@@ -10,4 +10,13 @@ import BaseKit
 
 final class FavoriteView: BaseView {
     
+    override var viewBg: UIColor { ResColors.mainBg.value }
+    
+    override func configureView() {
+        
+    }
+    
+    override func setConstraints() {
+        
+    }
 }

@@ -18,7 +18,4 @@ final class SearchVC: BaseViewController<SearchView> {
         
     }
     
-    override func setConstraints() {
-        
-    }
 }

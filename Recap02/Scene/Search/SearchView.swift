@@ -10,4 +10,6 @@ import BaseKit
 
 final class SearchView: BaseView {
     
+    override var viewBg: UIColor { ResColors.mainBg.value }
+    
 }

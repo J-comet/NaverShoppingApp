@@ -18,7 +18,4 @@ final class FavoriteVC: BaseViewController<FavoriteView> {
         
     }
     
-    override func setConstraints() {
-        
-    }
 }
