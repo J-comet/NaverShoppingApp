@@ -20,7 +20,7 @@ final class ShoppingSearchBar: UISearchBar {
     
     private func configureView() {
         backgroundImage = UIImage()
-        setShowsCancelButton(true, animated: true)
+        setShowsCancelButton(true, animated: false)
         if let cancelButton = value(forKey: "cancelButton") as? UIButton {
             cancelButton.setTitle(ResStrings.SearchBar.cancelBtnTitle, for: .normal)
             cancelButton.setTitleColor(ResColors.placeHolder, for: .normal)
