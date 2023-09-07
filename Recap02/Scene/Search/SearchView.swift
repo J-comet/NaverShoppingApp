@@ -11,7 +11,7 @@ import SnapKit
 
 final class SearchView: BaseView {
     
-    override var viewBg: UIColor { ResColors.mainBg.value }
+    override var viewBg: UIColor { ResColors.mainBg }
     
     private lazy var searchBar = ShoppingSearchBar()
     
@@ -22,7 +22,7 @@ final class SearchView: BaseView {
     override func setConstraints() {
         searchBar.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide)
-            make.horizontalEdges.equalToSuperview().inset(10)
+            make.horizontalEdges.equalToSuperview().inset(ResDimens.defaultHorizontalMargin)
         }
     }
 }

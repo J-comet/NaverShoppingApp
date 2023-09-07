@@ -13,7 +13,7 @@ final class FavoriteVC: BaseViewController<FavoriteView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = ResStrings.NavigationBar.favorite
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ResColors.primaryLabel.value]
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ResColors.primaryLabel]
     }
     
     override func configureView() {

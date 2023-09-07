@@ -23,10 +23,10 @@ final class ShoppingSearchBar: UISearchBar {
         setShowsCancelButton(true, animated: true)
         if let cancelButton = value(forKey: "cancelButton") as? UIButton {
             cancelButton.setTitle(ResStrings.SearchBar.cancelBtnTitle, for: .normal)
-            cancelButton.setTitleColor(ResColors.placeHolder.value, for: .normal)
+            cancelButton.setTitleColor(ResColors.placeHolder, for: .normal)
         }
-        searchTextField.leftView?.tintColor = ResColors.placeHolder.value
-        searchTextField.textColor = ResColors.primaryLabel.value
-        searchTextField.attributedPlaceholder = NSAttributedString(string: ResStrings.SearchBar.placeHolder, attributes: [NSAttributedString.Key.foregroundColor: ResColors.placeHolder.value])
+        searchTextField.leftView?.tintColor = ResColors.placeHolder
+        searchTextField.textColor = ResColors.primaryLabel
+        searchTextField.attributedPlaceholder = NSAttributedString(string: ResStrings.SearchBar.placeHolder, attributes: [NSAttributedString.Key.foregroundColor: ResColors.placeHolder])
     }
 }

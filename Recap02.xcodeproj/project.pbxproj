@@ -25,6 +25,7 @@
 		C017FC0A2AAA0E6C007BCFB1 /* ResStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017FC092AAA0E6C007BCFB1 /* ResStrings.swift */; };
 		C017FC122AAA1638007BCFB1 /* ResColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017FC112AAA1638007BCFB1 /* ResColors.swift */; };
 		C017FC182AAA2884007BCFB1 /* ShoppingSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017FC172AAA2884007BCFB1 /* ShoppingSearchBar.swift */; };
+		C017FC1A2AAA2B78007BCFB1 /* ResDimens.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017FC192AAA2B78007BCFB1 /* ResDimens.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		C017FC092AAA0E6C007BCFB1 /* ResStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResStrings.swift; sourceTree = "<group>"; };
 		C017FC112AAA1638007BCFB1 /* ResColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResColors.swift; sourceTree = "<group>"; };
 		C017FC172AAA2884007BCFB1 /* ShoppingSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingSearchBar.swift; sourceTree = "<group>"; };
+		C017FC192AAA2B78007BCFB1 /* ResDimens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResDimens.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 				C017FB8B2AA9C86A007BCFB1 /* Localizable.strings */,
 				C017FC092AAA0E6C007BCFB1 /* ResStrings.swift */,
 				C017FC112AAA1638007BCFB1 /* ResColors.swift */,
+				C017FC192AAA2B78007BCFB1 /* ResDimens.swift */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C017FC082AAA06BC007BCFB1 /* FavoriteView.swift in Sources */,
+				C017FC1A2AAA2B78007BCFB1 /* ResDimens.swift in Sources */,
 				C017FC022AAA0669007BCFB1 /* SearchVC.swift in Sources */,
 				C017FB6D2AA9B90C007BCFB1 /* AppDelegate.swift in Sources */,
 				C017FC122AAA1638007BCFB1 /* ResColors.swift in Sources */,

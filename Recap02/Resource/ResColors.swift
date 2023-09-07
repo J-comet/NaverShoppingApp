@@ -8,23 +8,8 @@
 import UIKit
 
 enum ResColors {
-    case mainBg
-    case primaryLabel
-    case secondaryLabel
-    case placeHolder
-}
-
-extension ResColors {
-    var value: UIColor {
-        switch self {
-        case .mainBg:
-            return .systemBackground
-        case .primaryLabel:
-            return .label
-        case .secondaryLabel:
-            return .systemGray5
-        case .placeHolder:
-            return .lightGray
-        }
-    }
+    static let mainBg = UIColor.systemBackground
+    static let primaryLabel = UIColor.label
+    static let secondaryLabel = UIColor.systemGray5
+    static let placeHolder = UIColor.lightGray
 }

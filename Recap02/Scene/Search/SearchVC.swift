@@ -13,7 +13,7 @@ final class SearchVC: BaseViewController<SearchView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = ResStrings.NavigationBar.search
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ResColors.primaryLabel.value]
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ResColors.primaryLabel]
     }
     
     override func configureView() {

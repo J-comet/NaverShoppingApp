@@ -15,9 +15,9 @@ final class TabBarVC: UITabBarController {
         let viewControllers = [tapVC(type: .search), tapVC(type: .favorite)]
         setViewControllers(viewControllers, animated: true)
         
-        tabBar.backgroundColor = ResColors.mainBg.value
-        tabBar.tintColor = ResColors.primaryLabel.value
-        tabBar.unselectedItemTintColor = ResColors.secondaryLabel.value
+        tabBar.backgroundColor = ResColors.mainBg
+        tabBar.tintColor = ResColors.primaryLabel
+        tabBar.unselectedItemTintColor = ResColors.secondaryLabel
     }
     
     private func tapVC(type: TabType) -> UINavigationController {
