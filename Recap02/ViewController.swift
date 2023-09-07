@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import BaseKit
 
-class ViewController: UIViewController {
+class ViewController: BaseViewController<MainView> {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,3 +17,6 @@ class ViewController: UIViewController {
 
 }
 
+class MainView: BaseView {
+    
+}
