@@ -8,3 +8,9 @@
 
 "tab_search" = "Search";
 "tab_favorite" = "Favorite";
+
+"nav_search" = "Shopping Search";
+"nav_favorite" = "Favorite List";
+
+"searchbar_btn_cancel" = "Cancel";
+"searchbar_place_holder" = "Please enter your search term";

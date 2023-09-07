@@ -24,6 +24,7 @@
 		C017FC082AAA06BC007BCFB1 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017FC072AAA06BC007BCFB1 /* FavoriteView.swift */; };
 		C017FC0A2AAA0E6C007BCFB1 /* ResStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017FC092AAA0E6C007BCFB1 /* ResStrings.swift */; };
 		C017FC122AAA1638007BCFB1 /* ResColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017FC112AAA1638007BCFB1 /* ResColors.swift */; };
+		C017FC182AAA2884007BCFB1 /* ShoppingSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017FC172AAA2884007BCFB1 /* ShoppingSearchBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		C017FC072AAA06BC007BCFB1 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		C017FC092AAA0E6C007BCFB1 /* ResStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResStrings.swift; sourceTree = "<group>"; };
 		C017FC112AAA1638007BCFB1 /* ResColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResColors.swift; sourceTree = "<group>"; };
+		C017FC172AAA2884007BCFB1 /* ShoppingSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingSearchBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,14 +113,15 @@
 		C017FB6B2AA9B90C007BCFB1 /* Recap02 */ = {
 			isa = PBXGroup;
 			children = (
-				C017FC0B2AAA139D007BCFB1 /* Extension */,
 				C017FB7A2AA9B914007BCFB1 /* Info.plist */,
 				C017FB6C2AA9B90C007BCFB1 /* AppDelegate.swift */,
 				C017FB6E2AA9B90C007BCFB1 /* SceneDelegate.swift */,
 				C017FBEF2AA9DF0A007BCFB1 /* BaseKit.xcodeproj */,
+				C017FC0B2AAA139D007BCFB1 /* Extension */,
 				C017FB772AA9B914007BCFB1 /* LaunchScreen.storyboard */,
 				C017FB862AA9C852007BCFB1 /* Resource */,
 				C017FBFC2AAA0101007BCFB1 /* Scene */,
+				C017FC132AAA1D09007BCFB1 /* View */,
 			);
 			path = Recap02;
 			sourceTree = "<group>";
@@ -183,6 +186,14 @@
 			children = (
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		C017FC132AAA1D09007BCFB1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C017FC172AAA2884007BCFB1 /* ShoppingSearchBar.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -300,6 +311,7 @@
 				C017FC062AAA06B3007BCFB1 /* FavoriteVC.swift in Sources */,
 				C017FB6F2AA9B90C007BCFB1 /* SceneDelegate.swift in Sources */,
 				C017FC0A2AAA0E6C007BCFB1 /* ResStrings.swift in Sources */,
+				C017FC182AAA2884007BCFB1 /* ShoppingSearchBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

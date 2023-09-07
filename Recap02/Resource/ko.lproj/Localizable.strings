@@ -8,3 +8,9 @@
 
 "tab_search" = "검색";
 "tab_favorite" = "좋아요";
+
+"nav_search" = "쇼핑 검색";
+"nav_favorite" = "좋아요 목록";
+
+"searchbar_btn_cancel" = "취소";
+"searchbar_place_holder" = "검색어를 입력해주세요";

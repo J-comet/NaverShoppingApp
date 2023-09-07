@@ -11,6 +11,7 @@ enum ResColors {
     case mainBg
     case primaryLabel
     case secondaryLabel
+    case placeHolder
 }
 
 extension ResColors {
@@ -22,6 +23,8 @@ extension ResColors {
             return .label
         case .secondaryLabel:
             return .systemGray5
+        case .placeHolder:
+            return .lightGray
         }
     }
 }
