@@ -9,11 +9,15 @@ import UIKit
 import BaseKit
 import SnapKit
 
-final class SearchView: BaseView {
+class SearchView: BaseView {
     
     override var viewBg: UIColor { ResColors.mainBg }
     
-    private lazy var searchBar = ShoppingSearchBar()
+    lazy var searchBar = ShoppingSearchBar().setup { view in
+        view.delegate = self
+    }
+    
+    weak var delegate: SearchVCProtocol?
     
     override func configureView() {
         addSubview(searchBar)
@@ -25,4 +29,18 @@ final class SearchView: BaseView {
             make.horizontalEdges.equalToSuperview().inset(ResDimens.defaultHorizontalMargin)
         }
     }
+}
+
+extension SearchView: UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        delegate?.cancelButtonClicked(searchBar)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        delegate?.searchButtonClicked(searchBar)
+    }
+    
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        // 실시간 검색 기능
+//    }
 }

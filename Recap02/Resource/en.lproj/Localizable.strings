@@ -6,11 +6,11 @@
   
 */
 
-"tab_search" = "Search";
-"tab_favorite" = "Favorite";
+"tabSearch" = "Search";
+"tabFavorite" = "Favorite";
 
-"nav_search" = "Shopping Search";
-"nav_favorite" = "Favorite List";
+"navSearch" = "Shopping Search";
+"navFavorite" = "Favorite List";
 
-"searchbar_btn_cancel" = "Cancel";
-"searchbar_place_holder" = "Please enter your search term";
+"searchbarBtnCancel" = "Cancel";
+"searchbarPlaceHolder" = "Please enter your search term";

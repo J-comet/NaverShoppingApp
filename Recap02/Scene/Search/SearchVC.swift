@@ -8,23 +8,35 @@
 import UIKit
 import BaseKit
 
+protocol SearchVCProtocol: AnyObject {
+    func cancelButtonClicked(_ searchBar: UISearchBar)
+    func searchButtonClicked(_ searchBar: UISearchBar)
+}
+
 final class SearchVC: BaseViewController<SearchView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        mainView.delegate = self
         navigationItem.title = ResStrings.NavigationBar.search
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ResColors.primaryLabel]
     }
     
     override func configureView() {
-//        mainView.searchBar.delegate = self
+        
     }
     
 }
 
-//extension SearchVC: UISearchBarDelegate {
-//    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-//         let cBtn = searchBar.value(forKey: "cancelButton") as! UIButton
-//         cBtn.setTitle("Cancel", for: .normal)
-//    }
-//}
+extension SearchVC: SearchVCProtocol {
+    func cancelButtonClicked(_ searchBar: UISearchBar) {
+        print(#function, "취소 버튼")
+    }
+    
+    func searchButtonClicked(_ searchBar: UISearchBar) {
+        print(#function, "검색 버튼")
+    }
+    
+    
+}
+

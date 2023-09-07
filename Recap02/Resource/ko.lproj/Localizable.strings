@@ -6,11 +6,11 @@
   
 */
 
-"tab_search" = "검색";
-"tab_favorite" = "좋아요";
+"tabSearch" = "검색";
+"tabFavorite" = "좋아요";
 
-"nav_search" = "쇼핑 검색";
-"nav_favorite" = "좋아요 목록";
+"navSearch" = "쇼핑 검색";
+"navFavorite" = "좋아요 목록";
 
-"searchbar_btn_cancel" = "취소";
-"searchbar_place_holder" = "검색어를 입력해주세요";
+"searchbarBtnCancel" = "취소";
+"searchbarPlaceHolder" = "검색어를 입력해주세요";
