@@ -9,8 +9,8 @@ import UIKit
 import BaseKit
 
 protocol SearchVCProtocol: AnyObject {
-    func cancelButtonClicked(_ searchBar: UISearchBar)
-    func searchButtonClicked(_ searchBar: UISearchBar)
+    func searchBarCancelClicked(_ searchBar: UISearchBar)
+    func searchBarSearchClicked(_ searchBar: UISearchBar)
 }
 
 final class SearchVC: BaseViewController<SearchView> {
@@ -29,14 +29,12 @@ final class SearchVC: BaseViewController<SearchView> {
 }
 
 extension SearchVC: SearchVCProtocol {
-    func cancelButtonClicked(_ searchBar: UISearchBar) {
+    func searchBarCancelClicked(_ searchBar: UISearchBar) {
         print(#function, "취소 버튼")
     }
     
-    func searchButtonClicked(_ searchBar: UISearchBar) {
+    func searchBarSearchClicked(_ searchBar: UISearchBar) {
         print(#function, "검색 버튼")
     }
-    
-    
 }
 
