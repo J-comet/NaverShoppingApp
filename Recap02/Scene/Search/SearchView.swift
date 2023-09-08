@@ -63,19 +63,19 @@ final class SearchView: BaseView {
     override func setConstraints() {
         searchBar.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide)
-            make.horizontalEdges.equalToSuperview().inset(4)
+            make.horizontalEdges.equalToSuperview().inset(ResDimens.searchBarHorizontalMargin)
         }
                 
         filterCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom)
+            make.top.equalTo(searchBar.snp.bottom).offset(6)
             make.horizontalEdges.equalToSuperview().inset(ResDimens.defaultHorizontalMargin)
-            make.height.equalTo(28)
+            make.height.equalTo(38)
         }
         
         productCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(filterCollectionView.snp.bottom).offset(ResDimens.defaultHorizontalMargin)
+            make.top.equalTo(filterCollectionView.snp.bottom)
             make.bottom.equalToSuperview()
-            make.horizontalEdges.equalToSuperview().inset(10)
+            make.horizontalEdges.equalToSuperview().inset(ResDimens.defaultHorizontalMargin)
         }
     }
     
@@ -108,7 +108,6 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         switch collectionView {
         case filterCollectionView:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilterCollectionViewCell.identifier, for: indexPath) as? FilterCollectionViewCell else {
@@ -116,6 +115,7 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource {
             }
             cell.configCell(row: shoppingFilters[indexPath.item])
             return cell
+            
         case productCollectionView:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCollectionViewCell.identifier, for: indexPath) as? ProductCollectionViewCell else {
                 return UICollectionViewCell()

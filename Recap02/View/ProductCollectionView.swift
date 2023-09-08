@@ -35,7 +35,7 @@ final class ProductCollectionView: UICollectionView {
         
         return UICollectionViewFlowLayout().collectionViewLayout(
             itemSize: CGSize(width: width / count, height: width / count),
-            sectionInset: .zero,
+            sectionInset: UIEdgeInsets(top: spacing, left: 0, bottom: spacing, right: 0),
             minimumLineSpacing: spacing + (spacing / 2),
             minimumInteritemSpacing: spacing)
     }

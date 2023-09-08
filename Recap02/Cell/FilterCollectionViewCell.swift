@@ -11,22 +11,46 @@ import SnapKit
 
 final class FilterCollectionViewCell: BaseCollectionViewCell<FilterShopping> {
     
-    private let nameLabel = UILabel().setup { view in
-        view.textColor = ResColors.primaryLabel
+    private let nameButton = UIButton().setup { view in
+        view.layer.cornerRadius = 10
+        view.clipsToBounds = true
+        view.layer.borderWidth = 1
     }
     
+    private let verticalInset: CGFloat = 8
+    private let horizontalInset: CGFloat = 4
+    
     override func configureView() {
-        layer.borderWidth = 1
-        contentView.addSubview(nameLabel)
+        contentView.addSubview(nameButton)
     }
     
     override func setConstraints() {
-        nameLabel.snp.makeConstraints { make in
+        nameButton.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
     
     override func configCell(row: FilterShopping) {
-        nameLabel.text = row.type.title
+        
+        nameButton.layer.borderColor = row.isSelected ? ResColors.primaryLabel.cgColor : ResColors.placeHolder.cgColor
+        
+        if #available(iOS 15.0, *) {
+            var attString = AttributedString(row.type.title)
+            attString.font = .systemFont(ofSize: 14, weight: .medium)
+            attString.foregroundColor = row.isSelected ? ResColors.mainBg : ResColors.placeHolder
+            var config = UIButton.Configuration.filled()
+            config.attributedTitle = attString
+            config.contentInsets = .init(top: verticalInset, leading: horizontalInset, bottom: verticalInset, trailing: horizontalInset)
+
+            config.baseBackgroundColor = row.isSelected ? ResColors.primaryLabel : ResColors.mainBg
+            nameButton.configuration = config
+        } else {
+            nameButton.backgroundColor = row.isSelected ? ResColors.primaryLabel : ResColors.mainBg
+            nameButton.titleLabel?.font = .systemFont(ofSize: 14, weight: .medium)
+            nameButton.setTitle(row.type.title, for: .normal)
+            nameButton.setTitleColor(ResColors.placeHolder, for: .normal)
+            nameButton.contentEdgeInsets = .init(top: verticalInset, left: horizontalInset, bottom: verticalInset, right: horizontalInset)
+        }
+        
     }
 }

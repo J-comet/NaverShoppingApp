@@ -8,5 +8,6 @@
 import Foundation
 
 struct ResDimens {
+    static let searchBarHorizontalMargin = 4
     static let defaultHorizontalMargin = 10
 }
