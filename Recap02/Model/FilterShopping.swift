@@ -8,7 +8,7 @@
 import Foundation
 
 struct FilterShopping {
-    let type: ShoppingFilterType
+    var type: ShoppingFilterType
     var isSelected: Bool
 }
 

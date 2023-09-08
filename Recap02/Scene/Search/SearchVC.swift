@@ -8,16 +8,11 @@
 import UIKit
 import BaseKit
 
-protocol SearchVCProtocol: AnyObject {
-    func searchBarCancelClicked(_ searchBar: UISearchBar)
-    func searchBarSearchClicked(_ searchBar: UISearchBar)
-}
-
 final class SearchVC: BaseViewController<SearchView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mainView.delegate = self
+        mainView.searchVCDelegate = self
         navigationItem.title = ResStrings.NavigationBar.search
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ResColors.primaryLabel]
     }
@@ -35,6 +30,10 @@ extension SearchVC: SearchVCProtocol {
     
     func searchBarSearchClicked(_ searchBar: UISearchBar) {
         print(#function, "검색 버튼")
+    }
+    
+    func filterClicked(row: FilterShopping) {
+        print(#function, row)
     }
 }
 

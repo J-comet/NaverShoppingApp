@@ -11,14 +11,21 @@ import SnapKit
 
 final class FilterCollectionViewCell: BaseCollectionViewCell<FilterShopping> {
     
-    private let nameButton = UIButton().setup { view in
+    private lazy var nameButton = UIButton().setup { view in
         view.layer.cornerRadius = 10
         view.clipsToBounds = true
         view.layer.borderWidth = 1
+        view.addTarget(self, action: #selector(nameButtonClicked), for: .touchUpInside)
     }
     
     private let verticalInset: CGFloat = 8
     private let horizontalInset: CGFloat = 4
+    
+    var nameButtonAction: ((UIButton) -> Void)?
+    
+    @objc func nameButtonClicked(_ sender: UIButton) {
+        nameButtonAction?(sender)
+    }
     
     override func configureView() {
         contentView.addSubview(nameButton)
@@ -48,7 +55,7 @@ final class FilterCollectionViewCell: BaseCollectionViewCell<FilterShopping> {
             nameButton.backgroundColor = row.isSelected ? ResColors.primaryLabel : ResColors.mainBg
             nameButton.titleLabel?.font = .systemFont(ofSize: 14, weight: .medium)
             nameButton.setTitle(row.type.title, for: .normal)
-            nameButton.setTitleColor(ResColors.placeHolder, for: .normal)
+            nameButton.setTitleColor(row.isSelected ? ResColors.mainBg : ResColors.placeHolder, for: .normal)
             nameButton.contentEdgeInsets = .init(top: verticalInset, left: horizontalInset, bottom: verticalInset, right: horizontalInset)
         }
         
