@@ -28,6 +28,9 @@
 		C017FC122AAA1638007BCFB1 /* ResColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017FC112AAA1638007BCFB1 /* ResColors.swift */; };
 		C017FC182AAA2884007BCFB1 /* ShoppingSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017FC172AAA2884007BCFB1 /* ShoppingSearchBar.swift */; };
 		C017FC1A2AAA2B78007BCFB1 /* ResDimens.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017FC192AAA2B78007BCFB1 /* ResDimens.swift */; };
+		C08C5E772AAB6BBF0045E7B8 /* ShoppingFilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08C5E762AAB6BBF0045E7B8 /* ShoppingFilterButton.swift */; };
+		C08C5E792AAB6FC30045E7B8 /* FilterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08C5E782AAB6FC30045E7B8 /* FilterCollectionViewCell.swift */; };
+		C08C5E7C2AAB7D980045E7B8 /* FilterShopping.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08C5E7B2AAB7D980045E7B8 /* FilterShopping.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +85,9 @@
 		C017FC112AAA1638007BCFB1 /* ResColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResColors.swift; sourceTree = "<group>"; };
 		C017FC172AAA2884007BCFB1 /* ShoppingSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingSearchBar.swift; sourceTree = "<group>"; };
 		C017FC192AAA2B78007BCFB1 /* ResDimens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResDimens.swift; sourceTree = "<group>"; };
+		C08C5E762AAB6BBF0045E7B8 /* ShoppingFilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingFilterButton.swift; sourceTree = "<group>"; };
+		C08C5E782AAB6FC30045E7B8 /* FilterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCollectionViewCell.swift; sourceTree = "<group>"; };
+		C08C5E7B2AAB7D980045E7B8 /* FilterShopping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterShopping.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				C017E3672AAAE5F9005FD225 /* ProductCollectionViewCell.swift */,
+				C08C5E782AAB6FC30045E7B8 /* FilterCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -127,6 +134,7 @@
 		C017FB6B2AA9B90C007BCFB1 /* Recap02 */ = {
 			isa = PBXGroup;
 			children = (
+				C08C5E7A2AAB7D7B0045E7B8 /* Model */,
 				C017FB7A2AA9B914007BCFB1 /* Info.plist */,
 				C017FB6C2AA9B90C007BCFB1 /* AppDelegate.swift */,
 				C017FB6E2AA9B90C007BCFB1 /* SceneDelegate.swift */,
@@ -209,8 +217,17 @@
 			children = (
 				C017FC172AAA2884007BCFB1 /* ShoppingSearchBar.swift */,
 				C017E36C2AAAE9EF005FD225 /* ProductCollectionView.swift */,
+				C08C5E762AAB6BBF0045E7B8 /* ShoppingFilterButton.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		C08C5E7A2AAB7D7B0045E7B8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C08C5E7B2AAB7D980045E7B8 /* FilterShopping.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -325,11 +342,14 @@
 				C017FB6D2AA9B90C007BCFB1 /* AppDelegate.swift in Sources */,
 				C017FC122AAA1638007BCFB1 /* ResColors.swift in Sources */,
 				C017FBFE2AAA0225007BCFB1 /* TabBarVC.swift in Sources */,
+				C08C5E772AAB6BBF0045E7B8 /* ShoppingFilterButton.swift in Sources */,
 				C017FC042AAA0683007BCFB1 /* SearchView.swift in Sources */,
 				C017FC062AAA06B3007BCFB1 /* FavoriteVC.swift in Sources */,
 				C017FB6F2AA9B90C007BCFB1 /* SceneDelegate.swift in Sources */,
+				C08C5E792AAB6FC30045E7B8 /* FilterCollectionViewCell.swift in Sources */,
 				C017FC0A2AAA0E6C007BCFB1 /* ResStrings.swift in Sources */,
 				C017E3682AAAE5F9005FD225 /* ProductCollectionViewCell.swift in Sources */,
+				C08C5E7C2AAB7D980045E7B8 /* FilterShopping.swift in Sources */,
 				C017E36D2AAAE9EF005FD225 /* ProductCollectionView.swift in Sources */,
 				C017FC182AAA2884007BCFB1 /* ShoppingSearchBar.swift in Sources */,
 			);

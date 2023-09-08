@@ -21,6 +21,7 @@ final class ProductCollectionView: UICollectionView {
     private func configureView() {
         self.collectionViewLayout = collectionViewLayout()
         self.showsVerticalScrollIndicator = false
+        self.alwaysBounceVertical = true
         self.register(
             ProductCollectionViewCell.self,
             forCellWithReuseIdentifier: ProductCollectionViewCell.identifier
@@ -29,13 +30,13 @@ final class ProductCollectionView: UICollectionView {
     
     private func collectionViewLayout() -> UICollectionViewFlowLayout {
         let count: CGFloat = 2
-        let spacing: CGFloat = 12
+        let spacing: CGFloat = 10
         let width: CGFloat = UIScreen.main.bounds.width - (spacing * (count + 1))
         
         return UICollectionViewFlowLayout().collectionViewLayout(
             itemSize: CGSize(width: width / count, height: width / count),
             sectionInset: .zero,
             minimumLineSpacing: spacing + (spacing / 2),
-            minimumInteritemSpacing: 0)
+            minimumInteritemSpacing: spacing)
     }
 }

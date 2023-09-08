@@ -24,4 +24,11 @@ struct ResStrings {
         static let placeHolder = "searchbarPlaceHolder".localized
         static let cancelBtnTitle = "searchbarBtnCancel".localized
     }
+    
+    struct ShoppingFilterType {
+        static let accuracy = "filterAccuracy".localized
+        static let date = "filterDate".localized
+        static let highPrice = "filterHighPrice".localized
+        static let lowPrice = "filterLowPrice".localized
+    }
 }
