@@ -13,7 +13,7 @@ final class SearchView: BaseView {
     
     override var viewBg: UIColor { ResColors.mainBg }
     
-    private lazy var searchBar = ShoppingSearchBar().setup { view in
+    lazy var searchBar = ShoppingSearchBar().setup { view in
         view.delegate = self
     }
 
@@ -63,12 +63,8 @@ final class SearchView: BaseView {
     
     var searchProducts: [ShoppingProduct] = [] {
         didSet {
-            if searchProducts.isEmpty {
-                emptyLabel.isHidden = false
-            } else {
-                emptyLabel.isHidden = true
-                productCollectionView.reloadData()
-            }
+            emptyLabel.isHidden = true
+            productCollectionView.reloadData()
         }
     }
     

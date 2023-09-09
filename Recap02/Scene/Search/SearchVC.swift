@@ -18,14 +18,10 @@ final class SearchVC: BaseViewController<SearchView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mainView.searchVCDelegate = self
-        navigationItem.title = ResStrings.NavigationBar.search
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ResColors.primaryLabel]
     }
     
     private func search(page: Int, query: String, sort: ShoppingSortType) {
-        // 터치 이벤트 막기
-        self.view.isUserInteractionEnabled = false
+        LoadingIndicator.show()
         repository.search(page: page, query: query, sort: sort) { [weak self] response, isSuccess in
             if isSuccess {
                 guard let response else {
@@ -42,13 +38,14 @@ final class SearchVC: BaseViewController<SearchView> {
             } else {
                 self?.showToast(message: ResStrings.Guide.searchFail)
             }
-            
-            self?.view.isUserInteractionEnabled = true
+            LoadingIndicator.hide()
         }
     }
     
     override func configureView() {
-        
+        mainView.searchVCDelegate = self
+        navigationItem.title = ResStrings.NavigationBar.search
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ResColors.primaryLabel]
     }
     
     
@@ -62,6 +59,7 @@ extension SearchVC: SearchVCProtocol {
     }
     
     func searchBarSearchClicked(_ searchBar: UISearchBar) {
+        mainView.searchProducts.removeAll()
         page = 1
         search(page: page, query: searchBar.searchTextField.text!, sort: sortType)
         searchBar.resignFirstResponder()
@@ -73,6 +71,17 @@ extension SearchVC: SearchVCProtocol {
                 if !sort.isSelected {
                     mainView.shoppingSorts[index] = sort.copy(isSelected: true)
                     sortType = sort.type
+                    
+                    guard let searchText = mainView.searchBar.searchTextField.text else {
+                        return
+                    }
+                    
+                    mainView.searchProducts.removeAll()
+                    page = 1
+                    if searchText.count > 0 {
+                        search(page: page, query: searchText, sort: sortType)
+                    }
+                    
                 }
             } else {
                 mainView.shoppingSorts[index] = sort.copy(isSelected: false)
