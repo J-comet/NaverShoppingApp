@@ -8,9 +8,12 @@
 import UIKit
 import BaseKit
 import Kingfisher
+import SkeletonView
 import SnapKit
 
 final class ProductCollectionViewCell: BaseCollectionViewCell<ShoppingProduct> {
+    
+    private let ImageContainerView = UIView(frame: .zero)
     
     private let thumbImageView = UIImageView(frame: .zero).setup { view in
         view.contentMode = .scaleToFill
@@ -60,9 +63,22 @@ final class ProductCollectionViewCell: BaseCollectionViewCell<ShoppingProduct> {
     }
     
     override func configureView() {
-        contentView.addSubview(thumbImageView)
-        contentView.addSubview(opacityView)
-        contentView.addSubview(heartCircleView)
+        self.isSkeletonable = true
+        ImageContainerView.isSkeletonable = true
+        labelContainerView.isSkeletonable = true
+        mallNameLabel.isSkeletonable = true
+        titleLabel.isSkeletonable = true
+        priceLabel.isSkeletonable = true
+        
+        ImageContainerView.skeletonCornerRadius = 10
+        mallNameLabel.linesCornerRadius = 5
+        titleLabel.linesCornerRadius = 5
+        priceLabel.linesCornerRadius = 5
+        
+        contentView.addSubview(ImageContainerView)
+        ImageContainerView.addSubview(thumbImageView)
+        ImageContainerView.addSubview(opacityView)
+        ImageContainerView.addSubview(heartCircleView)
         heartCircleView.addSubview(heartImageView)
         contentView.addSubview(labelContainerView)
         labelContainerView.addSubview(mallNameLabel)
@@ -71,19 +87,22 @@ final class ProductCollectionViewCell: BaseCollectionViewCell<ShoppingProduct> {
     }
     
     override func setConstraints() {
-        thumbImageView.snp.makeConstraints { make in
+        ImageContainerView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.horizontalEdges.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.7)
         }
         
+        thumbImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
         opacityView.snp.makeConstraints { make in
-            make.edges.equalTo(thumbImageView)
+            make.edges.equalToSuperview()
         }
         
         heartCircleView.snp.makeConstraints { make in
-            make.trailing.equalTo(thumbImageView.snp.trailing).inset(8)
-            make.bottom.equalTo(thumbImageView.snp.bottom).inset(8)
+            make.trailing.bottom.equalToSuperview().inset(8)
             make.size.equalTo(40)
         }
         
@@ -92,7 +111,7 @@ final class ProductCollectionViewCell: BaseCollectionViewCell<ShoppingProduct> {
         }
         
         labelContainerView.snp.makeConstraints { make in
-            make.top.equalTo(thumbImageView.snp.bottom)
+            make.top.equalTo(ImageContainerView.snp.bottom).offset(5)
             make.horizontalEdges.bottom.equalToSuperview()
         }
         
@@ -101,7 +120,7 @@ final class ProductCollectionViewCell: BaseCollectionViewCell<ShoppingProduct> {
         priceLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
         mallNameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(4)
+            make.top.equalToSuperview()
             make.horizontalEdges.equalToSuperview().inset(2)
         }
         

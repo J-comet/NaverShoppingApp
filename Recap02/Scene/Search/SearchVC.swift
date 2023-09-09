@@ -7,6 +7,7 @@
 
 import UIKit
 import BaseKit
+import SkeletonView
 import Toast
 
 
@@ -24,7 +25,7 @@ final class SearchVC: BaseViewController<SearchView> {
     
     private func search(page: Int, query: String, sort: ShoppingSortType, completionHandler: @escaping () -> Void) {
         repository.search(page: page, query: query, sort: sort) { [weak self] response, isSuccess in
-            
+
             guard let self else {
                 completionHandler()
                 return
@@ -70,6 +71,7 @@ final class SearchVC: BaseViewController<SearchView> {
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ResColors.primaryLabel]
     }
     
+    
 }
 
 extension SearchVC: SearchVCProtocol {
@@ -103,7 +105,7 @@ extension SearchVC: SearchVCProtocol {
             self.page = 1
             self.search(page: page, query: searchText, sort: self.sortType) {
                 refreshControl.endRefreshing()
-                self.mainView.productCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+                self.mainView.productCollectionView.setContentOffset(.zero, animated: false)
             }
         }
     }
@@ -121,11 +123,11 @@ extension SearchVC: SearchVCProtocol {
         mainView.searchProducts.removeAll()
         searchText = searchBar.searchTextField.text!
         
-        LoadingIndicator.show()
+        mainView.showSkeleton()
         page = 1
         search(page: page, query: searchText, sort: sortType) { [weak self] in
-            LoadingIndicator.hide()
-            self?.mainView.productCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+            self?.mainView.hideSkeleton()
+            self?.mainView.productCollectionView.setContentOffset(.zero, animated: false)
         }
     }
     
@@ -142,11 +144,11 @@ extension SearchVC: SearchVCProtocol {
                     
                     if searchText.count > 0 {
                         mainView.searchProducts.removeAll()
-                        LoadingIndicator.show()
+                        mainView.showSkeleton()
                         page = 1
                         search(page: page, query: searchText, sort: sortType) { [weak self] in
-                            LoadingIndicator.hide()
-                            self?.mainView.productCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+                            self?.mainView.hideSkeleton()
+                            self?.mainView.productCollectionView.setContentOffset(.zero, animated: false)
                         }
                     }
                 }

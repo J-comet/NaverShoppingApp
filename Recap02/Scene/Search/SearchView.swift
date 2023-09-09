@@ -7,6 +7,7 @@
 
 import UIKit
 import BaseKit
+import SkeletonView
 import SnapKit
 
 final class SearchView: BaseView {
@@ -74,6 +75,7 @@ final class SearchView: BaseView {
     }
     
     override func configureView() {
+        productCollectionView.isSkeletonable = true
         ShoppingSortType.allCases.enumerated().forEach { index, sortType in
             shoppingSorts.append(
                 SortShopping(type: sortType, isSelected: index == 0 ? true : false)
@@ -97,6 +99,18 @@ final class SearchView: BaseView {
     func removePullRefreshControllAction() {
         print("제거 당겨서새로고침")
         productCollectionView.refreshControl = nil
+    }
+    
+    func showSkeleton() {
+        let anim = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .topLeftBottomRight)
+        productCollectionView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: ResColors.placeHolder), animation: anim, transition: .crossDissolve(0.5))
+    }
+    
+    func hideSkeleton() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+            self?.productCollectionView.stopSkeletonAnimation()
+            self?.productCollectionView.hideSkeleton()
+        }
     }
     
     @objc func productCellTapped() {
@@ -207,7 +221,6 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
             
             return cell
             
-            
         default:
             return UICollectionViewCell()
         }
@@ -220,8 +233,11 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         case productCollectionView:
             //MARK: mainView 에 TabGesture 로 키보드 내리는 동작때문에 didSelectItemAt 호출 X 안되는 오류 cellForItemAt 에서 터치 재정의
             print("productCollectionView 클릭")
-            let row = searchProducts[indexPath.item]
-            searchVCDelegate?.didSelectItemAt(row: row)
+            if !searchProducts.isEmpty {
+                let row = searchProducts[indexPath.item]
+                searchVCDelegate?.didSelectItemAt(row: row)
+            }
+            
         default: print("none")
         }
     }
@@ -229,5 +245,23 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         searchBar.resignFirstResponder()
     }
+}
+
+extension SearchView: SkeletonCollectionViewDataSource, SkeletonCollectionViewDelegate {
+    
+    func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> SkeletonView.ReusableCellIdentifier {
+        return ProductCollectionViewCell.identifier
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 8
+    }
+    
+//    func collectionSkeletonView(_ skeletonView: UICollectionView, skeletonCellForItemAt indexPath: IndexPath) -> UICollectionViewCell? {
+//        let cell = productCollectionView.dequeueReusableCell(withReuseIdentifier: ProductCollectionViewCell.identifier, for: indexPath) as? ProductCollectionViewCell
+//        cell?.isSkeletonable = indexPath.row != 0
+//        return cell
+//    }
+    
 }
 
