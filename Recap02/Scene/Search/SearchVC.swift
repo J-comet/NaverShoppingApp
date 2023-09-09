@@ -7,11 +7,14 @@
 
 import UIKit
 import BaseKit
+import Toast
+
 
 final class SearchVC: BaseViewController<SearchView> {
     
     private let repository = ProductRepository()
     private var page = 1
+    private var sortType: ShoppingSortType = .accuracy
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +23,10 @@ final class SearchVC: BaseViewController<SearchView> {
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ResColors.primaryLabel]
     }
     
-    private func search(page: Int, query: String) {
-        repository.search(page: page, query: query) { [weak self] response, isSuccess in
+    private func search(page: Int, query: String, sort: ShoppingSortType) {
+        // 터치 이벤트 막기
+        self.view.isUserInteractionEnabled = false
+        repository.search(page: page, query: query, sort: sort) { [weak self] response, isSuccess in
             if isSuccess {
                 guard let response else {
                     self?.mainView.emptyLabel.text = ResStrings.Guide.searchResultEmpty
@@ -35,10 +40,10 @@ final class SearchVC: BaseViewController<SearchView> {
                 self?.mainView.searchProducts.append(contentsOf: response.items)
                 
             } else {
-                print("오류 발생")
+                self?.showToast(message: ResStrings.Guide.searchFail)
             }
-        } endHandler: {
-            print("인디케이터 종료시키기")
+            
+            self?.view.isUserInteractionEnabled = true
         }
     }
     
@@ -51,24 +56,15 @@ final class SearchVC: BaseViewController<SearchView> {
 
 extension SearchVC: SearchVCProtocol {
     func searchBarCancelClicked(_ searchBar: UISearchBar) {
-        print(#function, "취소 버튼")
         mainView.emptyLabel.text = ResStrings.Guide.searchDefaultGuide
         searchBar.searchTextField.text = nil
         mainView.searchProducts.removeAll()
     }
     
     func searchBarSearchClicked(_ searchBar: UISearchBar) {
-        print(#function, "검색 버튼")
-        guard let text = searchBar.searchTextField.text else { return }
-        
-        if text.isEmpty {
-            print("검색어를 입력해주세요")
-            return
-        }
-        
         page = 1
-        search(page: page, query: text)
-        searchBar.endEditing(true)
+        search(page: page, query: searchBar.searchTextField.text!, sort: sortType)
+        searchBar.resignFirstResponder()
     }
     
     func sortClicked(sortButton: UIButton) {
@@ -76,6 +72,7 @@ extension SearchVC: SearchVCProtocol {
             if sortButton.titleLabel!.text == sort.type.title {
                 if !sort.isSelected {
                     mainView.shoppingSorts[index] = sort.copy(isSelected: true)
+                    sortType = sort.type
                 }
             } else {
                 mainView.shoppingSorts[index] = sort.copy(isSelected: false)

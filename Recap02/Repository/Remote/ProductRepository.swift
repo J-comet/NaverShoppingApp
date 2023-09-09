@@ -13,8 +13,7 @@ class ProductRepository {
         page: Int,
         query: String,
         sort: ShoppingSortType = .accuracy,
-        completionHandler: @escaping (_ response: ResponseSearchShopping?, _ isSuccess: Bool) -> Void,
-        endHandler: @escaping () -> Void
+        completionHandler: @escaping (_ response: ResponseSearchShopping?, _ isSuccess: Bool) -> Void
     ) {
         APIManager.shared.call(
             endPoint: .search,
@@ -27,8 +26,6 @@ class ProductRepository {
             ]
         ) { response, isSuccess in
             completionHandler(response, isSuccess)
-        } end: {
-            endHandler()
         }
     }
     

@@ -23,8 +23,7 @@ class APIManager {
         endPoint: Endpoint,
         responseData: T.Type,
         parameters: [String:Any]? = nil,
-        complete: @escaping (_ response: T?, _ isSuccess: Bool) -> (),
-        end: @escaping () -> Void
+        complete: @escaping (_ response: T?, _ isSuccess: Bool) -> ()
     ){
         var requestParameters: Parameters = [:]
         if let parameters {

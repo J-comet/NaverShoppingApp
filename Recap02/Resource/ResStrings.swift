@@ -35,5 +35,7 @@ struct ResStrings {
     struct Guide {
         static let searchDefaultGuide = "searchDefaultGuide".localized
         static let searchResultEmpty = "searchResultEmpty".localized
+        static let searchInputTextEmpty = "searchInputTextEmpty".localized
+        static let searchFail = "searchFail".localized
     }
 }

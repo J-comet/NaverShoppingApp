@@ -179,11 +179,14 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         switch collectionView {
         case sortCollectionView:
             print("버튼만 있을 때는 didSelectItemAt 메서드 호출 X , 현재 클로저로 액션 전달")
-            
         case productCollectionView:
             print("111")
         default: print("none")
         }
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchBar.resignFirstResponder()
     }
 }
 

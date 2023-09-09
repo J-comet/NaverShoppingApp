@@ -23,4 +23,8 @@
 "searchDefaultGuide" = "원하는 상품을 검색해주세요";
 "searchResultEmpty" = "검색 결과가 없어요";
 
+"searchInputTextEmpty" = "검색어를 입력해주세요";
+"searchFail" = "검색 결과를 가져오는데 실패했어요";
+
+
 
