@@ -34,7 +34,7 @@ final class ProductCollectionView: UICollectionView {
         let width: CGFloat = UIScreen.main.bounds.width - (spacing * (count + 1))
         
         return UICollectionViewFlowLayout().collectionViewLayout(
-            itemSize: CGSize(width: width / count, height: width / count),
+            itemSize: .zero,
             sectionInset: UIEdgeInsets(top: spacing, left: 0, bottom: spacing, right: 0),
             minimumLineSpacing: spacing + (spacing / 2),
             minimumInteritemSpacing: spacing)

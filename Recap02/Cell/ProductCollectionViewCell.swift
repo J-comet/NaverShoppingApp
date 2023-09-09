@@ -10,22 +10,20 @@ import BaseKit
 
 final class ProductCollectionViewCell: BaseCollectionViewCell<ShoppingProduct> {
     
-    private let testLabel = UILabel().setup { view in
+    private let titleLabel = UILabel().setup { view in
         view.textColor = ResColors.primaryLabel
         view.numberOfLines = 2
     }
     
     override func configureView() {
-        contentView.addSubview(testLabel)
+        
     }
     
     override func setConstraints() {
-        testLabel.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
+        
     }
     
     override func configCell(row: ShoppingProduct) {
-        testLabel.text = row.title
+        titleLabel.text = row.title
     }
 }

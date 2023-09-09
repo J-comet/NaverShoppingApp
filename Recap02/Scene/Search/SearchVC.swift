@@ -22,27 +22,39 @@ final class SearchVC: BaseViewController<SearchView> {
         super.viewDidLoad()
     }
     
-    private func search(page: Int, query: String, sort: ShoppingSortType) {
-        searchText = query
-        LoadingIndicator.show()
+    private func search(page: Int, query: String, sort: ShoppingSortType, completionHandler: @escaping () -> Void) {
         repository.search(page: page, query: query, sort: sort) { [weak self] response, isSuccess in
+            
+            guard let self else {
+                completionHandler()
+                return
+            }
+            
             if isSuccess {
                 guard let response else {
-                    self?.mainView.emptyLabel.text = ResStrings.Guide.searchResultEmpty
-                    self?.mainView.emptyLabel.isHidden = false
-                    self?.mainView.searchProducts.removeAll()
+                    self.mainView.emptyLabel.text = ResStrings.Guide.searchResultEmpty
+                    self.mainView.emptyLabel.isHidden = false
+                    self.mainView.searchProducts.removeAll()
                     return
                 }
 //                print(response)
                 if response.items.isEmpty {
-                    self?.mainView.emptyLabel.text = ResStrings.Guide.searchResultEmpty
+                    self.mainView.emptyLabel.text = ResStrings.Guide.searchResultEmpty
                 }
-                self?.mainView.searchProducts.append(contentsOf: response.items)
+                self.mainView.searchProducts.append(contentsOf: response.items)
                 
             } else {
-                self?.showToast(message: ResStrings.Guide.searchFail)
+                self.showToast(message: ResStrings.Guide.searchFail)
             }
-            LoadingIndicator.hide()
+            
+            completionHandler()
+            
+            if page == 1 {
+                self.mainView.removePullRefreshControllAction()
+                if !self.mainView.searchProducts.isEmpty {
+                    self.mainView.addPullRefreshControllAction()
+                }
+            }
         }
     }
     
@@ -69,15 +81,17 @@ extension SearchVC: SearchVCProtocol {
     func prefetchItemsAt(prefetchItemsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
             if mainView.searchProducts.count - 1 == indexPath.item && page < APIManager.limitPage {
+                LoadingIndicator.show()
                 page += 1
-                search(page: page, query: searchText, sort: sortType)
+                search(page: page, query: searchText, sort: sortType) {
+                    LoadingIndicator.hide()
+                }
             }
         }
     }
     
     func refreshPull(refreshControl: UIRefreshControl) {
-      
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.7) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) { [weak self] in
             guard let self, let searchBarText = self.mainView.searchBar.searchTextField.text else {
                 return
             }
@@ -87,8 +101,9 @@ extension SearchVC: SearchVCProtocol {
             self.mainView.searchBar.searchTextField.text = searchText
             
             self.page = 1
-            self.search(page: page, query: searchText, sort: self.sortType)
-            refreshControl.endRefreshing()
+            self.search(page: page, query: searchText, sort: self.sortType) {
+                refreshControl.endRefreshing()
+            }
         }
     }
     
@@ -96,15 +111,20 @@ extension SearchVC: SearchVCProtocol {
         searchBar.searchTextField.text = nil
         searchText = ""
         mainView.emptyLabel.text = ResStrings.Guide.searchDefaultGuide
-        mainView.emptyLabel.isHidden = false
         mainView.searchProducts.removeAll()
+        mainView.removePullRefreshControllAction()
     }
     
     func searchBarSearchClicked(_ searchBar: UISearchBar) {
-        mainView.searchProducts.removeAll()
-        page = 1
-        search(page: page, query: searchBar.searchTextField.text!, sort: sortType)
         searchBar.resignFirstResponder()
+        mainView.searchProducts.removeAll()
+        searchText = searchBar.searchTextField.text!
+        
+        LoadingIndicator.show()
+        page = 1
+        search(page: page, query: searchText, sort: sortType) {
+            LoadingIndicator.hide()
+        }
     }
     
     func sortClicked(sortButton: UIButton) {
@@ -119,11 +139,13 @@ extension SearchVC: SearchVCProtocol {
                     }
                     
                     mainView.searchProducts.removeAll()
+                    
+                    LoadingIndicator.show()
                     page = 1
                     if searchText.count > 0 {
-                        search(page: page, query: searchText, sort: sortType)
-                    } else {
-                        mainView.emptyLabel.isHidden = false
+                        search(page: page, query: searchText, sort: sortType) {
+                            LoadingIndicator.hide()
+                        }
                     }
                 }
             } else {

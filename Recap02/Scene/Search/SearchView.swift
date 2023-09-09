@@ -16,7 +16,7 @@ final class SearchView: BaseView {
     lazy var searchBar = ShoppingSearchBar().setup { view in
         view.delegate = self
     }
-
+    
     private lazy var sortCollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout().setup({ view in
@@ -64,8 +64,12 @@ final class SearchView: BaseView {
     
     var searchProducts: [ShoppingProduct] = [] {
         didSet {
-            emptyLabel.isHidden = true
-            productCollectionView.reloadData()
+            if searchProducts.isEmpty {
+                emptyLabel.isHidden = false
+            } else {
+                emptyLabel.isHidden = true
+                productCollectionView.reloadData()
+            }
         }
     }
     
@@ -76,15 +80,23 @@ final class SearchView: BaseView {
             )
         }
         
-        productCollectionView.refreshControl = UIRefreshControl().setup { view in
-            view.tintColor = ResColors.loading
-        }
-        productCollectionView.refreshControl?.addTarget(self, action: #selector(pullRefresh), for: .valueChanged)
-        
         addSubview(searchBar)
         addSubview(sortCollectionView)
         addSubview(productCollectionView)
         addSubview(emptyLabel)
+    }
+    
+    func addPullRefreshControllAction() {
+        print("추가 당겨서새로고침")
+        productCollectionView.refreshControl = UIRefreshControl().setup { view in
+            view.tintColor = ResColors.loading
+        }
+        productCollectionView.refreshControl?.addTarget(self, action: #selector(pullRefresh), for: .valueChanged)
+    }
+    
+    func removePullRefreshControllAction() {
+        print("제거 당겨서새로고침")
+        productCollectionView.refreshControl = nil
     }
     
     @objc func productCellTapped() {
@@ -101,7 +113,7 @@ final class SearchView: BaseView {
             make.top.equalTo(safeAreaLayoutGuide)
             make.horizontalEdges.equalToSuperview().inset(ResDimens.searchBarHorizontalMargin)
         }
-                
+        
         sortCollectionView.snp.makeConstraints { make in
             make.top.equalTo(searchBar.snp.bottom).offset(6)
             make.horizontalEdges.equalToSuperview().inset(ResDimens.defaultHorizontalMargin)
@@ -131,9 +143,9 @@ extension SearchView: UISearchBarDelegate {
         searchVCDelegate?.searchBarSearchClicked(searchBar)
     }
     
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        // 실시간 검색 기능
-//    }
+    //    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    //        // 실시간 검색 기능
+    //    }
 }
 
 extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDataSourcePrefetching {
@@ -146,7 +158,7 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
             let count: CGFloat = 2
             let spacing: CGFloat = 10
             let width: CGFloat = UIScreen.main.bounds.width - (spacing * (count + 1))
-            return CGSize(width: width / count, height: width / count)
+            return CGSize(width: width / count, height: (width / count) * 1.5)
         default: return .zero
         }
     }
@@ -187,11 +199,16 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
             let tap = UITapGestureRecognizer(target: self, action: #selector(productCellTapped))
             cell.addGestureRecognizer(tap)
             tap.cancelsTouchesInView = false
+ 
+            // 당겨서 새로고침 Index Out of Range  오류 해결
+            if productCollectionView.refreshControl?.isRefreshing == false {
+                cell.backgroundColor = .brown
+                cell.layer.cornerRadius = 10.0
+                cell.configCell(row: searchProducts[indexPath.item])
+            }
             
-            cell.backgroundColor = .brown
-            cell.layer.cornerRadius = 10.0
-            cell.configCell(row: searchProducts[indexPath.item])
             return cell
+            
             
         default:
             return UICollectionViewCell()
