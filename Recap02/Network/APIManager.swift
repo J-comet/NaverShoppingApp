@@ -10,7 +10,8 @@ import Alamofire
 
 class APIManager {
     static let shared = APIManager()
-    static let DISPLAY = 30
+    static let display = 30
+    static let limitPage = 1000
     
     private init() { }
     

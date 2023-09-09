@@ -62,6 +62,15 @@ final class SearchVC: BaseViewController<SearchView> {
 
 extension SearchVC: SearchVCProtocol {
     
+    func prefetchItemsAt(prefetchItemsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            if mainView.searchProducts.count - 1 == indexPath.item && page < APIManager.limitPage {
+                page += 1
+                search(page: page, query: searchText, sort: sortType)
+            }
+        }
+    }
+    
     func refreshPull(refreshControl: UIRefreshControl) {
       
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.7) { [weak self] in

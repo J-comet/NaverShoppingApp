@@ -43,6 +43,7 @@ final class SearchView: BaseView {
     ).setup { view in
         view.delegate = self
         view.dataSource = self
+        view.prefetchDataSource = self
     }
     
     let emptyLabel = UILabel().setup { view in
@@ -76,7 +77,7 @@ final class SearchView: BaseView {
         }
         
         productCollectionView.refreshControl = UIRefreshControl().setup { view in
-            view.tintColor = .systemGreen
+            view.tintColor = ResColors.loading
         }
         productCollectionView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         
@@ -130,7 +131,7 @@ extension SearchView: UISearchBarDelegate {
 //    }
 }
 
-extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDataSourcePrefetching {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -143,6 +144,10 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
             return CGSize(width: width / count, height: width / count)
         default: return .zero
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        searchVCDelegate?.prefetchItemsAt(prefetchItemsAt: indexPaths)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -181,6 +186,8 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("sdsdsd")
+        
         switch collectionView {
         case sortCollectionView:
             print("버튼만 있을 때는 didSelectItemAt 메서드 호출 X , 현재 클로저로 액션 전달")

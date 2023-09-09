@@ -19,7 +19,7 @@ class LoadingIndicator {
             } else {
                 indicatorView = UIActivityIndicatorView(style: .medium)
                 indicatorView.frame = window.frame
-                indicatorView.color = .systemGreen
+                indicatorView.color = ResColors.loading
                 window.addSubview(indicatorView)
             }
             

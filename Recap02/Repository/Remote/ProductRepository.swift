@@ -21,7 +21,7 @@ class ProductRepository {
             parameters: [
                 "query": query,
                 "start": page,
-                "display": APIManager.DISPLAY,
+                "display": APIManager.display,
                 "sort": sort.rawValue
             ]
         ) { response, isSuccess in

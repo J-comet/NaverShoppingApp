@@ -12,4 +12,5 @@ enum ResColors {
     static let primaryLabel = UIColor.label
     static let secondaryLabel = UIColor.systemGray5
     static let placeHolder = UIColor.lightGray
+    static let loading = UIColor.systemGreen
 }
