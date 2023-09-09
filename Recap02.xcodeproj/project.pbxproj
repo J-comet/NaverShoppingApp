@@ -32,6 +32,7 @@
 		C08C5E7C2AAB7D980045E7B8 /* FilterShopping.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08C5E7B2AAB7D980045E7B8 /* FilterShopping.swift */; };
 		C08C5E802AAB8CD20045E7B8 /* FilterCollectionCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08C5E7F2AAB8CD20045E7B8 /* FilterCollectionCellProtocol.swift */; };
 		C08C5E832AAB8F070045E7B8 /* SearchVCProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08C5E822AAB8F070045E7B8 /* SearchVCProtocol.swift */; };
+		C08C5E8A2AAC1FCC0045E7B8 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C08C5E892AAC1FCC0045E7B8 /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		C08C5E7B2AAB7D980045E7B8 /* FilterShopping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterShopping.swift; sourceTree = "<group>"; };
 		C08C5E7F2AAB8CD20045E7B8 /* FilterCollectionCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCollectionCellProtocol.swift; sourceTree = "<group>"; };
 		C08C5E822AAB8F070045E7B8 /* SearchVCProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVCProtocol.swift; sourceTree = "<group>"; };
+		C08C5E892AAC1FCC0045E7B8 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 				C017FB862AA9C852007BCFB1 /* Resource */,
 				C017FBFC2AAA0101007BCFB1 /* Scene */,
 				C017FC132AAA1D09007BCFB1 /* View */,
+				C08C5E892AAC1FCC0045E7B8 /* .gitignore */,
 			);
 			path = Recap02;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C08C5E8A2AAC1FCC0045E7B8 /* .gitignore in Resources */,
 				C017FB792AA9B914007BCFB1 /* LaunchScreen.storyboard in Resources */,
 				C017FB892AA9C86A007BCFB1 /* Localizable.strings in Resources */,
 				C017FB762AA9B914007BCFB1 /* Assets.xcassets in Resources */,
