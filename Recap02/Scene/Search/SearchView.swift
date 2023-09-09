@@ -75,10 +75,19 @@ final class SearchView: BaseView {
             )
         }
         
+        productCollectionView.refreshControl = UIRefreshControl().setup { view in
+            view.tintColor = .systemGreen
+        }
+        productCollectionView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        
         addSubview(searchBar)
         addSubview(sortCollectionView)
         addSubview(productCollectionView)
         addSubview(emptyLabel)
+    }
+    
+    @objc private func refreshData(_ sender: UIRefreshControl) {
+        searchVCDelegate?.refreshPull(refreshControl: sender)
     }
     
     override func setConstraints() {

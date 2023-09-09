@@ -11,4 +11,5 @@ protocol SearchVCProtocol: AnyObject {
     func searchBarCancelClicked(_ searchBar: UISearchBar)
     func searchBarSearchClicked(_ searchBar: UISearchBar)
     func sortClicked(sortButton: UIButton)
+    func refreshPull(refreshControl: UIRefreshControl)
 }
