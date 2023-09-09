@@ -10,6 +10,13 @@ import Foundation
 struct FilterShopping {
     var type: ShoppingFilterType
     var isSelected: Bool
+    
+    func copy(
+        type: ShoppingFilterType? = nil,
+        isSelected: Bool? = nil
+    ) -> FilterShopping {
+        return .init(type: type ?? self.type, isSelected: isSelected ?? self.isSelected)
+    }
 }
 
 enum ShoppingFilterType: CaseIterable {

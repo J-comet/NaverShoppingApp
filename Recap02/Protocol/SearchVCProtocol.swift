@@ -10,5 +10,5 @@ import UIKit
 protocol SearchVCProtocol: AnyObject {
     func searchBarCancelClicked(_ searchBar: UISearchBar)
     func searchBarSearchClicked(_ searchBar: UISearchBar)
-    func filterClicked(row: FilterShopping)
+    func filterClicked(selectedFilterButton: UIButton)
 }

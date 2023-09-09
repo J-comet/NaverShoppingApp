@@ -32,8 +32,18 @@ extension SearchVC: SearchVCProtocol {
         print(#function, "검색 버튼")
     }
     
-    func filterClicked(row: FilterShopping) {
-        print(#function, row)
+    func filterClicked(selectedFilterButton: UIButton) {
+        for (index, filter) in mainView.shoppingFilters.enumerated() {
+            if selectedFilterButton.titleLabel!.text == filter.type.title {
+                if !filter.isSelected {
+                    mainView.shoppingFilters[index] = filter.copy(isSelected: true)
+                    mainView.filterCollectionView.reloadData()
+                }
+            } else {
+                mainView.shoppingFilters[index] = filter.copy(isSelected: false)
+            }
+        }
     }
+   
 }
 

@@ -17,7 +17,7 @@ final class SearchView: BaseView {
         view.delegate = self
     }
 
-    private lazy var filterCollectionView = UICollectionView(
+    lazy var filterCollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout().setup({ view in
             view.scrollDirection = .horizontal
@@ -47,7 +47,7 @@ final class SearchView: BaseView {
     
     weak var searchVCDelegate: SearchVCProtocol?
     
-    private var shoppingFilters: [FilterShopping] = []
+    var shoppingFilters: [FilterShopping] = []
     
     override func configureView() {
         ShoppingFilterType.allCases.enumerated().forEach { index, filterType in
@@ -127,24 +127,7 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
             }
             
             cell.nameButtonAction = { [weak self] button in
-                
-                guard let filters = self?.shoppingFilters else { return }
-                
-                for (index, filter) in filters.enumerated() {
-                    if button.titleLabel!.text == filter.type.title {
-                        print(filter.type.title)
-                        if !filter.isSelected {
-                            self!.shoppingFilters[index] = FilterShopping(type: filter.type, isSelected: true)
-                            self?.filterCollectionView.reloadData()
-                        }
-                    } else {
-                        self!.shoppingFilters[index] = FilterShopping(type: filter.type, isSelected: false)
-                    }
-                }
-                
-                self?.searchVCDelegate?.filterClicked(
-                    row: (self?.shoppingFilters[indexPath.item])!
-                )
+                self?.searchVCDelegate?.filterClicked(selectedFilterButton: button)
             }
             cell.configCell(row: shoppingFilters[indexPath.item])
             return cell
