@@ -23,38 +23,31 @@ class APIManager {
     func call<T: Codable>(
         endPoint: Endpoint,
         responseData: T.Type,
-        parameters: [String:Any]? = nil,
+        param: Encodable,
         complete: @escaping (_ response: T?, _ isSuccess: Bool) -> ()
     ){
-        var requestParameters: Parameters = [:]
-        if let parameters {
-            parameters.forEach { (key, value) in
-                requestParameters.updateValue(value, forKey: key)
-            }
-        }
-        
+        print(param)
         let url = endPoint.requestURL
         AF.request(
             url,
             method: .get,
-            parameters: requestParameters,
-            encoding: URLEncoding.default,
+            parameters: param,
+            encoder: URLEncodedFormParameterEncoder.default,
             headers: header
         )
-            .validate(statusCode: 200...500)
-            .responseDecodable(of: T.self) { response in
-                var requestStatus: String
-                switch response.result {
-                case .success(let data):
-                    complete(data, true)
-                    requestStatus = "성공"
-                case .failure(let error):
-                    print(error)
-                    complete(nil, false)
-                    requestStatus = "실패"
-                }
-                print("======== \(url) ======== 호출 \(requestStatus)")
+        .validate(statusCode: 200...500)
+        .responseDecodable(of: T.self) { response in
+            var requestStatus: String
+            switch response.result {
+            case .success(let data):
+                complete(data, true)
+                requestStatus = "성공"
+            case .failure(let error):
+                print(error)
+                complete(nil, false)
+                requestStatus = "실패"
             }
+            print("======== \(url) ======== 호출 \(requestStatus)")
+        }
     }
-    
 }

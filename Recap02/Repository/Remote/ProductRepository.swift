@@ -15,15 +15,19 @@ class ProductRepository {
         sort: ShoppingSortType = .accuracy,
         completionHandler: @escaping (_ response: ResponseSearchShopping?, _ isSuccess: Bool) -> Void
     ) {
+        
+        // 구조체로 전달
+        let request = RequestSearchShopping(
+            query: query,
+            start: page,
+            display: APIManager.display,
+            sort: sort.rawValue
+        )
+  
         APIManager.shared.call(
             endPoint: .search,
             responseData: ResponseSearchShopping.self,
-            parameters: [
-                "query": query,
-                "start": page,
-                "display": APIManager.display,
-                "sort": sort.rawValue
-            ]
+            param: request
         ) { response, isSuccess in
             completionHandler(response, isSuccess)
         }

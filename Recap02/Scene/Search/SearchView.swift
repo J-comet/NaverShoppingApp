@@ -254,7 +254,7 @@ extension SearchView: SkeletonCollectionViewDataSource, SkeletonCollectionViewDe
     }
     
     func collectionSkeletonView(_ skeletonView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return 6
     }
     
 //    func collectionSkeletonView(_ skeletonView: UICollectionView, skeletonCellForItemAt indexPath: IndexPath) -> UICollectionViewCell? {
