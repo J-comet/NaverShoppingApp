@@ -26,6 +26,7 @@ final class SearchVC: BaseViewController<SearchView> {
             if isSuccess {
                 guard let response else {
                     self?.mainView.emptyLabel.text = ResStrings.Guide.searchResultEmpty
+                    self?.mainView.emptyLabel.isHidden = false
                     self?.mainView.searchProducts.removeAll()
                     return
                 }
@@ -42,19 +43,24 @@ final class SearchVC: BaseViewController<SearchView> {
         }
     }
     
+    @objc private func mainViewTapped() {
+        mainView.searchBar.resignFirstResponder()
+    }
+    
     override func configureView() {
         mainView.searchVCDelegate = self
+        let mainViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(mainViewTapped))
+        mainView.addGestureRecognizer(mainViewTapGesture)
         navigationItem.title = ResStrings.NavigationBar.search
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ResColors.primaryLabel]
     }
-    
-    
 }
 
 extension SearchVC: SearchVCProtocol {
     func searchBarCancelClicked(_ searchBar: UISearchBar) {
-        mainView.emptyLabel.text = ResStrings.Guide.searchDefaultGuide
         searchBar.searchTextField.text = nil
+        mainView.emptyLabel.text = ResStrings.Guide.searchDefaultGuide
+        mainView.emptyLabel.isHidden = false
         mainView.searchProducts.removeAll()
     }
     
