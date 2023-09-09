@@ -37,7 +37,7 @@ final class SearchView: BaseView {
         )
     }
     
-    private lazy var productCollectionView = ProductCollectionView(
+    lazy var productCollectionView = ProductCollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewLayout()
     ).setup { view in
@@ -156,9 +156,9 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         case sortCollectionView: return .init(width: 1, height: 1)
         case productCollectionView:
             let count: CGFloat = 2
-            let spacing: CGFloat = 10
+            let spacing: CGFloat = 13
             let width: CGFloat = UIScreen.main.bounds.width - (spacing * (count + 1))
-            return CGSize(width: width / count, height: (width / count) * 1.5)
+            return CGSize(width: width / count, height: (width / count) * 1.4)
         default: return .zero
         }
     }
@@ -200,10 +200,8 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
             cell.addGestureRecognizer(tap)
             tap.cancelsTouchesInView = false
  
-            // 당겨서 새로고침 Index Out of Range  오류 해결
+            // 당겨서 새로고침 Index Out of Range 오류 해결
             if productCollectionView.refreshControl?.isRefreshing == false {
-                cell.backgroundColor = .brown
-                cell.layer.cornerRadius = 10.0
                 cell.configCell(row: searchProducts[indexPath.item])
             }
             

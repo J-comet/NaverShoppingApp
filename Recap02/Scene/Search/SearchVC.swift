@@ -103,6 +103,7 @@ extension SearchVC: SearchVCProtocol {
             self.page = 1
             self.search(page: page, query: searchText, sort: self.sortType) {
                 refreshControl.endRefreshing()
+                self.mainView.productCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
             }
         }
     }
@@ -122,8 +123,9 @@ extension SearchVC: SearchVCProtocol {
         
         LoadingIndicator.show()
         page = 1
-        search(page: page, query: searchText, sort: sortType) {
+        search(page: page, query: searchText, sort: sortType) { [weak self] in
             LoadingIndicator.hide()
+            self?.mainView.productCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
         }
     }
     
@@ -138,13 +140,13 @@ extension SearchVC: SearchVCProtocol {
                         return
                     }
                     
-                    mainView.searchProducts.removeAll()
-                    
-                    LoadingIndicator.show()
-                    page = 1
                     if searchText.count > 0 {
-                        search(page: page, query: searchText, sort: sortType) {
+                        mainView.searchProducts.removeAll()
+                        LoadingIndicator.show()
+                        page = 1
+                        search(page: page, query: searchText, sort: sortType) { [weak self] in
                             LoadingIndicator.hide()
+                            self?.mainView.productCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
                         }
                     }
                 }

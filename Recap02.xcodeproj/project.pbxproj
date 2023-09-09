@@ -44,6 +44,9 @@
 		C08C5EA52AAC766B0045E7B8 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = C08C5EA42AAC766B0045E7B8 /* Toast */; };
 		C08C5EA72AAC78C60045E7B8 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08C5EA62AAC78C60045E7B8 /* UIViewController+Extension.swift */; };
 		C08C5EAB2AAC95C90045E7B8 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08C5EAA2AAC95C90045E7B8 /* LoadingIndicator.swift */; };
+		C08C5EAD2AACC8960045E7B8 /* ClickableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08C5EAC2AACC8960045E7B8 /* ClickableView.swift */; };
+		C08C5EAF2AACC8BF0045E7B8 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08C5EAE2AACC8BF0045E7B8 /* CircleView.swift */; };
+		C08C5EB42AACD67E0045E7B8 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08C5EB32AACD67E0045E7B8 /* String+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +114,9 @@
 		C08C5E9C2AAC343F0045E7B8 /* ProductRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRepository.swift; sourceTree = "<group>"; };
 		C08C5EA62AAC78C60045E7B8 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		C08C5EAA2AAC95C90045E7B8 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
+		C08C5EAC2AACC8960045E7B8 /* ClickableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickableView.swift; sourceTree = "<group>"; };
+		C08C5EAE2AACC8BF0045E7B8 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
+		C08C5EB32AACD67E0045E7B8 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +246,7 @@
 			children = (
 				C08C5E952AAC26FF0045E7B8 /* URL+Extension.swift */,
 				C08C5EA62AAC78C60045E7B8 /* UIViewController+Extension.swift */,
+				C08C5EB32AACD67E0045E7B8 /* String+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -250,6 +257,8 @@
 				C017FC172AAA2884007BCFB1 /* ShoppingSearchBar.swift */,
 				C017E36C2AAAE9EF005FD225 /* ProductCollectionView.swift */,
 				C08C5EAA2AAC95C90045E7B8 /* LoadingIndicator.swift */,
+				C08C5EAC2AACC8960045E7B8 /* ClickableView.swift */,
+				C08C5EAE2AACC8BF0045E7B8 /* CircleView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -426,15 +435,18 @@
 				C08C5E9D2AAC343F0045E7B8 /* ProductRepository.swift in Sources */,
 				C017FB6D2AA9B90C007BCFB1 /* AppDelegate.swift in Sources */,
 				C08C5E962AAC26FF0045E7B8 /* URL+Extension.swift in Sources */,
+				C08C5EB42AACD67E0045E7B8 /* String+Extension.swift in Sources */,
 				C017FC122AAA1638007BCFB1 /* ResColors.swift in Sources */,
 				C08C5E802AAB8CD20045E7B8 /* SortCollectionCellProtocol.swift in Sources */,
 				C017FBFE2AAA0225007BCFB1 /* TabBarVC.swift in Sources */,
 				C017FC042AAA0683007BCFB1 /* SearchView.swift in Sources */,
 				C08C5EAB2AAC95C90045E7B8 /* LoadingIndicator.swift in Sources */,
+				C08C5EAD2AACC8960045E7B8 /* ClickableView.swift in Sources */,
 				C017FC062AAA06B3007BCFB1 /* FavoriteVC.swift in Sources */,
 				C017FB6F2AA9B90C007BCFB1 /* SceneDelegate.swift in Sources */,
 				C08C5E792AAB6FC30045E7B8 /* SortCollectionViewCell.swift in Sources */,
 				C017FC0A2AAA0E6C007BCFB1 /* ResStrings.swift in Sources */,
+				C08C5EAF2AACC8BF0045E7B8 /* CircleView.swift in Sources */,
 				C08C5E832AAB8F070045E7B8 /* SearchVCProtocol.swift in Sources */,
 				C08C5E942AAC26EC0045E7B8 /* Endpoint.swift in Sources */,
 				C017E3682AAAE5F9005FD225 /* ProductCollectionViewCell.swift in Sources */,

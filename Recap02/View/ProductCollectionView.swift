@@ -29,14 +29,11 @@ final class ProductCollectionView: UICollectionView {
     }
     
     private func collectionViewLayout() -> UICollectionViewFlowLayout {
-        let count: CGFloat = 2
-        let spacing: CGFloat = 10
-        let width: CGFloat = UIScreen.main.bounds.width - (spacing * (count + 1))
-        
+        let spacing: CGFloat = 16
         return UICollectionViewFlowLayout().collectionViewLayout(
             itemSize: .zero,
             sectionInset: UIEdgeInsets(top: spacing, left: 0, bottom: spacing, right: 0),
-            minimumLineSpacing: spacing + (spacing / 2),
+            minimumLineSpacing: spacing,
             minimumInteritemSpacing: spacing)
     }
 }
