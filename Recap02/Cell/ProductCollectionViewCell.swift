@@ -8,11 +8,23 @@
 import UIKit
 import BaseKit
 
-final class ProductCollectionViewCell: BaseCollectionViewCell<String> {
+final class ProductCollectionViewCell: BaseCollectionViewCell<ShoppingProduct> {
     
-    override func configureView() {}
+    private let testLabel = UILabel().setup { view in
+        view.textColor = ResColors.primaryLabel
+    }
     
-    override func setConstraints() {}
+    override func configureView() {
+        contentView.addSubview(testLabel)
+    }
     
-    override func configCell(row: String) {}
+    override func setConstraints() {
+        testLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+    }
+    
+    override func configCell(row: ShoppingProduct) {
+        testLabel.text = row.title
+    }
 }

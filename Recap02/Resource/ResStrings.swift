@@ -31,4 +31,9 @@ struct ResStrings {
         static let highPrice = "sortHighPrice".localized
         static let lowPrice = "sortLowPrice".localized
     }
+    
+    struct Guide {
+        static let searchDefaultGuide = "searchDefaultGuide".localized
+        static let searchResultEmpty = "searchResultEmpty".localized
+    }
 }

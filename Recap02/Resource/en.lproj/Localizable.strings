@@ -19,3 +19,6 @@
 "sortDate" = "Date";
 "sortHighPrice" = "HighPrice";
 "sortLowPrice" = "LowPrice";
+
+"searchDefaultGuide" = "Please search for the product you want";
+"searchResultEmpty" = "There's no search result";

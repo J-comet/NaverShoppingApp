@@ -20,3 +20,7 @@
 "sortHighPrice" = "가격높은순";
 "sortLowPrice" = "가격낮은순";
 
+"searchDefaultGuide" = "원하는 상품을 검색해주세요";
+"searchResultEmpty" = "검색 결과가 없어요";
+
+

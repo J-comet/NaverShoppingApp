@@ -17,7 +17,7 @@ final class SearchView: BaseView {
         view.delegate = self
     }
 
-    lazy var sortCollectionView = UICollectionView(
+    private lazy var sortCollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout().setup({ view in
             view.scrollDirection = .horizontal
@@ -45,9 +45,32 @@ final class SearchView: BaseView {
         view.dataSource = self
     }
     
+    let emptyLabel = UILabel().setup { view in
+        view.backgroundColor = ResColors.mainBg
+        view.text = ResStrings.Guide.searchDefaultGuide
+        view.font = .monospacedSystemFont(ofSize: 16, weight: .semibold)
+        view.textColor = ResColors.secondaryLabel
+        view.textAlignment = .center
+    }
+    
     weak var searchVCDelegate: SearchVCProtocol?
     
-    var shoppingSorts: [SortShopping] = []
+    var shoppingSorts: [SortShopping] = [] {
+        didSet {
+            sortCollectionView.reloadData()
+        }
+    }
+    
+    var searchProducts: [ShoppingProduct] = [] {
+        didSet {
+            if searchProducts.isEmpty {
+                emptyLabel.isHidden = false
+            } else {
+                emptyLabel.isHidden = true
+                productCollectionView.reloadData()
+            }
+        }
+    }
     
     override func configureView() {
         ShoppingSortType.allCases.enumerated().forEach { index, sortType in
@@ -59,6 +82,7 @@ final class SearchView: BaseView {
         addSubview(searchBar)
         addSubview(sortCollectionView)
         addSubview(productCollectionView)
+        addSubview(emptyLabel)
     }
     
     override func setConstraints() {
@@ -77,6 +101,11 @@ final class SearchView: BaseView {
             make.top.equalTo(sortCollectionView.snp.bottom)
             make.bottom.equalToSuperview()
             make.horizontalEdges.equalToSuperview().inset(ResDimens.defaultHorizontalMargin)
+        }
+        
+        emptyLabel.snp.makeConstraints { make in
+            make.top.equalTo(sortCollectionView.snp.bottom)
+            make.bottom.horizontalEdges.equalTo(safeAreaLayoutGuide)
         }
     }
     
@@ -114,7 +143,7 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
         case sortCollectionView: return shoppingSorts.count
-        case productCollectionView: return 20
+        case productCollectionView: return searchProducts.count
         default: return 0
         }
     }
@@ -138,7 +167,7 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
             }
             cell.backgroundColor = .brown
             cell.layer.cornerRadius = 10.0
-            cell.configCell(row: "1")
+            cell.configCell(row: searchProducts[indexPath.item])
             return cell
             
         default:
