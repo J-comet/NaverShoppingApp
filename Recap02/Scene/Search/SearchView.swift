@@ -17,7 +17,7 @@ final class SearchView: BaseView {
         view.delegate = self
     }
 
-    lazy var filterCollectionView = UICollectionView(
+    lazy var sortCollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout().setup({ view in
             view.scrollDirection = .horizontal
@@ -32,8 +32,8 @@ final class SearchView: BaseView {
         view.showsHorizontalScrollIndicator = false
         view.isUserInteractionEnabled = true
         view.register(
-            FilterCollectionViewCell.self,
-            forCellWithReuseIdentifier: FilterCollectionViewCell.identifier
+            SortCollectionViewCell.self,
+            forCellWithReuseIdentifier: SortCollectionViewCell.identifier
         )
     }
     
@@ -47,17 +47,17 @@ final class SearchView: BaseView {
     
     weak var searchVCDelegate: SearchVCProtocol?
     
-    var shoppingFilters: [FilterShopping] = []
+    var shoppingSorts: [SortShopping] = []
     
     override func configureView() {
-        ShoppingFilterType.allCases.enumerated().forEach { index, filterType in
-            shoppingFilters.append(
-                FilterShopping(type: filterType, isSelected: index == 0 ? true : false)
+        ShoppingSortType.allCases.enumerated().forEach { index, sortType in
+            shoppingSorts.append(
+                SortShopping(type: sortType, isSelected: index == 0 ? true : false)
             )
         }
         
         addSubview(searchBar)
-        addSubview(filterCollectionView)
+        addSubview(sortCollectionView)
         addSubview(productCollectionView)
     }
     
@@ -67,14 +67,14 @@ final class SearchView: BaseView {
             make.horizontalEdges.equalToSuperview().inset(ResDimens.searchBarHorizontalMargin)
         }
                 
-        filterCollectionView.snp.makeConstraints { make in
+        sortCollectionView.snp.makeConstraints { make in
             make.top.equalTo(searchBar.snp.bottom).offset(6)
             make.horizontalEdges.equalToSuperview().inset(ResDimens.defaultHorizontalMargin)
             make.height.equalTo(38)
         }
         
         productCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(filterCollectionView.snp.bottom)
+            make.top.equalTo(sortCollectionView.snp.bottom)
             make.bottom.equalToSuperview()
             make.horizontalEdges.equalToSuperview().inset(ResDimens.defaultHorizontalMargin)
         }
@@ -101,7 +101,7 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         switch collectionView {
-        case filterCollectionView: return .init(width: 1, height: 1)
+        case sortCollectionView: return .init(width: 1, height: 1)
         case productCollectionView:
             let count: CGFloat = 2
             let spacing: CGFloat = 10
@@ -113,7 +113,7 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
-        case filterCollectionView: return shoppingFilters.count
+        case sortCollectionView: return shoppingSorts.count
         case productCollectionView: return 20
         default: return 0
         }
@@ -121,15 +121,15 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionView {
-        case filterCollectionView:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilterCollectionViewCell.identifier, for: indexPath) as? FilterCollectionViewCell else {
+        case sortCollectionView:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SortCollectionViewCell.identifier, for: indexPath) as? SortCollectionViewCell else {
                 return UICollectionViewCell()
             }
             
             cell.nameButtonAction = { [weak self] button in
-                self?.searchVCDelegate?.filterClicked(selectedFilterButton: button)
+                self?.searchVCDelegate?.sortClicked(sortButton: button)
             }
-            cell.configCell(row: shoppingFilters[indexPath.item])
+            cell.configCell(row: shoppingSorts[indexPath.item])
             return cell
             
         case productCollectionView:
@@ -148,7 +148,7 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionView {
-        case filterCollectionView:
+        case sortCollectionView:
             print("버튼만 있을 때는 didSelectItemAt 메서드 호출 X , 현재 클로저로 액션 전달")
             
         case productCollectionView:

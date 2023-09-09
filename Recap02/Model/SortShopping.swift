@@ -1,5 +1,5 @@
 //
-//  FilterShopping.swift
+//  SortShopping.swift
 //  Recap02
 //
 //  Created by 장혜성 on 2023/09/09.
@@ -7,37 +7,37 @@
 
 import Foundation
 
-struct FilterShopping {
-    var type: ShoppingFilterType
+struct SortShopping {
+    var type: ShoppingSortType
     var isSelected: Bool
     
     func copy(
-        type: ShoppingFilterType? = nil,
+        type: ShoppingSortType? = nil,
         isSelected: Bool? = nil
-    ) -> FilterShopping {
+    ) -> SortShopping {
         return .init(type: type ?? self.type, isSelected: isSelected ?? self.isSelected)
     }
 }
 
-enum ShoppingFilterType: CaseIterable {
+enum ShoppingSortType: CaseIterable {
     case accuracy
     case date
     case highPrice
     case lowPrice
 }
 
-extension ShoppingFilterType {
+extension ShoppingSortType {
     
     var title: String {
         switch self {
         case .accuracy:
-            return ResStrings.ShoppingFilterType.accuracy
+            return ResStrings.ShoppingSortType.accuracy
         case .date:
-            return ResStrings.ShoppingFilterType.date
+            return ResStrings.ShoppingSortType.date
         case .highPrice:
-            return ResStrings.ShoppingFilterType.highPrice
+            return ResStrings.ShoppingSortType.highPrice
         case .lowPrice:
-            return ResStrings.ShoppingFilterType.lowPrice
+            return ResStrings.ShoppingSortType.lowPrice
         }
     }
     

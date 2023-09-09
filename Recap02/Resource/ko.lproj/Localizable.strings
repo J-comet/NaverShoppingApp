@@ -15,8 +15,8 @@
 "searchbarBtnCancel" = "취소";
 "searchbarPlaceHolder" = "검색어를 입력해주세요";
 
-"filterAccuracy" = "정확도";
-"filterDate" = "날짜순";
-"filterHighPrice" = "가격높은순";
-"filterLowPrice" = "가격낮은순";
+"sortAccuracy" = "정확도";
+"sortDate" = "날짜순";
+"sortHighPrice" = "가격높은순";
+"sortLowPrice" = "가격낮은순";
 

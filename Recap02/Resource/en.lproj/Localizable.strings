@@ -15,7 +15,7 @@
 "searchbarBtnCancel" = "Cancel";
 "searchbarPlaceHolder" = "Please enter your search term";
 
-"filterAccuracy" = "Accuracy";
-"filterDate" = "Date";
-"filterHighPrice" = "HighPrice";
-"filterLowPrice" = "LowPrice";
+"sortAccuracy" = "Accuracy";
+"sortDate" = "Date";
+"sortHighPrice" = "HighPrice";
+"sortLowPrice" = "LowPrice";

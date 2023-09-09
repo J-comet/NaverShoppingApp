@@ -25,10 +25,10 @@ struct ResStrings {
         static let cancelBtnTitle = "searchbarBtnCancel".localized
     }
     
-    struct ShoppingFilterType {
-        static let accuracy = "filterAccuracy".localized
-        static let date = "filterDate".localized
-        static let highPrice = "filterHighPrice".localized
-        static let lowPrice = "filterLowPrice".localized
+    struct ShoppingSortType {
+        static let accuracy = "sortAccuracy".localized
+        static let date = "sortDate".localized
+        static let highPrice = "sortHighPrice".localized
+        static let lowPrice = "sortLowPrice".localized
     }
 }

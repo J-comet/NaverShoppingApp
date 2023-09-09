@@ -1,5 +1,5 @@
 //
-//  FilterCollectionViewCell.swift
+//  SortCollectionViewCell.swift
 //  Recap02
 //
 //  Created by 장혜성 on 2023/09/09.
@@ -9,7 +9,7 @@ import UIKit
 import BaseKit
 import SnapKit
 
-final class FilterCollectionViewCell: BaseCollectionViewCell<FilterShopping> {
+final class SortCollectionViewCell: BaseCollectionViewCell<SortShopping> {
     
     private lazy var nameButton = UIButton().setup { view in
         view.layer.cornerRadius = 10
@@ -37,7 +37,7 @@ final class FilterCollectionViewCell: BaseCollectionViewCell<FilterShopping> {
         }
     }
     
-    override func configCell(row: FilterShopping) {
+    override func configCell(row: SortShopping) {
         
         nameButton.layer.borderColor = row.isSelected ? ResColors.primaryLabel.cgColor : ResColors.placeHolder.cgColor
         

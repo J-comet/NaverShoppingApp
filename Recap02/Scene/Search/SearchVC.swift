@@ -32,15 +32,15 @@ extension SearchVC: SearchVCProtocol {
         print(#function, "검색 버튼")
     }
     
-    func filterClicked(selectedFilterButton: UIButton) {
-        for (index, filter) in mainView.shoppingFilters.enumerated() {
-            if selectedFilterButton.titleLabel!.text == filter.type.title {
-                if !filter.isSelected {
-                    mainView.shoppingFilters[index] = filter.copy(isSelected: true)
-                    mainView.filterCollectionView.reloadData()
+    func sortClicked(sortButton: UIButton) {
+        for (index, sort) in mainView.shoppingSorts.enumerated() {
+            if sortButton.titleLabel!.text == sort.type.title {
+                if !sort.isSelected {
+                    mainView.shoppingSorts[index] = sort.copy(isSelected: true)
+                    mainView.sortCollectionView.reloadData()
                 }
             } else {
-                mainView.shoppingFilters[index] = filter.copy(isSelected: false)
+                mainView.shoppingSorts[index] = sort.copy(isSelected: false)
             }
         }
     }
