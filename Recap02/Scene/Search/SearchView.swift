@@ -79,7 +79,7 @@ final class SearchView: BaseView {
         productCollectionView.refreshControl = UIRefreshControl().setup { view in
             view.tintColor = ResColors.loading
         }
-        productCollectionView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        productCollectionView.refreshControl?.addTarget(self, action: #selector(pullRefresh), for: .valueChanged)
         
         addSubview(searchBar)
         addSubview(sortCollectionView)
@@ -87,7 +87,12 @@ final class SearchView: BaseView {
         addSubview(emptyLabel)
     }
     
-    @objc private func refreshData(_ sender: UIRefreshControl) {
+    @objc func productCellTapped() {
+        // tabGesture 를 mainView 에서 사용중이라 didSelectItemAt 이 안찍혀서 터치 재정의
+        print("터치 재정의")
+    }
+    
+    @objc private func pullRefresh(_ sender: UIRefreshControl) {
         searchVCDelegate?.refreshPull(refreshControl: sender)
     }
     
@@ -168,6 +173,7 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
             cell.nameButtonAction = { [weak self] button in
                 self?.searchVCDelegate?.sortClicked(sortButton: button)
             }
+            
             cell.configCell(row: shoppingSorts[indexPath.item])
             return cell
             
@@ -175,6 +181,13 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCollectionViewCell.identifier, for: indexPath) as? ProductCollectionViewCell else {
                 return UICollectionViewCell()
             }
+            
+            //MARK: mainView 에서 TabGesture 로 인해 터치가 안될 때 cell 터치 재정의 해주기
+            //MARK: 재정의 후에 didSelectItemAt 이 다시 호출되는 것을 확인할 수 있음
+            let tap = UITapGestureRecognizer(target: self, action: #selector(productCellTapped))
+            cell.addGestureRecognizer(tap)
+            tap.cancelsTouchesInView = false
+            
             cell.backgroundColor = .brown
             cell.layer.cornerRadius = 10.0
             cell.configCell(row: searchProducts[indexPath.item])
@@ -186,13 +199,14 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("sdsdsd")
-        
         switch collectionView {
         case sortCollectionView:
             print("버튼만 있을 때는 didSelectItemAt 메서드 호출 X , 현재 클로저로 액션 전달")
         case productCollectionView:
+            //MARK: mainView 에 TabGesture 로 키보드 내리는 동작때문에 didSelectItemAt 호출 X 안되는 오류 cellForItemAt 에서 터치 재정의
             print("productCollectionView 클릭")
+            let row = searchProducts[indexPath.item]
+            searchVCDelegate?.didSelectItemAt(row: row)
         default: print("none")
         }
     }

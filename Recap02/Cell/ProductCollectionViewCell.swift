@@ -12,6 +12,7 @@ final class ProductCollectionViewCell: BaseCollectionViewCell<ShoppingProduct> {
     
     private let testLabel = UILabel().setup { view in
         view.textColor = ResColors.primaryLabel
+        view.numberOfLines = 2
     }
     
     override func configureView() {
@@ -20,7 +21,7 @@ final class ProductCollectionViewCell: BaseCollectionViewCell<ShoppingProduct> {
     
     override func setConstraints() {
         testLabel.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+            make.edges.equalToSuperview()
         }
     }
     

@@ -62,6 +62,10 @@ final class SearchVC: BaseViewController<SearchView> {
 
 extension SearchVC: SearchVCProtocol {
     
+    func didSelectItemAt(row: ShoppingProduct) {
+        print("상세페이지로 이동", row.title)
+    }
+    
     func prefetchItemsAt(prefetchItemsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
             if mainView.searchProducts.count - 1 == indexPath.item && page < APIManager.limitPage {
@@ -121,7 +125,6 @@ extension SearchVC: SearchVCProtocol {
                     } else {
                         mainView.emptyLabel.isHidden = false
                     }
-                    
                 }
             } else {
                 mainView.shoppingSorts[index] = sort.copy(isSelected: false)
