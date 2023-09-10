@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C017E3682AAAE5F9005FD225 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017E3672AAAE5F9005FD225 /* ProductCollectionViewCell.swift */; };
+		C007E5052AAD9845008E9FA8 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C007E5042AAD9845008E9FA8 /* ProductCollectionViewCell.swift */; };
+		C007E5072AAD99B4008E9FA8 /* ProductDesignCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C007E5062AAD99B4008E9FA8 /* ProductDesignCellView.swift */; };
 		C017E36D2AAAE9EF005FD225 /* ProductCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017E36C2AAAE9EF005FD225 /* ProductCollectionView.swift */; };
 		C017FB6D2AA9B90C007BCFB1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017FB6C2AA9B90C007BCFB1 /* AppDelegate.swift */; };
 		C017FB6F2AA9B90C007BCFB1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017FB6E2AA9B90C007BCFB1 /* SceneDelegate.swift */; };
@@ -86,7 +87,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		C017E3672AAAE5F9005FD225 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
+		C007E5042AAD9845008E9FA8 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
+		C007E5062AAD99B4008E9FA8 /* ProductDesignCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDesignCellView.swift; sourceTree = "<group>"; };
 		C017E36C2AAAE9EF005FD225 /* ProductCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionView.swift; sourceTree = "<group>"; };
 		C017FB692AA9B90C007BCFB1 /* Recap02.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recap02.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C017FB6C2AA9B90C007BCFB1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -151,7 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				C08C5E782AAB6FC30045E7B8 /* SortCollectionViewCell.swift */,
-				C017E3672AAAE5F9005FD225 /* ProductCollectionViewCell.swift */,
+				C007E5042AAD9845008E9FA8 /* ProductCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -269,6 +271,7 @@
 				C08C5EAA2AAC95C90045E7B8 /* LoadingIndicator.swift */,
 				C08C5EAC2AACC8960045E7B8 /* ClickableView.swift */,
 				C08C5EAE2AACC8BF0045E7B8 /* CircleView.swift */,
+				C007E5062AAD99B4008E9FA8 /* ProductDesignCellView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 				C08C5E802AAB8CD20045E7B8 /* SortCollectionCellProtocol.swift in Sources */,
 				C017FBFE2AAA0225007BCFB1 /* TabBarVC.swift in Sources */,
 				C017FC042AAA0683007BCFB1 /* SearchView.swift in Sources */,
+				C007E5072AAD99B4008E9FA8 /* ProductDesignCellView.swift in Sources */,
 				C08C5EAB2AAC95C90045E7B8 /* LoadingIndicator.swift in Sources */,
 				C08C5EAD2AACC8960045E7B8 /* ClickableView.swift in Sources */,
 				C017FC062AAA06B3007BCFB1 /* FavoriteVC.swift in Sources */,
@@ -498,11 +502,11 @@
 				C08C5EAF2AACC8BF0045E7B8 /* CircleView.swift in Sources */,
 				C08C5E832AAB8F070045E7B8 /* SearchVCProtocol.swift in Sources */,
 				C08C5E942AAC26EC0045E7B8 /* Endpoint.swift in Sources */,
-				C017E3682AAAE5F9005FD225 /* ProductCollectionViewCell.swift in Sources */,
 				C08C5E7C2AAB7D980045E7B8 /* SortShopping.swift in Sources */,
 				C08C5EC42AAD76790045E7B8 /* RealmDBProtocol.swift in Sources */,
 				C017E36D2AAAE9EF005FD225 /* ProductCollectionView.swift in Sources */,
 				C08C5E982AAC28D70045E7B8 /* ResponseSearchShopping.swift in Sources */,
+				C007E5052AAD9845008E9FA8 /* ProductCollectionViewCell.swift in Sources */,
 				C08C5E8D2AAC1FFD0045E7B8 /* APIKey.swift in Sources */,
 				C08C5EC02AAD73000045E7B8 /* LikeProduct.swift in Sources */,
 				C017FC182AAA2884007BCFB1 /* ShoppingSearchBar.swift in Sources */,

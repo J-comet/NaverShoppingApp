@@ -103,7 +103,7 @@ final class SearchView: BaseView {
     
     func showSkeleton() {
         let anim = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .topLeftBottomRight)
-        productCollectionView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: ResColors.placeHolder), animation: anim, transition: .crossDissolve(0.1))
+        productCollectionView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: ResColors.placeHolder), animation: anim, transition: .crossDissolve(0.2))
     }
     
     func hideSkeleton() {
