@@ -196,7 +196,7 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
                 return UICollectionViewCell()
             }
             
-            cell.nameButtonAction = { [weak self] button in
+            cell.sortButtonClicked = { [weak self] button in
                 self?.searchVCDelegate?.sortClicked(sortButton: button)
             }
             
@@ -213,9 +213,12 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
             let tap = UITapGestureRecognizer(target: self, action: #selector(productCellTapped))
             cell.addGestureRecognizer(tap)
             tap.cancelsTouchesInView = false
- 
+            
             // 당겨서 새로고침 Index Out of Range 오류 해결
             if productCollectionView.refreshControl?.isRefreshing == false {
+                cell.heartClicked = { [weak self] item in
+                    self?.searchVCDelegate?.heartClicked(item: item)
+                }
                 cell.configCell(row: searchProducts[indexPath.item])
             }
             
@@ -235,7 +238,7 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
             print("productCollectionView 클릭")
             if !searchProducts.isEmpty {
                 let row = searchProducts[indexPath.item]
-                searchVCDelegate?.didSelectItemAt(row: row)
+                searchVCDelegate?.didSelectItemAt(item: row)
             }
             
         default: print("none")

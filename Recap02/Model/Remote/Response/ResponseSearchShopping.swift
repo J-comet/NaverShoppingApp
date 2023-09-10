@@ -21,16 +21,31 @@ struct ShoppingProduct: Codable {
     let image: String
     let lprice: String
     let mallName: String
-    let isLike: Bool = false
-//    let hprice: String
-//    let productType, brand, maker: String
-//    let category1, category2, category3, category4: String
+    var isLike: Bool = false
 
     enum CodingKeys: String, CodingKey {
         case productID = "productId"
         case title, link, image, lprice, mallName
-//        case hprice
-//        case productType, brand, maker, category1, category2, category3, category4
+    }
+    
+    func copy(
+        productID: String? = nil,
+        title: String? = nil,
+        link: String? = nil,
+        image: String? = nil,
+        lprice: String? = nil,
+        mallName: String? = nil,
+        isLike: Bool? = nil
+    ) -> ShoppingProduct {
+        return .init(
+            productID: productID ?? self.productID,
+            title: title ?? self.title,
+            link: link ?? self.link,
+            image: image ?? self.image,
+            lprice: lprice ?? self.lprice,
+            mallName: mallName ?? self.mallName,
+            isLike: isLike ?? self.isLike
+        )
     }
 }
 

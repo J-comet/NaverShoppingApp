@@ -13,8 +13,8 @@ final class LikeProductRepository: RealmDBProtocol {
     private let realm = try! Realm()
     private lazy var fileURL = self.realm.configuration.fileURL
     
-    func printFileURL() -> String {
-        return String(describing: fileURL)
+    func printFileURL() {
+        print(String(describing: fileURL))
     }
     
     func fetch(objType: LikeProduct.Type) -> Results<LikeProduct> {

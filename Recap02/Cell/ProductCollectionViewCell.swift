@@ -29,9 +29,6 @@ final class ProductCollectionViewCell: BaseCollectionViewCell<ShoppingProduct> {
     
     private lazy var heartCircleView = CircleView().setup { view in
         view.backgroundColor = ResColors.primaryLabel
-        view.onClick = {
-            print("하트 클릭")
-        }
     }
     
     private let heartImageView = UIImageView(frame: .zero).setup { view in
@@ -56,6 +53,8 @@ final class ProductCollectionViewCell: BaseCollectionViewCell<ShoppingProduct> {
         view.font = .systemFont(ofSize: 15, weight: .bold)
         view.textColor = ResColors.primaryLabel
     }
+    
+    var heartClicked: ((ShoppingProduct) -> Void)?
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -162,6 +161,12 @@ final class ProductCollectionViewCell: BaseCollectionViewCell<ShoppingProduct> {
 
         if let result {
             priceLabel.text = result
+        }
+        
+        heartImageView.image = row.isLike ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
+        
+        heartCircleView.onClick = { [weak self] in
+            self?.heartClicked?(row)
         }
     }
 }

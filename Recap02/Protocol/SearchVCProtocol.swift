@@ -12,6 +12,7 @@ protocol SearchVCProtocol: AnyObject {
     func searchBarSearchClicked(_ searchBar: UISearchBar)
     func sortClicked(sortButton: UIButton)
     func refreshPull(refreshControl: UIRefreshControl)
-    func didSelectItemAt(row: ShoppingProduct)
+    func didSelectItemAt(item: ShoppingProduct)
     func prefetchItemsAt(prefetchItemsAt indexPaths: [IndexPath])
+    func heartClicked(item: ShoppingProduct)
 }

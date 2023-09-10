@@ -15,16 +15,16 @@ final class SortCollectionViewCell: BaseCollectionViewCell<SortShopping> {
         view.layer.cornerRadius = 10
         view.clipsToBounds = true
         view.layer.borderWidth = 1
-        view.addTarget(self, action: #selector(nameButtonClicked), for: .touchUpInside)
+        view.addTarget(self, action: #selector(sortClicked), for: .touchUpInside)
     }
     
     private let verticalInset: CGFloat = 8
     private let horizontalInset: CGFloat = 4
     
-    var nameButtonAction: ((UIButton) -> Void)?
+    var sortButtonClicked: ((UIButton) -> Void)?
     
-    @objc func nameButtonClicked(_ sender: UIButton) {
-        nameButtonAction?(sender)
+    @objc func sortClicked(_ sender: UIButton) {
+        sortButtonClicked?(sender)
     }
     
     override func configureView() {

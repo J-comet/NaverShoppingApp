@@ -16,7 +16,6 @@ class LikeProduct: Object {
     @Persisted var image: String
     @Persisted var lprice: String
     @Persisted var mallName: String
-    @Persisted var isLike: Bool = false
     
     convenience init(
         productID: String,
@@ -24,8 +23,7 @@ class LikeProduct: Object {
         link: String,
         image: String,
         lprice: String,
-        mallName: String,
-        isLike: Bool
+        mallName: String
     ) {
         self.init()
         self.productID = productID
@@ -34,7 +32,6 @@ class LikeProduct: Object {
         self.image = image
         self.lprice = lprice
         self.mallName = mallName
-        self.isLike = isLike
     }
 
 }
