@@ -58,25 +58,12 @@ final class SearchVC: BaseViewController<SearchView> {
             
             switch changes {
             case .initial:
-                self.favoriteProducts = tasks
                 //MARK: 최초 실행시 검색값이 없으므로 search() 함수에서 likeStatusCheckItems 로 검사하도록 수정
-            case .update(_, let deletions, let insertions, let modifications):
-                // Query results have changed.
-                print("Deleted indices: ", deletions)
-                print("Inserted indices: ", insertions)
-                print("Modified modifications: ", modifications)
                 self.favoriteProducts = tasks
-                for favoriteProduct in tasks {
-                    for (index,product) in mainView.searchProducts.enumerated() {
-                        if favoriteProduct.productID == product.productID {
-                            print("=========== ", product.title)
-                            mainView.searchProducts[index] = product.copy(isLike: true)
-                            break
-                        }
-                    }
-                }
-//                self.mainView.productCollectionView.reloadData()
-                
+            case .update(_, let deletions, let insertions, let modifications):
+                print("업데이트 되어따")
+                self.favoriteProducts = tasks
+                mainView.searchProducts = likeStatusCheckItems(responseProducts: mainView.searchProducts)
             case .error(let error):
                 // An error occurred while opening the Realm file on the background worker thread
                 fatalError("\(error)")
@@ -136,8 +123,9 @@ final class SearchVC: BaseViewController<SearchView> {
     private func likeStatusCheckItems(responseProducts: [ShoppingProduct]) -> [ShoppingProduct] {
         var items = responseProducts
         if let favoriteProducts {
-            for favoriteProduct in favoriteProducts {
-                for (index,product) in items.enumerated() {
+            for (index,product) in items.enumerated() {
+                items[index] = product.copy(isLike: false)
+                for favoriteProduct in favoriteProducts {
                     if favoriteProduct.productID == product.productID {
                         print("=========== ", product.title)
                         items[index] = product.copy(isLike: true)
@@ -157,7 +145,8 @@ extension SearchVC: SearchVCProtocol {
     }
     
     func heartClicked(item: ShoppingProduct) {
-        
+        // 페이징 이후 하트 클릭하면 하트색이 안바뀌는 오류
+        print(#function, item)
         guard let realmFavoriteProduct = getRealmFavoriteProduct(data: item) else {
             // ADD
             let newFavoriteProduct = FavoriteProduct(

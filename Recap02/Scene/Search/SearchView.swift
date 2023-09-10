@@ -160,10 +160,6 @@ extension SearchView: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchVCDelegate?.searchBarSearchClicked(searchBar)
     }
-    
-    //    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-    //        // 실시간 검색 기능
-    //    }
 }
 
 extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDataSourcePrefetching {

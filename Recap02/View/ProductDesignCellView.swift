@@ -30,9 +30,16 @@ class ProductDesignCellView: BaseView {
         view.backgroundColor = ResColors.primaryLabel
     }
     
-    let heartImageView = UIImageView(frame: .zero).setup { view in
+    let emptyHeartImageView = UIImageView(frame: .zero).setup { view in
         view.tintColor = ResColors.mainBg
         view.image = UIImage(systemName: "heart")
+        view.isHidden = true
+    }
+    
+    let fillHeartImageView = UIImageView(frame: .zero).setup { view in
+        view.tintColor = ResColors.mainBg
+        view.image = UIImage(systemName: "heart.fill")
+        view.isHidden = true
     }
     
     private let labelContainerView = UIView()
@@ -71,7 +78,8 @@ class ProductDesignCellView: BaseView {
         ImageContainerView.addSubview(thumbImageView)
         ImageContainerView.addSubview(opacityView)
         ImageContainerView.addSubview(heartCircleView)
-        heartCircleView.addSubview(heartImageView)
+        heartCircleView.addSubview(emptyHeartImageView)
+        heartCircleView.addSubview(fillHeartImageView)
         self.addSubview(labelContainerView)
         labelContainerView.addSubview(mallNameLabel)
         labelContainerView.addSubview(titleLabel)
@@ -98,7 +106,11 @@ class ProductDesignCellView: BaseView {
             make.size.equalTo(40)
         }
         
-        heartImageView.snp.makeConstraints { make in
+        emptyHeartImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(8)
+        }
+        
+        fillHeartImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(8)
         }
         

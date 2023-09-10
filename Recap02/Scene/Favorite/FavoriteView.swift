@@ -8,12 +8,14 @@
 import UIKit
 import BaseKit
 import SnapKit
+import RealmSwift
 
 final class FavoriteView: BaseView {
     
     override var viewBg: UIColor { ResColors.mainBg }
     
     lazy var searchBar = ShoppingSearchBar().setup { view in
+        view.searchTextField.returnKeyType = .done
         view.delegate = self
     }
     
@@ -40,9 +42,9 @@ final class FavoriteView: BaseView {
     
     weak var favoriteVCDelegate: FavoriteVCProtocol?
     
-    var favoriteProducts: [FavoriteProduct] = [] {
+    var favoriteProducts: Results<FavoriteProduct>? {
         didSet {
-            if favoriteProducts.isEmpty {
+            if favoriteProducts?.isEmpty == true {
                 emptyLabel.isHidden = false
             } else {
                 emptyLabel.isHidden = true
@@ -111,7 +113,7 @@ extension FavoriteView: UICollectionViewDelegate, UICollectionViewDataSource, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return favoriteProducts.count
+        return favoriteProducts?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -128,14 +130,16 @@ extension FavoriteView: UICollectionViewDelegate, UICollectionViewDataSource, UI
         cell.heartClicked = { [weak self] item in
             self?.favoriteVCDelegate?.heartClicked(item: item)
         }
-        cell.configCell(row: favoriteProducts[indexPath.item])
         
+        guard let favoriteProducts else { return UICollectionViewCell() }
+        cell.configCell(row: favoriteProducts[indexPath.item])
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //MARK: mainView 에 TabGesture 로 키보드 내리는 동작때문에 didSelectItemAt 호출 X 안되는 오류 cellForItemAt 에서 터치 재정의
         print("productCollectionView 클릭")
+        guard let favoriteProducts else { return }
         if !favoriteProducts.isEmpty {
             let row = favoriteProducts[indexPath.item]
             favoriteVCDelegate?.didSelectItemAt(item: row)

@@ -19,6 +19,8 @@ final class ProductCollectionViewCell: BaseCollectionViewCell<ShoppingProduct> {
     override func prepareForReuse() {
         super.prepareForReuse()
         cellView.thumbImageView.image = nil
+        cellView.fillHeartImageView.isHidden = true
+        cellView.emptyHeartImageView.isHidden = true
     }
     
     override func configureView() {
@@ -45,8 +47,17 @@ final class ProductCollectionViewCell: BaseCollectionViewCell<ShoppingProduct> {
         cellView.titleLabel.text = row.titleValue
         cellView.mallNameLabel.text = row.mallNameValue
         cellView.priceLabel.text = row.priceValue
-        cellView.heartImageView.image = UIImage(systemName: row.likeImgNameValue)
+        
+        if row.isLike {
+            cellView.fillHeartImageView.isHidden = false
+        } else {
+            cellView.emptyHeartImageView.isHidden = false
+        }
+        
+//        cellView.heartImageView.image = UIImage(systemName: row.likeImgNameValue)
+        
         cellView.heartCircleView.onClick = { [weak self] in
+            print(row.likeImgNameValue)
             self?.heartClicked?(row)
         }
     }

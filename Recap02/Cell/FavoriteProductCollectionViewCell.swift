@@ -45,7 +45,7 @@ final class FavoriteProductCollectionViewCell: BaseCollectionViewCell<FavoritePr
         cellView.titleLabel.text = row.titleValue
         cellView.mallNameLabel.text = row.mallNameValue
         cellView.priceLabel.text = row.priceValue
-        cellView.heartImageView.image = UIImage(systemName: "heart.fill")
+        cellView.fillHeartImageView.isHidden = false
         cellView.heartCircleView.onClick = { [weak self] in
             self?.heartClicked?(row)
         }

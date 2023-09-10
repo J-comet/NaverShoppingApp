@@ -22,15 +22,20 @@ final class FavoriteVC: BaseViewController<FavoriteView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = ResStrings.NavigationBar.favorite
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ResColors.primaryLabel]
-        
-        let tasks = favoriteRepository.fetch(objType: FavoriteProduct.self)
-        realmResultsObserve(tasks: tasks)
     }
     
     override func configureView() {
         mainView.favoriteVCDelegate = self
+        navigationItem.title = ResStrings.NavigationBar.favorite
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ResColors.primaryLabel]
+        let mainViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(mainViewTapped))
+        mainView.addGestureRecognizer(mainViewTapGesture)
+        let tasks = favoriteRepository.fetch(objType: FavoriteProduct.self)
+        realmResultsObserve(tasks: tasks)
+    }
+    
+    @objc private func mainViewTapped() {
+        mainView.searchBar.resignFirstResponder()
     }
     
     private func realmResultsObserve(tasks: Results<FavoriteProduct>?) {
@@ -43,14 +48,14 @@ final class FavoriteVC: BaseViewController<FavoriteView> {
             guard let self else { return }
             switch changes {
             case .initial:
-                self.mainView.favoriteProducts.append(contentsOf: tasks)
+                self.mainView.favoriteProducts = tasks
             case .update(_, let deletions, let insertions, let modifications):
                 // Query results have changed.
                 print("Deleted indices: ", deletions)
                 print("Inserted indices: ", insertions)
                 print("Modified modifications: ", modifications)
-                self.mainView.favoriteProducts.removeAll()
-                self.mainView.favoriteProducts.append(contentsOf: tasks)
+                self.mainView.favoriteProducts = tasks
+                
             case .error(let error):
                 // An error occurred while opening the Realm file on the background worker thread
                 fatalError("\(error)")
@@ -62,11 +67,11 @@ final class FavoriteVC: BaseViewController<FavoriteView> {
 
 extension FavoriteVC: FavoriteVCProtocol {
     func didSelectItemAt(item: FavoriteProduct) {
-        
+        print(item.titleValue)
     }
     
     func heartClicked(item: FavoriteProduct) {
-        
+        favoriteRepository.delete(item)
     }
     
     func prefetchItemsAt(prefetchItemsAt indexPaths: [IndexPath]) {
@@ -75,14 +80,28 @@ extension FavoriteVC: FavoriteVCProtocol {
     
     func searchBarCancelClicked(_ searchBar: UISearchBar) {
         print(#function, "취소")
+        searchBar.searchTextField.text = nil
+        let tasks =  favoriteRepository.fetch(objType: FavoriteProduct.self)
+        mainView.favoriteProducts = tasks
+        searchBar.resignFirstResponder()
     }
     
     func searchBarSearchClicked(_ searchBar: UISearchBar) {
-        print(#function, "검색")
+        searchBar.resignFirstResponder()
     }
     
     func searchBarTextDidChange(textDidChange searchText: String) {
         print(#function, "실시간 검색")
+        // 실시간 검색 빈값일 때는 전체리스트 노출
+        if searchText.isEmpty {
+            let tasks =  favoriteRepository.fetch(objType: FavoriteProduct.self)
+            mainView.favoriteProducts = tasks
+        } else {
+            let tasks =  favoriteRepository.fetchFilter(objType: FavoriteProduct.self) {
+                $0.titleValue.contains(searchText)
+            }
+            mainView.favoriteProducts = tasks
+        }
     }
     
     
