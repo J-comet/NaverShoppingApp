@@ -30,7 +30,6 @@ final class DetailProductVC: BaseViewController<DetailProductView> {
         
         navigationItem.title = navTitle
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ResColors.primaryLabel]
-        navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.tintColor = ResColors.primaryLabel
         
         let realmProduct = favoriteRepository.favoriteProductItem(productID: searchProduct.productID)

@@ -40,7 +40,6 @@ final class SearchVC: BaseViewController<SearchView> {
         mainView.addGestureRecognizer(mainViewTapGesture)
         navigationItem.title = ResStrings.NavigationBar.search
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ResColors.primaryLabel]
-        navigationController?.navigationBar.isTranslucent = false
        
         let realmProducts = favoriteProductRepository.fetch(objType: FavoriteProduct.self)
         realmResultsObserve(tasks: realmProducts)

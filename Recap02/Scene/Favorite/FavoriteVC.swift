@@ -28,7 +28,6 @@ final class FavoriteVC: BaseViewController<FavoriteView> {
         mainView.favoriteVCDelegate = self
         navigationItem.title = ResStrings.NavigationBar.favorite
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ResColors.primaryLabel]
-        navigationController?.navigationBar.isTranslucent = false
         
         let mainViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(mainViewTapped))
         mainView.addGestureRecognizer(mainViewTapGesture)
