@@ -22,8 +22,8 @@ struct SortShopping {
 enum ShoppingSortType: String, CaseIterable {
     case accuracy = "sim"
     case date = "date"
-    case highPrice = "asc"
-    case lowPrice = "dsc"
+    case highPrice = "dsc"
+    case lowPrice = "asc"
 }
 
 extension ShoppingSortType {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ProductRepository {
+final class ProductRepository {
     
     func search(
         page: Int,
@@ -15,7 +15,7 @@ class ProductRepository {
         sort: ShoppingSortType = .accuracy,
         completionHandler: @escaping (_ response: ResponseSearchShopping?, _ isSuccess: Bool) -> Void
     ) {
-        
+
         // 구조체로 전달
         let request = RequestSearchShopping(
             query: query,

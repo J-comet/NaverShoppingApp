@@ -69,7 +69,8 @@ final class ProductCollectionViewCell: BaseCollectionViewCell<ShoppingProduct> {
         mallNameLabel.isSkeletonable = true
         titleLabel.isSkeletonable = true
         priceLabel.isSkeletonable = true
-        
+        mallNameLabel.lastLineFillPercent = 0  // 0 으로 설정해서 스켈레톤뷰 안보이게 설정
+    
         ImageContainerView.skeletonCornerRadius = 10
         mallNameLabel.linesCornerRadius = 5
         titleLabel.linesCornerRadius = 5

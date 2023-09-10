@@ -49,6 +49,9 @@
 		C08C5EB42AACD67E0045E7B8 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08C5EB32AACD67E0045E7B8 /* String+Extension.swift */; };
 		C08C5EB72AACDF4F0045E7B8 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = C08C5EB62AACDF4F0045E7B8 /* SkeletonView */; };
 		C08C5EBB2AACF3F10045E7B8 /* RequestSearhShopping.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08C5EBA2AACF3F10045E7B8 /* RequestSearhShopping.swift */; };
+		C08C5EC02AAD73000045E7B8 /* LikeProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08C5EBF2AAD73000045E7B8 /* LikeProduct.swift */; };
+		C08C5EC22AAD76310045E7B8 /* LikeProductRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08C5EC12AAD76310045E7B8 /* LikeProductRepository.swift */; };
+		C08C5EC42AAD76790045E7B8 /* RealmDBProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08C5EC32AAD76790045E7B8 /* RealmDBProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +123,9 @@
 		C08C5EAE2AACC8BF0045E7B8 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		C08C5EB32AACD67E0045E7B8 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		C08C5EBA2AACF3F10045E7B8 /* RequestSearhShopping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSearhShopping.swift; sourceTree = "<group>"; };
+		C08C5EBF2AAD73000045E7B8 /* LikeProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeProduct.swift; sourceTree = "<group>"; };
+		C08C5EC12AAD76310045E7B8 /* LikeProductRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeProductRepository.swift; sourceTree = "<group>"; };
+		C08C5EC32AAD76790045E7B8 /* RealmDBProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDBProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,11 +181,11 @@
 				C017FB6C2AA9B90C007BCFB1 /* AppDelegate.swift */,
 				C017FB6E2AA9B90C007BCFB1 /* SceneDelegate.swift */,
 				C017FBEF2AA9DF0A007BCFB1 /* BaseKit.xcodeproj */,
+				C08C5E8B2AAC1FED0045E7B8 /* API */,
 				C017E3662AAAE5C2005FD225 /* Cell */,
 				C017FC0B2AAA139D007BCFB1 /* Extension */,
 				C017FB772AA9B914007BCFB1 /* LaunchScreen.storyboard */,
 				C08C5E7A2AAB7D7B0045E7B8 /* Model */,
-				C08C5E8B2AAC1FED0045E7B8 /* Network */,
 				C08C5E812AAB8E2B0045E7B8 /* Protocol */,
 				C08C5E992AAC34080045E7B8 /* Repository */,
 				C017FB862AA9C852007BCFB1 /* Resource */,
@@ -270,8 +276,8 @@
 		C08C5E7A2AAB7D7B0045E7B8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C08C5EB92AACF3BD0045E7B8 /* Response */,
-				C08C5EB82AACF3B70045E7B8 /* Request */,
+				C08C5EBE2AAD72ED0045E7B8 /* Local */,
+				C08C5EBD2AAD72DF0045E7B8 /* Remote */,
 				C08C5E7B2AAB7D980045E7B8 /* SortShopping.swift */,
 			);
 			path = Model;
@@ -282,18 +288,19 @@
 			children = (
 				C08C5E7F2AAB8CD20045E7B8 /* SortCollectionCellProtocol.swift */,
 				C08C5E822AAB8F070045E7B8 /* SearchVCProtocol.swift */,
+				C08C5EC32AAD76790045E7B8 /* RealmDBProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
 		};
-		C08C5E8B2AAC1FED0045E7B8 /* Network */ = {
+		C08C5E8B2AAC1FED0045E7B8 /* API */ = {
 			isa = PBXGroup;
 			children = (
 				C08C5E8C2AAC1FFD0045E7B8 /* APIKey.swift */,
 				C08C5E912AAC20D30045E7B8 /* APIManager.swift */,
 				C08C5E932AAC26EC0045E7B8 /* Endpoint.swift */,
 			);
-			path = Network;
+			path = API;
 			sourceTree = "<group>";
 		};
 		C08C5E992AAC34080045E7B8 /* Repository */ = {
@@ -316,6 +323,7 @@
 		C08C5E9B2AAC34240045E7B8 /* Local */ = {
 			isa = PBXGroup;
 			children = (
+				C08C5EC12AAD76310045E7B8 /* LikeProductRepository.swift */,
 			);
 			path = Local;
 			sourceTree = "<group>";
@@ -334,6 +342,23 @@
 				C08C5E972AAC28D70045E7B8 /* ResponseSearchShopping.swift */,
 			);
 			path = Response;
+			sourceTree = "<group>";
+		};
+		C08C5EBD2AAD72DF0045E7B8 /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				C08C5EB82AACF3B70045E7B8 /* Request */,
+				C08C5EB92AACF3BD0045E7B8 /* Response */,
+			);
+			path = Remote;
+			sourceTree = "<group>";
+		};
+		C08C5EBE2AAD72ED0045E7B8 /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				C08C5EBF2AAD73000045E7B8 /* LikeProduct.swift */,
+			);
+			path = Local;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -475,10 +500,13 @@
 				C08C5E942AAC26EC0045E7B8 /* Endpoint.swift in Sources */,
 				C017E3682AAAE5F9005FD225 /* ProductCollectionViewCell.swift in Sources */,
 				C08C5E7C2AAB7D980045E7B8 /* SortShopping.swift in Sources */,
+				C08C5EC42AAD76790045E7B8 /* RealmDBProtocol.swift in Sources */,
 				C017E36D2AAAE9EF005FD225 /* ProductCollectionView.swift in Sources */,
 				C08C5E982AAC28D70045E7B8 /* ResponseSearchShopping.swift in Sources */,
 				C08C5E8D2AAC1FFD0045E7B8 /* APIKey.swift in Sources */,
+				C08C5EC02AAD73000045E7B8 /* LikeProduct.swift in Sources */,
 				C017FC182AAA2884007BCFB1 /* ShoppingSearchBar.swift in Sources */,
+				C08C5EC22AAD76310045E7B8 /* LikeProductRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
