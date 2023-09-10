@@ -22,10 +22,6 @@ final class ProductCollectionView: UICollectionView {
         self.collectionViewLayout = collectionViewLayout()
         self.showsVerticalScrollIndicator = false
         self.alwaysBounceVertical = true
-        self.register(
-            ProductCollectionViewCell.self,
-            forCellWithReuseIdentifier: ProductCollectionViewCell.identifier
-        )
     }
     
     private func collectionViewLayout() -> UICollectionViewFlowLayout {

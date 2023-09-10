@@ -162,7 +162,7 @@ extension SearchVC: SearchVCProtocol {
             // ADD
             let newFavoriteProduct = FavoriteProduct(
                 productID: item.productID,
-                title: item.title,
+                title: item.titleValue,
                 link: item.link,
                 image: item.image,
                 lprice: item.lprice,

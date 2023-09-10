@@ -24,6 +24,10 @@ final class FavoriteView: BaseView {
         view.delegate = self
         view.dataSource = self
         view.prefetchDataSource = self
+        view.register(
+            FavoriteProductCollectionViewCell.self,
+            forCellWithReuseIdentifier: FavoriteProductCollectionViewCell.identifier
+        )
     }
     
     let emptyLabel = UILabel().setup { view in
@@ -56,8 +60,9 @@ final class FavoriteView: BaseView {
     override func setConstraints() {
         searchBar.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide)
-            make.horizontalEdges.equalToSuperview().inset(ResDimens.defaultHorizontalMargin)
+            make.horizontalEdges.equalToSuperview().inset(ResDimens.searchBarHorizontalMargin)
         }
+        
         productCollectionView.snp.makeConstraints { make in
             make.top.equalTo(searchBar.snp.bottom).offset(6)
             make.bottom.equalToSuperview()

@@ -45,6 +45,10 @@ final class SearchView: BaseView {
         view.delegate = self
         view.dataSource = self
         view.prefetchDataSource = self
+        view.register(
+            ProductCollectionViewCell.self,
+            forCellWithReuseIdentifier: ProductCollectionViewCell.identifier
+        )
     }
     
     let emptyLabel = UILabel().setup { view in
