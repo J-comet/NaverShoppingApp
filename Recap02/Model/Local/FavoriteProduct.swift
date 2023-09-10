@@ -16,6 +16,7 @@ class FavoriteProduct: Object {
     @Persisted var image: String
     @Persisted var lprice: String
     @Persisted var mallName: String
+    @Persisted var date: Date = Date()
     
     var titleValue: String {
         return title.attributedHtmlString?.string ?? ""
@@ -44,6 +45,7 @@ class FavoriteProduct: Object {
         self.image = image
         self.lprice = lprice
         self.mallName = mallName
+        self.date = Date()
     }
 
 }

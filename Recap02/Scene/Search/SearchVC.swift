@@ -100,6 +100,8 @@ final class SearchVC: BaseViewController<SearchView> {
                 let result = likeStatusCheckItems(responseProducts: response.items)
                 self.mainView.searchProducts.append(contentsOf: result)
                 
+                print("page \(page), count = \(mainView.searchProducts.count)")
+                
             } else {
                 self.showToast(message: ResStrings.Guide.searchFail)
             }

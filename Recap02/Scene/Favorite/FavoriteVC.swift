@@ -94,11 +94,11 @@ extension FavoriteVC: FavoriteVCProtocol {
         print(#function, "실시간 검색")
         // 실시간 검색 빈값일 때는 전체리스트 노출
         if searchText.isEmpty {
-            let tasks =  favoriteRepository.fetch(objType: FavoriteProduct.self)
+            let tasks = favoriteRepository.fetch(objType: FavoriteProduct.self)
             mainView.favoriteProducts = tasks
         } else {
             let tasks =  favoriteRepository.fetchFilter(objType: FavoriteProduct.self) {
-                $0.titleValue.contains(searchText)
+                $0.titleValue.contains(searchText, options: .caseInsensitive)
             }
             mainView.favoriteProducts = tasks
         }

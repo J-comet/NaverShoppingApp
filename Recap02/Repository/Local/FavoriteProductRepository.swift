@@ -18,7 +18,7 @@ final class FavoriteProductRepository: RealmDBProtocol {
     }
     
     func fetch(objType: FavoriteProduct.Type) -> Results<FavoriteProduct> {
-        return realm.objects(objType.self)
+        return realm.objects(objType.self).sorted(byKeyPath: "date", ascending: false)
     }
     
     func fetchFilter(objType: FavoriteProduct.Type, _ isIncluded: ((Query<FavoriteProduct>) -> Query<Bool>)) -> Results<FavoriteProduct> {
