@@ -1,5 +1,5 @@
 //
-//  LikeProductCollectionViewCell.swift
+//  FavoriteProductCollectionViewCell.swift
 //  Recap02
 //
 //  Created by 장혜성 on 2023/09/10.
@@ -11,10 +11,10 @@ import Kingfisher
 import SkeletonView
 import SnapKit
 
-final class LikeProductCollectionViewCell: BaseCollectionViewCell<LikeProduct> {
+final class FavoriteProductCollectionViewCell: BaseCollectionViewCell<FavoriteProduct> {
     
     private let cellView = ProductDesignCellView(frame: .zero)
-    var heartClicked: ((LikeProduct) -> Void)?
+    var heartClicked: ((FavoriteProduct) -> Void)?
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -29,7 +29,7 @@ final class LikeProductCollectionViewCell: BaseCollectionViewCell<LikeProduct> {
         }
     }
     
-    override func configCell(row: LikeProduct) {
+    override func configCell(row: FavoriteProduct) {
         let url = URL(string: row.image)
         if let url {
             cellView.thumbImageView.kf.setImage(

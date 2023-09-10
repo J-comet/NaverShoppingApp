@@ -1,5 +1,5 @@
 //
-//  LikeProduct.swift
+//  FavoriteProduct.swift
 //  Recap02
 //
 //  Created by 장혜성 on 2023/09/10.
@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-class LikeProduct: Object {
+class FavoriteProduct: Object {
        
     @Persisted(primaryKey: true) var productID: String
     @Persisted var title: String

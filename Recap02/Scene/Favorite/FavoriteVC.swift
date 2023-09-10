@@ -23,11 +23,11 @@ final class FavoriteVC: BaseViewController<FavoriteView> {
 }
 
 extension FavoriteVC: FavoriteVCProtocol {
-    func didSelectItemAt(item: LikeProduct) {
+    func didSelectItemAt(item: FavoriteProduct) {
         
     }
     
-    func heartClicked(item: LikeProduct) {
+    func heartClicked(item: FavoriteProduct) {
         
     }
     

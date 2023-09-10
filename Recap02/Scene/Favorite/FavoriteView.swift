@@ -28,7 +28,7 @@ final class FavoriteView: BaseView {
     
     let emptyLabel = UILabel().setup { view in
         view.backgroundColor = ResColors.mainBg
-        view.text = ResStrings.Guide.likeDefaultGuide
+        view.text = ResStrings.Guide.favoriteDefaultGuide
         view.font = .monospacedSystemFont(ofSize: 16, weight: .semibold)
         view.textColor = ResColors.secondaryLabel
         view.textAlignment = .center
@@ -36,9 +36,9 @@ final class FavoriteView: BaseView {
     
     weak var favoriteVCDelegate: FavoriteVCProtocol?
     
-    var likeProducts: [LikeProduct] = [] {
+    var favoriteProducts: [FavoriteProduct] = [] {
         didSet {
-            if likeProducts.isEmpty {
+            if favoriteProducts.isEmpty {
                 emptyLabel.isHidden = false
             } else {
                 emptyLabel.isHidden = true
@@ -106,11 +106,11 @@ extension FavoriteView: UICollectionViewDelegate, UICollectionViewDataSource, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return likeProducts.count
+        return favoriteProducts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LikeProductCollectionViewCell.identifier, for: indexPath) as? LikeProductCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FavoriteProductCollectionViewCell.identifier, for: indexPath) as? FavoriteProductCollectionViewCell else {
             return UICollectionViewCell()
         }
         
@@ -123,7 +123,7 @@ extension FavoriteView: UICollectionViewDelegate, UICollectionViewDataSource, UI
         cell.heartClicked = { [weak self] item in
             self?.favoriteVCDelegate?.heartClicked(item: item)
         }
-        cell.configCell(row: likeProducts[indexPath.item])
+        cell.configCell(row: favoriteProducts[indexPath.item])
         
         return cell
     }
@@ -131,8 +131,8 @@ extension FavoriteView: UICollectionViewDelegate, UICollectionViewDataSource, UI
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //MARK: mainView 에 TabGesture 로 키보드 내리는 동작때문에 didSelectItemAt 호출 X 안되는 오류 cellForItemAt 에서 터치 재정의
         print("productCollectionView 클릭")
-        if !likeProducts.isEmpty {
-            let row = likeProducts[indexPath.item]
+        if !favoriteProducts.isEmpty {
+            let row = favoriteProducts[indexPath.item]
             favoriteVCDelegate?.didSelectItemAt(item: row)
         }
     }

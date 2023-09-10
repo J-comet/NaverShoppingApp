@@ -15,14 +15,14 @@ import Toast
 final class SearchVC: BaseViewController<SearchView> {
     
     private let productRepository = ProductRepository()
-    private let likeProductRepository = LikeProductRepository()
+    private let favoriteProductRepository = FavoriteProductRepository()
     private var page = 1
     private var sortType: ShoppingSortType = .accuracy
     
     private var searchText = ""  // 당겨서 새로고침할 때 사용자가 텍스트를 지우고 새로고침한 경우 이전에 검색한 내용으로 새로고침 기능 실행
     
     private var notificationToken: NotificationToken?
-    private var likeProducts: Results<LikeProduct>?
+    private var favoriteProducts: Results<FavoriteProduct>?
     
     deinit {
         // realm 노티피케이션 제거
@@ -31,7 +31,7 @@ final class SearchVC: BaseViewController<SearchView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        likeProductRepository.printFileURL()
+        favoriteProductRepository.printFileURL()
     }
     
     override func configureView() {
@@ -41,13 +41,13 @@ final class SearchVC: BaseViewController<SearchView> {
         navigationItem.title = ResStrings.NavigationBar.search
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ResColors.primaryLabel]
         
-        let realmLikeProducts = likeProductRepository.fetch(objType: LikeProduct.self)
-        realmResultsObserve(tasks: realmLikeProducts)
+        let realmProducts = favoriteProductRepository.fetch(objType: FavoriteProduct.self)
+        realmResultsObserve(tasks: realmProducts)
     }
     
     // realm 값 변화 옵저빙
     // realm 에 데이터 추가될 때마다 기존 서버에서 불러온 데이터와 동기화
-    private func realmResultsObserve(tasks: Results<LikeProduct>?) {
+    private func realmResultsObserve(tasks: Results<FavoriteProduct>?) {
         
         guard let tasks else { return }
         
@@ -58,17 +58,17 @@ final class SearchVC: BaseViewController<SearchView> {
             
             switch changes {
             case .initial:
-                self.likeProducts = tasks
+                self.favoriteProducts = tasks
                 //MARK: 최초 실행시 검색값이 없으므로 search() 함수에서 likeStatusCheckItems 로 검사하도록 수정
             case .update(_, let deletions, let insertions, let modifications):
                 // Query results have changed.
                 print("Deleted indices: ", deletions)
                 print("Inserted indices: ", insertions)
                 print("Modified modifications: ", modifications)
-                self.likeProducts = tasks
-                for likeProduct in tasks {
+                self.favoriteProducts = tasks
+                for favoriteProduct in tasks {
                     for (index,product) in mainView.searchProducts.enumerated() {
-                        if likeProduct.productID == product.productID {
+                        if favoriteProduct.productID == product.productID {
                             print("=========== ", product.title)
                             mainView.searchProducts[index] = product.copy(isLike: true)
                             break
@@ -84,8 +84,8 @@ final class SearchVC: BaseViewController<SearchView> {
         }
     }
     
-    private func getRealmLikeProduct(data: ShoppingProduct) -> LikeProduct? {
-        return likeProductRepository.fetchFilter(objType: LikeProduct.self) {
+    private func getRealmFavoriteProduct(data: ShoppingProduct) -> FavoriteProduct? {
+        return favoriteProductRepository.fetchFilter(objType: FavoriteProduct.self) {
             $0.productID == data.productID
         }.first
     }
@@ -135,10 +135,10 @@ final class SearchVC: BaseViewController<SearchView> {
     // realm 에 저장되어 있는 아이템과 확인
     private func likeStatusCheckItems(responseProducts: [ShoppingProduct]) -> [ShoppingProduct] {
         var items = responseProducts
-        if let likeProducts {
-            for likeProduct in likeProducts {
+        if let favoriteProducts {
+            for favoriteProduct in favoriteProducts {
                 for (index,product) in items.enumerated() {
-                    if likeProduct.productID == product.productID {
+                    if favoriteProduct.productID == product.productID {
                         print("=========== ", product.title)
                         items[index] = product.copy(isLike: true)
                         break
@@ -158,9 +158,9 @@ extension SearchVC: SearchVCProtocol {
     
     func heartClicked(item: ShoppingProduct) {
         
-        guard let realmLikeProduct = getRealmLikeProduct(data: item) else {
+        guard let realmFavoriteProduct = getRealmFavoriteProduct(data: item) else {
             // ADD
-            let likeProduct = LikeProduct(
+            let newFavoriteProduct = FavoriteProduct(
                 productID: item.productID,
                 title: item.title,
                 link: item.link,
@@ -168,7 +168,7 @@ extension SearchVC: SearchVCProtocol {
                 lprice: item.lprice,
                 mallName: item.mallName
             )
-            likeProductRepository.create(likeProduct)
+            favoriteProductRepository.create(newFavoriteProduct)
             return
         }
         
@@ -180,7 +180,7 @@ extension SearchVC: SearchVCProtocol {
             }
         }
         mainView.productCollectionView.reloadData()
-        likeProductRepository.delete(realmLikeProduct)
+        favoriteProductRepository.delete(realmFavoriteProduct)
         
     }
     

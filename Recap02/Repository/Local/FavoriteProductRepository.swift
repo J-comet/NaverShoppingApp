@@ -1,5 +1,5 @@
 //
-//  LikeProductRepository.swift
+//  FavoriteProductRepository.swift
 //  Recap02
 //
 //  Created by 장혜성 on 2023/09/10.
@@ -8,8 +8,8 @@
 import Foundation
 import RealmSwift
 
-final class LikeProductRepository: RealmDBProtocol {
-    typealias T = LikeProduct
+final class FavoriteProductRepository: RealmDBProtocol {
+    typealias T = FavoriteProduct
     private let realm = try! Realm()
     private lazy var fileURL = self.realm.configuration.fileURL
     
@@ -17,15 +17,15 @@ final class LikeProductRepository: RealmDBProtocol {
         print(String(describing: fileURL))
     }
     
-    func fetch(objType: LikeProduct.Type) -> Results<LikeProduct> {
+    func fetch(objType: FavoriteProduct.Type) -> Results<FavoriteProduct> {
         return realm.objects(objType.self)
     }
     
-    func fetchFilter(objType: LikeProduct.Type, _ isIncluded: ((Query<LikeProduct>) -> Query<Bool>)) -> Results<LikeProduct> {
+    func fetchFilter(objType: FavoriteProduct.Type, _ isIncluded: ((Query<FavoriteProduct>) -> Query<Bool>)) -> Results<FavoriteProduct> {
         return realm.objects(objType.self).where { isIncluded($0) }
     }
     
-    func create(_ item: LikeProduct) {
+    func create(_ item: FavoriteProduct) {
         do {
             try realm.write {
                 realm.add(item)
@@ -35,11 +35,11 @@ final class LikeProductRepository: RealmDBProtocol {
         }
     }
     
-    func update(_ item: LikeProduct) {
+    func update(_ item: FavoriteProduct) {
         do {
             try realm.write {
                 realm.create(
-                    LikeProduct.self,
+                    FavoriteProduct.self,
                     value: item,
                     update: .modified
                 )
@@ -49,7 +49,7 @@ final class LikeProductRepository: RealmDBProtocol {
         }
     }
     
-    func delete(_ item: LikeProduct) {
+    func delete(_ item: FavoriteProduct) {
         do {
             let _ = try realm.write {
                 realm.delete(item)

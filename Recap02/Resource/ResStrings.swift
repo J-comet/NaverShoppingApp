@@ -38,6 +38,6 @@ struct ResStrings {
         static let searchInputTextEmpty = "searchInputTextEmpty".localized
         static let searchFail = "searchFail".localized
         
-        static let likeDefaultGuide = "likeDefaultGuide".localized
+        static let favoriteDefaultGuide = "favoriteDefaultGuide".localized
     }
 }
