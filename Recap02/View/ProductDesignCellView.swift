@@ -56,7 +56,6 @@ class ProductDesignCellView: BaseView {
     override func configureView() {
         self.isSkeletonable = true
         ImageContainerView.isSkeletonable = true
-        heartCircleView.isSkeletonable = true
         labelContainerView.isSkeletonable = true
         mallNameLabel.isSkeletonable = true
         titleLabel.isSkeletonable = true

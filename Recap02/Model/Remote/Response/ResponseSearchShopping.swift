@@ -22,6 +22,26 @@ struct ShoppingProduct: Codable {
     let lprice: String
     let mallName: String
     var isLike: Bool = false
+    
+    var titleValue: String {
+        return title.attributedHtmlString?.string ?? ""
+    }
+    
+    var mallNameValue: String {
+        return "[\(mallName)]"
+    }
+    
+    var priceValue: String {
+        return lprice.decimalFormatString
+    }
+    
+    var likeImgNameValue: String {
+        if isLike {
+            return "heart.fill"
+        } else {
+            return "heart"
+        }
+    }
 
     enum CodingKeys: String, CodingKey {
         case productID = "productId"

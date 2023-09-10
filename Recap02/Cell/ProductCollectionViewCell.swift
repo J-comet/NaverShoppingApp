@@ -42,22 +42,10 @@ final class ProductCollectionViewCell: BaseCollectionViewCell<ShoppingProduct> {
             )
         }
     
-        if let attributedText = row.title.attributedHtmlString {
-            cellView.titleLabel.text = attributedText.string
-        }
-        cellView.mallNameLabel.text = "[\(row.mallName)]"
-        
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        let price = Int(row.lprice)
-        let result = numberFormatter.string(for: price)
-
-        if let result {
-            cellView.priceLabel.text = result
-        }
-        
-        cellView.heartImageView.image = row.isLike ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
-        
+        cellView.titleLabel.text = row.titleValue
+        cellView.mallNameLabel.text = row.mallNameValue
+        cellView.priceLabel.text = row.priceValue
+        cellView.heartImageView.image = UIImage(systemName: row.likeImgNameValue)
         cellView.heartCircleView.onClick = { [weak self] in
             self?.heartClicked?(row)
         }
