@@ -40,7 +40,8 @@ final class SearchVC: BaseViewController<SearchView> {
         mainView.addGestureRecognizer(mainViewTapGesture)
         navigationItem.title = ResStrings.NavigationBar.search
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ResColors.primaryLabel]
-        
+        navigationController?.navigationBar.isTranslucent = false
+       
         let realmProducts = favoriteProductRepository.fetch(objType: FavoriteProduct.self)
         realmResultsObserve(tasks: realmProducts)
     }
@@ -71,12 +72,6 @@ final class SearchVC: BaseViewController<SearchView> {
         }
     }
     
-    private func getRealmFavoriteProduct(data: ShoppingProduct) -> FavoriteProduct? {
-        return favoriteProductRepository.fetchFilter(objType: FavoriteProduct.self) {
-            $0.productID == data.productID
-        }.first
-    }
-    
     private func search(page: Int, query: String, sort: ShoppingSortType, completionHandler: @escaping () -> Void) {
         productRepository.search(page: page, query: query, sort: sort) { [weak self] response, isSuccess in
             guard let self else {
@@ -91,15 +86,13 @@ final class SearchVC: BaseViewController<SearchView> {
                     self.mainView.searchProducts.removeAll()
                     return
                 }
-                //                print(response)
+    
                 if response.items.isEmpty {
                     self.mainView.emptyLabel.text = ResStrings.Guide.searchResultEmpty
                 }
                 
                 let result = likeStatusCheckItems(responseProducts: response.items)
                 self.mainView.searchProducts.append(contentsOf: result)
-                
-                print("page \(page), count = \(mainView.searchProducts.count)")
                 
             } else {
                 self.showToast(message: ResStrings.Guide.searchFail)
@@ -143,15 +136,14 @@ extension SearchVC: SearchVCProtocol {
     
     func didSelectItemAt(item: ShoppingProduct) {
         let vc = DetailProductVC()
-        vc.productID = item.productID
-        vc.productTitle = item.titleValue
+        vc.searchProduct = item
         navigationController?.pushViewController(vc, animated: true)
     }
     
     func heartClicked(item: ShoppingProduct) {
-        // 페이징 이후 하트 클릭하면 하트색이 안바뀌는 오류
-        print(#function, item)
-        guard let realmFavoriteProduct = getRealmFavoriteProduct(data: item) else {
+        // 페이징 이후 하트 클릭하면 하트색이 안바뀌는 오류 발생
+        //  => 기존 하나의 UIImageView 에서 UIImage 값 변경 -> 두개의 UIImageView (꽉찬 하트, 일반 하트) 로 Hidden 처리로 오류 수정
+        guard let realmFavoriteProduct = favoriteProductRepository.favoriteProductItem(productID: item.productID) else {
             // ADD
             let newFavoriteProduct = FavoriteProduct(
                 productID: item.productID,
@@ -172,7 +164,6 @@ extension SearchVC: SearchVCProtocol {
                 break
             }
         }
-        mainView.productCollectionView.reloadData()
         favoriteProductRepository.delete(realmFavoriteProduct)
         
     }

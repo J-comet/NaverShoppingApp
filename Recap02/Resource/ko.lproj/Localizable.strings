@@ -27,4 +27,5 @@
 "searchFail" = "검색 결과를 가져오는데 실패했어요";
 
 "favoriteDefaultGuide" = "마음에 드는 상품을 담아보세요";
+"notFoundWebViewURL" = "잘못된 웹사이트 주소입니다";
 

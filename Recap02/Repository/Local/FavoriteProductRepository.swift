@@ -59,4 +59,10 @@ final class FavoriteProductRepository: RealmDBProtocol {
             print(#function, "error")
         }
     }
+    
+    func favoriteProductItem(productID: String) -> FavoriteProduct? {
+        return fetchFilter(objType: FavoriteProduct.self) {
+            $0.productID == productID
+        }.first
+    }
 }

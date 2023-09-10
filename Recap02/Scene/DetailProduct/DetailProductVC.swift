@@ -10,48 +10,74 @@ import BaseKit
 
 final class DetailProductVC: BaseViewController<DetailProductView> {
     
-    var productID: String?
-    var productTitle: String?
+    var searchProduct: ShoppingProduct?
     
-    private let favoriteRepostiroy = FavoriteProductRepository()
+    private let favoriteRepository = FavoriteProductRepository()
+    private var isLike = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func configureView() {
-        guard let productID, let productTitle else { return }
-        
+        guard let searchProduct else { return }
         var navTitle = ""
-        if productTitle.count > 10 {
-            navTitle = productTitle.prefix(12) + "..."
+        if searchProduct.titleValue.count > 12 {
+            navTitle = searchProduct.titleValue.prefix(12) + "..."
         } else {
-            navTitle = productTitle
+            navTitle = searchProduct.titleValue
         }
         
         navigationItem.title = navTitle
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ResColors.primaryLabel]
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.tintColor = ResColors.primaryLabel
         
-        let product = favoriteRepostiroy.fetchFilter(objType: FavoriteProduct.self){
-            $0.productID.equals(productID)
-        }.first
-        
-        var heartImg = UIImage(systemName: "heart")
-        if product != nil {
-            heartImg = UIImage(systemName: "heart.fill")
+        let realmProduct = favoriteRepository.favoriteProductItem(productID: searchProduct.productID)
+        if realmProduct != nil {
+            isLike = true
         }
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: heartImg,
+            image: isLike ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart"),
             style: .plain,
             target: self,
             action: #selector(heartClicked)
         )
         
-        self.navigationController?.navigationBar.tintColor = ResColors.primaryLabel
+        loadWebView(id: searchProduct.productID)
     }
     
     @objc func heartClicked() {
-        print("1234")
+        if let searchProduct {
+            guard let realmFavoriteProduct = favoriteRepository.favoriteProductItem(productID: searchProduct.productID) else {
+                // 좋아요 ADD
+                let newFavoriteProduct = FavoriteProduct(
+                    productID: searchProduct.productID,
+                    title: searchProduct.titleValue,
+                    link: searchProduct.link,
+                    image: searchProduct.image,
+                    lprice: searchProduct.lprice,
+                    mallName: searchProduct.mallName
+                )
+                favoriteRepository.create(newFavoriteProduct)
+                navigationItem.rightBarButtonItem?.image = UIImage(systemName: "heart.fill")
+                return
+            }
+            
+            // 좋아요 DELETE
+            favoriteRepository.delete(realmFavoriteProduct)
+            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "heart")
+        }
+    }
+    
+    private func loadWebView(id: String) {
+        let webViewURL = URL(string:APIManager.webViewURL + id)
+        guard let webViewURL else {
+            showToast(message: ResStrings.Guide.notFoundWebViewURL)
+            return
+        }
+        let request = URLRequest(url: webViewURL)
+        mainView.webView.load(request)
     }
 }

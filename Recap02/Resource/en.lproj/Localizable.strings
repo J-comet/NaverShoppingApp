@@ -26,3 +26,4 @@
 "searchFail" = "Failed to get search results";
 
 "favoriteDefaultGuide" = "Put your favorite product in it";
+"notFoundWebViewURL" = "Invalid website address";

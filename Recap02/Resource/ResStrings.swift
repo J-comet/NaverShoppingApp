@@ -39,5 +39,6 @@ struct ResStrings {
         static let searchFail = "searchFail".localized
         
         static let favoriteDefaultGuide = "favoriteDefaultGuide".localized
+        static let notFoundWebViewURL = "notFoundWebViewURL".localized 
     }
 }

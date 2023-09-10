@@ -28,6 +28,8 @@ final class FavoriteVC: BaseViewController<FavoriteView> {
         mainView.favoriteVCDelegate = self
         navigationItem.title = ResStrings.NavigationBar.favorite
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ResColors.primaryLabel]
+        navigationController?.navigationBar.isTranslucent = false
+        
         let mainViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(mainViewTapped))
         mainView.addGestureRecognizer(mainViewTapGesture)
         let tasks = favoriteRepository.fetch(objType: FavoriteProduct.self)
@@ -68,7 +70,14 @@ final class FavoriteVC: BaseViewController<FavoriteView> {
 extension FavoriteVC: FavoriteVCProtocol {
     func didSelectItemAt(item: FavoriteProduct) {
         let vc = DetailProductVC()
-        vc.productID = item.productID
+        vc.searchProduct = ShoppingProduct(
+            productID: item.productID,
+            title: item.title,
+            link: item.link,
+            image: item.image,
+            lprice: item.lprice,
+            mallName: item.mallName
+        )
         navigationController?.pushViewController(vc, animated: true)
     }
     
