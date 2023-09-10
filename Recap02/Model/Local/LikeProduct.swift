@@ -17,6 +17,18 @@ class LikeProduct: Object {
     @Persisted var lprice: String
     @Persisted var mallName: String
     
+    var titleValue: String {
+        return title.attributedHtmlString?.string ?? ""
+    }
+    
+    var mallNameValue: String {
+        return "[\(mallName)]"
+    }
+    
+    var priceValue: String {
+        return lprice.decimalFormatString
+    }
+    
     convenience init(
         productID: String,
         title: String,

@@ -17,7 +17,35 @@ final class FavoriteVC: BaseViewController<FavoriteView> {
     }
     
     override func configureView() {
+        mainView.favoriteVCDelegate = self
+    }
+    
+}
+
+extension FavoriteVC: FavoriteVCProtocol {
+    func didSelectItemAt(item: LikeProduct) {
         
     }
+    
+    func heartClicked(item: LikeProduct) {
+        
+    }
+    
+    func prefetchItemsAt(prefetchItemsAt indexPaths: [IndexPath]) {
+        
+    }
+    
+    func searchBarCancelClicked(_ searchBar: UISearchBar) {
+        print(#function, "취소")
+    }
+    
+    func searchBarSearchClicked(_ searchBar: UISearchBar) {
+        print(#function, "검색")
+    }
+    
+    func searchBarTextDidChange(textDidChange searchText: String) {
+        print(#function, "실시간 검색")
+    }
+    
     
 }

@@ -37,5 +37,7 @@ struct ResStrings {
         static let searchResultEmpty = "searchResultEmpty".localized
         static let searchInputTextEmpty = "searchInputTextEmpty".localized
         static let searchFail = "searchFail".localized
+        
+        static let likeDefaultGuide = "likeDefaultGuide".localized
     }
 }

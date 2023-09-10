@@ -32,10 +32,14 @@ final class SearchVC: BaseViewController<SearchView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         likeProductRepository.printFileURL()
-        
-        /**
-         Realm 에 저장된를 가지고 와서 서버에서 통신 후 가져오는 값이랑 id 가 같다면 isLike 값 업데이트 시키기
-         */
+    }
+    
+    override func configureView() {
+        mainView.searchVCDelegate = self
+        let mainViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(mainViewTapped))
+        mainView.addGestureRecognizer(mainViewTapGesture)
+        navigationItem.title = ResStrings.NavigationBar.search
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ResColors.primaryLabel]
         
         let realmLikeProducts = likeProductRepository.fetch(objType: LikeProduct.self)
         realmResultsObserve(tasks: realmLikeProducts)
@@ -143,14 +147,6 @@ final class SearchVC: BaseViewController<SearchView> {
             }
         }
         return items
-    }
-    
-    override func configureView() {
-        mainView.searchVCDelegate = self
-        let mainViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(mainViewTapped))
-        mainView.addGestureRecognizer(mainViewTapGesture)
-        navigationItem.title = ResStrings.NavigationBar.search
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ResColors.primaryLabel]
     }
 }
 
