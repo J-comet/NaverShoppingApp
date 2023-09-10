@@ -79,7 +79,6 @@ final class SearchVC: BaseViewController<SearchView> {
     
     private func search(page: Int, query: String, sort: ShoppingSortType, completionHandler: @escaping () -> Void) {
         productRepository.search(page: page, query: query, sort: sort) { [weak self] response, isSuccess in
-            
             guard let self else {
                 completionHandler()
                 return
@@ -143,7 +142,10 @@ final class SearchVC: BaseViewController<SearchView> {
 extension SearchVC: SearchVCProtocol {
     
     func didSelectItemAt(item: ShoppingProduct) {
-        print("상세페이지로 이동", item.title)
+        let vc = DetailProductVC()
+        vc.productID = item.productID
+        vc.productTitle = item.titleValue
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func heartClicked(item: ShoppingProduct) {
@@ -177,7 +179,7 @@ extension SearchVC: SearchVCProtocol {
     
     func prefetchItemsAt(prefetchItemsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
-            if mainView.searchProducts.count - 1 == indexPath.item && page < APIManager.limitPage {
+            if mainView.searchProducts.count - 1 == indexPath.item && page < Endpoint.search.limitPage {
                 LoadingIndicator.show()
                 page += 1
                 search(page: page, query: searchText, sort: sortType) {

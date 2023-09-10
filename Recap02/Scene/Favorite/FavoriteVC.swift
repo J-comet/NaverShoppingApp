@@ -67,7 +67,9 @@ final class FavoriteVC: BaseViewController<FavoriteView> {
 
 extension FavoriteVC: FavoriteVCProtocol {
     func didSelectItemAt(item: FavoriteProduct) {
-        print(item.titleValue)
+        let vc = DetailProductVC()
+        vc.productID = item.productID
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func heartClicked(item: FavoriteProduct) {
@@ -79,7 +81,6 @@ extension FavoriteVC: FavoriteVCProtocol {
     }
     
     func searchBarCancelClicked(_ searchBar: UISearchBar) {
-        print(#function, "취소")
         searchBar.searchTextField.text = nil
         let tasks =  favoriteRepository.fetch(objType: FavoriteProduct.self)
         mainView.favoriteProducts = tasks
@@ -91,7 +92,6 @@ extension FavoriteVC: FavoriteVCProtocol {
     }
     
     func searchBarTextDidChange(textDidChange searchText: String) {
-        print(#function, "실시간 검색")
         // 실시간 검색 빈값일 때는 전체리스트 노출
         if searchText.isEmpty {
             let tasks = favoriteRepository.fetch(objType: FavoriteProduct.self)

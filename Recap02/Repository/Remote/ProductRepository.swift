@@ -20,7 +20,7 @@ final class ProductRepository {
         let request = RequestSearchShopping(
             query: query,
             start: page,
-            display: APIManager.display,
+            display: Endpoint.search.display,
             sort: sort.rawValue
         )
   

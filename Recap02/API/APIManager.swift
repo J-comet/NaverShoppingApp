@@ -10,8 +10,7 @@ import Alamofire
 
 class APIManager {
     static let shared = APIManager()
-    static let display = 30
-    static let limitPage = 1000
+    static let webViewURL = "https://msearch.shopping.naver.com/product/"
     
     private init() { }
     

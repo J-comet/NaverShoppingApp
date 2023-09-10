@@ -16,4 +16,19 @@ enum Endpoint {
             return URL.makeEndPointString("search/shop.json")
         }
     }
+    
+    var display: Int {
+        switch self {
+        case .search:
+            return 30
+        }
+    }
+    
+    var limitPage: Int {
+        switch self {
+        case .search:
+            return 1000
+        }
+    }
+    
 }
