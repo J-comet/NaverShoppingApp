@@ -234,12 +234,15 @@ extension SearchVC: SearchVCProtocol {
     }
     
     func sortClicked(sortButton: UIButton) {
-        guard let searchText = mainView.searchBar.searchTextField.text else {
+        guard let searchFieldText = mainView.searchBar.searchTextField.text else {
             return
         }
+        
+        let searchContent = searchFieldText.count > 0 ? searchFieldText : self.searchText
 
-        if searchText.count > 0 {
+        if searchContent.count > 0 {
             NetworkMonitor.shared.checkNetwork {
+                mainView.searchBar.resignFirstResponder()
                 mainView.shoppingSorts.enumerated().forEach { index, sort in
                     if sortButton.titleLabel!.text == sort.type.title {
                         if !sort.isSelected {
