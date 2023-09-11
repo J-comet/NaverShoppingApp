@@ -72,6 +72,11 @@ final class FavoriteVC: BaseViewController<FavoriteView> {
 }
 
 extension FavoriteVC: FavoriteVCProtocol {
+    
+    func emptyMoveLabelClicked() {
+        tabBarController?.selectedIndex = 0
+    }
+    
     func didSelectItemAt(item: FavoriteProduct) {
         let vc = DetailProductVC()
         vc.searchProduct = ShoppingProduct(

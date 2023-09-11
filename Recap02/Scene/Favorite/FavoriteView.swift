@@ -31,12 +31,28 @@ final class FavoriteView: BaseView {
         )
     }
     
-    let emptyLabel = UILabel().setup { view in
+    let emptyView = UIView().setup { view in
         view.backgroundColor = ResColors.mainBg
+        view.isHidden = true
+    }
+    
+    private let emptyLabel = UILabel().setup { view in
         view.text = ResStrings.Guide.favoriteDefaultGuide
         view.font = .monospacedSystemFont(ofSize: 16, weight: .semibold)
         view.textColor = ResColors.secondaryLabel
         view.textAlignment = .center
+    }
+    
+    private lazy var moveLabel = ClickableLabel().setup { view in
+        let tap = UITapGestureRecognizer(target: self, action: #selector(moveTapped))
+        view.addGestureRecognizer(tap)
+        view.text = ResStrings.Guide.moveFavoriteToSearch
+        view.font = .monospacedSystemFont(ofSize: 16, weight: .bold)
+        view.textColor = .systemBlue
+    }
+    
+    @objc func moveTapped() {
+        self.favoriteVCDelegate?.emptyMoveLabelClicked()
     }
     
     weak var favoriteVCDelegate: FavoriteVCProtocol?
@@ -44,9 +60,9 @@ final class FavoriteView: BaseView {
     var favoriteProducts: Results<FavoriteProduct>? {
         didSet {
             if favoriteProducts?.isEmpty == true {
-                emptyLabel.isHidden = false
+                emptyView.isHidden = false
             } else {
-                emptyLabel.isHidden = true
+                emptyView.isHidden = true
                 productCollectionView.reloadData()
             }
         }
@@ -55,7 +71,9 @@ final class FavoriteView: BaseView {
     override func configureView() {
         addSubview(searchBar)
         addSubview(productCollectionView)
-        addSubview(emptyLabel)
+        addSubview(emptyView)
+        emptyView.addSubview(emptyLabel)
+        emptyView.addSubview(moveLabel)
     }
     
     override func setConstraints() {
@@ -70,9 +88,19 @@ final class FavoriteView: BaseView {
             make.horizontalEdges.equalToSuperview().inset(ResDimens.defaultHorizontalMargin)
         }
         
-        emptyLabel.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom).offset(6)
+        emptyView.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom)
             make.bottom.horizontalEdges.equalTo(safeAreaLayoutGuide)
+        }
+        
+        emptyLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview().offset(-30)
+            make.centerX.equalToSuperview()
+        }
+        
+        moveLabel.snp.makeConstraints { make in
+            make.top.equalTo(emptyLabel.snp.bottom).offset(12)
+            make.centerX.equalToSuperview()
         }
     }
     

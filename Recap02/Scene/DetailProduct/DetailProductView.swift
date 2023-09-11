@@ -34,7 +34,7 @@ final class DetailProductView: BaseView {
     }
     
     private let reloadLabel = UILabel().setup { view in
-        view.text = "다시불러오기"
+        view.text = ResStrings.Guide.webViewReload
         view.textColor = ResColors.primaryLabel
         view.font = .monospacedSystemFont(ofSize: 14, weight: .semibold)
     }

@@ -22,11 +22,13 @@
 
 "searchDefaultGuide" = "원하는 상품을 검색해주세요";
 "searchResultEmpty" = "검색 결과가 없어요";
-
 "searchInputTextEmpty" = "검색어를 입력해주세요";
 "searchFail" = "검색 결과를 가져오는데 실패했어요";
 
 "favoriteDefaultGuide" = "마음에 드는 상품을 담아보세요";
+"moveFavoriteToSearch" = "쇼핑검색으로 이동"; 
 "notFoundWebViewURL" = "잘못된 웹사이트 주소입니다";
+
+"webViewReload" = "다시불러오기";
 
 "networkError" = "네트워크 오류";

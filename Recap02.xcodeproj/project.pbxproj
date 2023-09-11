@@ -59,6 +59,7 @@
 		C0C979302AADE67000ED8103 /* DetailProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C9792F2AADE67000ED8103 /* DetailProductView.swift */; };
 		C0C9798C2AAEE4B900ED8103 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C9798B2AAEE4B900ED8103 /* NetworkMonitor.swift */; };
 		C0C979912AAF067B00ED8103 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C0C979932AAF067B00ED8103 /* InfoPlist.strings */; };
+		C0C979962AAF0B6200ED8103 /* ClickableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C979952AAF0B6200ED8103 /* ClickableLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +142,7 @@
 		C0C9798B2AAEE4B900ED8103 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		C0C979922AAF067B00ED8103 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C0C979942AAF067E00ED8103 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C0C979952AAF0B6200ED8103 /* ClickableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickableLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -289,6 +291,7 @@
 				C08C5EAC2AACC8960045E7B8 /* ClickableView.swift */,
 				C08C5EAE2AACC8BF0045E7B8 /* CircleView.swift */,
 				C007E5062AAD99B4008E9FA8 /* ProductDesignCellView.swift */,
+				C0C979952AAF0B6200ED8103 /* ClickableLabel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -536,6 +539,7 @@
 				C017FC062AAA06B3007BCFB1 /* FavoriteVC.swift in Sources */,
 				C017FB6F2AA9B90C007BCFB1 /* SceneDelegate.swift in Sources */,
 				C08C5E792AAB6FC30045E7B8 /* SortCollectionViewCell.swift in Sources */,
+				C0C979962AAF0B6200ED8103 /* ClickableLabel.swift in Sources */,
 				C017FC0A2AAA0E6C007BCFB1 /* ResStrings.swift in Sources */,
 				C08C5EAF2AACC8BF0045E7B8 /* CircleView.swift in Sources */,
 				C08C5E832AAB8F070045E7B8 /* SearchVCProtocol.swift in Sources */,
