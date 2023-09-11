@@ -25,7 +25,6 @@ final class FavoriteView: BaseView {
     ).setup { view in
         view.delegate = self
         view.dataSource = self
-        view.prefetchDataSource = self
         view.register(
             FavoriteProductCollectionViewCell.self,
             forCellWithReuseIdentifier: FavoriteProductCollectionViewCell.identifier
@@ -99,17 +98,13 @@ extension FavoriteView: UISearchBarDelegate {
 }
 
 
-extension FavoriteView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDataSourcePrefetching {
+extension FavoriteView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let count: CGFloat = 2
         let spacing: CGFloat = 13
         let width: CGFloat = UIScreen.main.bounds.width - (spacing * (count + 1))
         return CGSize(width: width / count, height: (width / count) * 1.4)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        favoriteVCDelegate?.prefetchItemsAt(prefetchItemsAt: indexPaths)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

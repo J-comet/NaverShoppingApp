@@ -10,7 +10,7 @@ import BaseKit
 import SkeletonView
 import SnapKit
 
-class ProductDesignCellView: BaseView {
+final class ProductDesignCellView: BaseView {
     
     private let ImageContainerView = UIView(frame: .zero)
     

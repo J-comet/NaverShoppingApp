@@ -34,6 +34,11 @@ final class SearchVC: BaseViewController<SearchView> {
         favoriteProductRepository.printFileURL()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        mainView.searchBar.resignFirstResponder()
+    }
+    
     override func configureView() {
         mainView.searchVCDelegate = self
         let mainViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(mainViewTapped))

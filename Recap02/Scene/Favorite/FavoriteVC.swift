@@ -24,6 +24,11 @@ final class FavoriteVC: BaseViewController<FavoriteView> {
         super.viewDidLoad()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        mainView.searchBar.resignFirstResponder()
+    }
+    
     override func configureView() {
         mainView.favoriteVCDelegate = self
         navigationItem.title = ResStrings.NavigationBar.favorite
@@ -82,10 +87,6 @@ extension FavoriteVC: FavoriteVCProtocol {
     
     func heartClicked(item: FavoriteProduct) {
         favoriteRepository.delete(item)
-    }
-    
-    func prefetchItemsAt(prefetchItemsAt indexPaths: [IndexPath]) {
-        
     }
     
     func searchBarCancelClicked(_ searchBar: UISearchBar) {

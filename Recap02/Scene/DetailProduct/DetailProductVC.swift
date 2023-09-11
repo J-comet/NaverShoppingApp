@@ -44,6 +44,10 @@ final class DetailProductVC: BaseViewController<DetailProductView> {
             action: #selector(heartClicked)
         )
         
+        mainView.reloadViewClicked = { [weak self] in
+            self?.loadWebView(id: searchProduct.productID)
+        }
+        
         loadWebView(id: searchProduct.productID)
     }
     
@@ -71,12 +75,21 @@ final class DetailProductVC: BaseViewController<DetailProductView> {
     }
     
     private func loadWebView(id: String) {
-        let webViewURL = URL(string:APIManager.webViewURL + id)
-        guard let webViewURL else {
-            showToast(message: ResStrings.Guide.notFoundWebViewURL)
-            return
+        NetworkMonitor.shared.checkNetwork {
+            mainView.webView.isHidden = false
+            mainView.networkErrorView.isHidden = true
+            let webViewURL = URL(string:APIManager.webViewURL + id)
+            guard let webViewURL else {
+                showToast(message: ResStrings.Guide.notFoundWebViewURL)
+                return
+            }
+            let request = URLRequest(url: webViewURL)
+            mainView.webView.load(request)
+        } failHandler: {
+            mainView.webView.isHidden = true
+            mainView.networkErrorView.isHidden = false
+            showToast(message: ResStrings.Network.networkError, position: .top, backgroundColor: ResColors.networkError)
         }
-        let request = URLRequest(url: webViewURL)
-        mainView.webView.load(request)
+        
     }
 }

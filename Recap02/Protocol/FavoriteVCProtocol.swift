@@ -12,6 +12,5 @@ protocol FavoriteVCProtocol: AnyObject {
     func searchBarSearchClicked(_ searchBar: UISearchBar)
     func searchBarTextDidChange(textDidChange searchText: String)
     func didSelectItemAt(item: FavoriteProduct)
-    func prefetchItemsAt(prefetchItemsAt indexPaths: [IndexPath])
     func heartClicked(item: FavoriteProduct)
 }
