@@ -717,6 +717,7 @@
 				DEVELOPMENT_TEAM = SV3K237PCX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Recap02/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "장혜성";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -748,6 +749,7 @@
 				DEVELOPMENT_TEAM = SV3K237PCX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Recap02/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "장혜성";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

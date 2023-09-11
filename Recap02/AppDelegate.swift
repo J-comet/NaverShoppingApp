@@ -15,8 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIView.appearance().backgroundColor = .clear
         
         // 개발 테스트
-        let config = Realm.Configuration(schemaVersion: 1, deleteRealmIfMigrationNeeded: true)
-        Realm.Configuration.defaultConfiguration = config
+//        let config = Realm.Configuration(schemaVersion: 1, deleteRealmIfMigrationNeeded: true)
+//        Realm.Configuration.defaultConfiguration = config
         return true
     }
 
