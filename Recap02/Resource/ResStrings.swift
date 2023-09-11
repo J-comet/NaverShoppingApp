@@ -41,4 +41,8 @@ struct ResStrings {
         static let favoriteDefaultGuide = "favoriteDefaultGuide".localized
         static let notFoundWebViewURL = "notFoundWebViewURL".localized 
     }
+    
+    struct Network {
+        static let networkError = "networkError".localized
+    }
 }

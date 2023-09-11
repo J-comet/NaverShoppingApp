@@ -11,12 +11,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         window?.rootViewController = TabBarVC()
         window?.makeKeyAndVisible()
+        
+        NetworkMonitor.shared.startMonitoring(statusUpdateHandler: { status in
+                    switch status {
+                    case .satisfied:
+                        NetworkMonitor.shared.isConnected = true
+                        print("dismiss networkError View if is present")
+                    case .unsatisfied:
+                        NetworkMonitor.shared.isConnected = false
+                        print("No Internet!! show network Error View")
+                    default:
+                        break
+                    }
+                })
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -24,6 +36,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This occurs shortly after the scene enters the background, or when its session is discarded.
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
         // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
+        NetworkMonitor.shared.stopMonitoring()
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {

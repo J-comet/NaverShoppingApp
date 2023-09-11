@@ -27,3 +27,5 @@
 
 "favoriteDefaultGuide" = "Put your favorite product in it";
 "notFoundWebViewURL" = "Invalid website address";
+
+"networkError" = "Not connected";

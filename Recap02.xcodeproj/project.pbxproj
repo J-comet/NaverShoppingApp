@@ -57,6 +57,7 @@
 		C08C5EC42AAD76790045E7B8 /* RealmDBProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08C5EC32AAD76790045E7B8 /* RealmDBProtocol.swift */; };
 		C0C9792E2AADE63000ED8103 /* DetailProductVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C9792D2AADE63000ED8103 /* DetailProductVC.swift */; };
 		C0C979302AADE67000ED8103 /* DetailProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C9792F2AADE67000ED8103 /* DetailProductView.swift */; };
+		C0C9798C2AAEE4B900ED8103 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C9798B2AAEE4B900ED8103 /* NetworkMonitor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +137,7 @@
 		C08C5EC32AAD76790045E7B8 /* RealmDBProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDBProtocol.swift; sourceTree = "<group>"; };
 		C0C9792D2AADE63000ED8103 /* DetailProductVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProductVC.swift; sourceTree = "<group>"; };
 		C0C9792F2AADE67000ED8103 /* DetailProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProductView.swift; sourceTree = "<group>"; };
+		C0C9798B2AAEE4B900ED8103 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +189,7 @@
 		C017FB6B2AA9B90C007BCFB1 /* Recap02 */ = {
 			isa = PBXGroup;
 			children = (
+				C0C9798A2AAEE4AA00ED8103 /* Util */,
 				C08C5E892AAC1FCC0045E7B8 /* .gitignore */,
 				C017FB7A2AA9B914007BCFB1 /* Info.plist */,
 				C017FB6C2AA9B90C007BCFB1 /* AppDelegate.swift */,
@@ -384,6 +387,14 @@
 			path = DetailProduct;
 			sourceTree = "<group>";
 		};
+		C0C9798A2AAEE4AA00ED8103 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				C0C9798B2AAEE4B900ED8103 /* NetworkMonitor.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -533,6 +544,7 @@
 				C007E5052AAD9845008E9FA8 /* ProductCollectionViewCell.swift in Sources */,
 				C08C5E8D2AAC1FFD0045E7B8 /* APIKey.swift in Sources */,
 				C08C5EC02AAD73000045E7B8 /* FavoriteProduct.swift in Sources */,
+				C0C9798C2AAEE4B900ED8103 /* NetworkMonitor.swift in Sources */,
 				C017FC182AAA2884007BCFB1 /* ShoppingSearchBar.swift in Sources */,
 				C08C5EC22AAD76310045E7B8 /* FavoriteProductRepository.swift in Sources */,
 			);

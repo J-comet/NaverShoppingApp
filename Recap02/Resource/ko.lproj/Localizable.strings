@@ -29,3 +29,4 @@
 "favoriteDefaultGuide" = "마음에 드는 상품을 담아보세요";
 "notFoundWebViewURL" = "잘못된 웹사이트 주소입니다";
 
+"networkError" = "네트워크 오류";

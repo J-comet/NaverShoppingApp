@@ -11,12 +11,12 @@ import Toast
 
 extension UIViewController {
     
-    func showToast(message: String) {
+    func showToast(message: String, position: ToastPosition = .bottom, backgroundColor: UIColor = .darkGray) {
         var style = ToastStyle()
         style.messageFont =  .monospacedDigitSystemFont(ofSize: 12, weight: .regular)
         style.messageColor = .white
         style.messageAlignment = .center
-        style.backgroundColor = .darkGray
-        self.navigationController?.view.makeToast(message, duration: 3.0, position: .bottom, style: style)
+        style.backgroundColor = backgroundColor
+        self.navigationController?.view.makeToast(message, duration: 3.0, position: position, style: style)
     }
 }

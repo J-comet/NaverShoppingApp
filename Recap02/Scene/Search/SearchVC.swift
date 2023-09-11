@@ -40,7 +40,7 @@ final class SearchVC: BaseViewController<SearchView> {
         mainView.addGestureRecognizer(mainViewTapGesture)
         navigationItem.title = ResStrings.NavigationBar.search
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ResColors.primaryLabel]
-       
+        
         let realmProducts = favoriteProductRepository.fetch(objType: FavoriteProduct.self)
         realmResultsObserve(tasks: realmProducts)
     }
@@ -85,7 +85,7 @@ final class SearchVC: BaseViewController<SearchView> {
                     self.mainView.searchProducts.removeAll()
                     return
                 }
-    
+                
                 if response.items.isEmpty {
                     self.mainView.emptyLabel.text = ResStrings.Guide.searchResultEmpty
                 }
@@ -180,20 +180,25 @@ extension SearchVC: SearchVCProtocol {
     }
     
     func refreshPull(refreshControl: UIRefreshControl) {
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) { [weak self] in
-            guard let self, let searchBarText = self.mainView.searchBar.searchTextField.text else {
-                return
+        NetworkMonitor.shared.checkNetwork {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) { [weak self] in
+                guard let self, let searchBarText = self.mainView.searchBar.searchTextField.text else {
+                    return
+                }
+                
+                // 서치바에 검색어가 없는 경우 바로전에 검색한 내용으로 당겨서 새로고침
+                let searchText = searchBarText.isEmpty ? self.searchText : searchBarText
+                self.mainView.searchBar.searchTextField.text = searchText
+                
+                self.page = 1
+                self.search(page: page, query: searchText, sort: self.sortType) {
+                    refreshControl.endRefreshing()
+                    self.mainView.productCollectionView.setContentOffset(.zero, animated: false)
+                }
             }
-            
-            // 서치바에 검색어가 없는 경우 바로전에 검색한 내용으로 당겨서 새로고침
-            let searchText = searchBarText.isEmpty ? self.searchText : searchBarText
-            self.mainView.searchBar.searchTextField.text = searchText
-            
-            self.page = 1
-            self.search(page: page, query: searchText, sort: self.sortType) {
-                refreshControl.endRefreshing()
-                self.mainView.productCollectionView.setContentOffset(.zero, animated: false)
-            }
+        } failHandler: {
+            refreshControl.endRefreshing()
+            showToast(message: ResStrings.Network.networkError, position: .top, backgroundColor: ResColors.networkError)
         }
     }
     
@@ -206,41 +211,62 @@ extension SearchVC: SearchVCProtocol {
     }
     
     func searchBarSearchClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        mainView.searchProducts.removeAll()
-        searchText = searchBar.searchTextField.text!
-        
-        mainView.showSkeleton()
-        page = 1
-        search(page: page, query: searchText, sort: sortType) { [weak self] in
-            self?.mainView.hideSkeleton()
-            self?.mainView.productCollectionView.setContentOffset(.zero, animated: false)
+        NetworkMonitor.shared.checkNetwork {
+            searchBar.resignFirstResponder()
+            mainView.searchProducts.removeAll()
+            searchText = searchBar.searchTextField.text!
+            
+            mainView.showSkeleton()
+            page = 1
+            search(page: page, query: searchText, sort: sortType) { [weak self] in
+                self?.mainView.hideSkeleton()
+                self?.mainView.productCollectionView.setContentOffset(.zero, animated: false)
+            }
+            
+        } failHandler: {
+            showToast(message: ResStrings.Network.networkError, position: .top, backgroundColor: ResColors.networkError)
         }
     }
     
     func sortClicked(sortButton: UIButton) {
-        mainView.shoppingSorts.enumerated().forEach { index, sort in
-            if sortButton.titleLabel!.text == sort.type.title {
-                if !sort.isSelected {
-                    mainView.shoppingSorts[index] = sort.copy(isSelected: true)
-                    sortType = sort.type
-                    
-                    guard let searchText = mainView.searchBar.searchTextField.text else {
-                        return
-                    }
-                    
-                    if searchText.count > 0 {
-                        mainView.searchProducts.removeAll()
-                        mainView.showSkeleton()
-                        page = 1
-                        search(page: page, query: searchText, sort: sortType) { [weak self] in
-                            self?.mainView.hideSkeleton()
-                            self?.mainView.productCollectionView.setContentOffset(.zero, animated: false)
+        guard let searchText = mainView.searchBar.searchTextField.text else {
+            return
+        }
+
+        if searchText.count > 0 {
+            NetworkMonitor.shared.checkNetwork {
+                mainView.shoppingSorts.enumerated().forEach { index, sort in
+                    if sortButton.titleLabel!.text == sort.type.title {
+                        if !sort.isSelected {
+                            mainView.shoppingSorts[index] = sort.copy(isSelected: true)
+                            sortType = sort.type
                         }
+                    } else {
+                        mainView.shoppingSorts[index] = sort.copy(isSelected: false)
                     }
                 }
-            } else {
-                mainView.shoppingSorts[index] = sort.copy(isSelected: false)
+                
+                mainView.searchProducts.removeAll()
+                mainView.showSkeleton()
+                page = 1
+                search(page: page, query: searchText, sort: sortType) { [weak self] in
+                    self?.mainView.hideSkeleton()
+                    self?.mainView.productCollectionView.setContentOffset(.zero, animated: false)
+                }
+            } failHandler: {
+                showToast(message: ResStrings.Network.networkError, position: .top, backgroundColor: ResColors.networkError)
+            }
+
+        } else {
+            mainView.shoppingSorts.enumerated().forEach { index, sort in
+                if sortButton.titleLabel!.text == sort.type.title {
+                    if !sort.isSelected {
+                        mainView.shoppingSorts[index] = sort.copy(isSelected: true)
+                        sortType = sort.type
+                    }
+                } else {
+                    mainView.shoppingSorts[index] = sort.copy(isSelected: false)
+                }
             }
         }
     }
