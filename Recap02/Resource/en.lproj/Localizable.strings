@@ -13,14 +13,14 @@
 "navFavorite" = "Favorite List";
 
 "searchbarBtnCancel" = "Cancel";
-"searchbarPlaceHolder" = "Please enter your search term";
+"searchbarPlaceHolder" = "Enter keyword";
 
 "sortAccuracy" = "Accuracy";
 "sortDate" = "Date";
 "sortHighPrice" = "HighPrice";
 "sortLowPrice" = "LowPrice";
 
-"searchDefaultGuide" = "Please search for the product you want";
+"searchDefaultGuide" = "Please search for the product";
 "searchResultEmpty" = "There's no search result";
 "searchInputTextEmpty" = "Please enter a search word";
 "searchFail" = "Failed to get search results";

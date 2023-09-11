@@ -58,6 +58,7 @@
 		C0C9792E2AADE63000ED8103 /* DetailProductVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C9792D2AADE63000ED8103 /* DetailProductVC.swift */; };
 		C0C979302AADE67000ED8103 /* DetailProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C9792F2AADE67000ED8103 /* DetailProductView.swift */; };
 		C0C9798C2AAEE4B900ED8103 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C9798B2AAEE4B900ED8103 /* NetworkMonitor.swift */; };
+		C0C979912AAF067B00ED8103 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C0C979932AAF067B00ED8103 /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +139,8 @@
 		C0C9792D2AADE63000ED8103 /* DetailProductVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProductVC.swift; sourceTree = "<group>"; };
 		C0C9792F2AADE67000ED8103 /* DetailProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProductView.swift; sourceTree = "<group>"; };
 		C0C9798B2AAEE4B900ED8103 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		C0C979922AAF067B00ED8103 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C0C979942AAF067E00ED8103 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +220,7 @@
 				C017FC092AAA0E6C007BCFB1 /* ResStrings.swift */,
 				C017FC112AAA1638007BCFB1 /* ResColors.swift */,
 				C017FC192AAA2B78007BCFB1 /* ResDimens.swift */,
+				C0C979932AAF067B00ED8103 /* InfoPlist.strings */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -499,6 +503,7 @@
 				C017FB792AA9B914007BCFB1 /* LaunchScreen.storyboard in Resources */,
 				C017FB892AA9C86A007BCFB1 /* Localizable.strings in Resources */,
 				C017FB762AA9B914007BCFB1 /* Assets.xcassets in Resources */,
+				C0C979912AAF067B00ED8103 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -568,6 +573,15 @@
 				C017FB8C2AA9C881007BCFB1 /* ko */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		C0C979932AAF067B00ED8103 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C0C979922AAF067B00ED8103 /* en */,
+				C0C979942AAF067E00ED8103 /* ko */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
