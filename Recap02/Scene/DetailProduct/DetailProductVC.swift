@@ -7,6 +7,7 @@
 
 import UIKit
 import BaseKit
+import RealmSwift
 
 final class DetailProductVC: BaseViewController<DetailProductView> {
     
@@ -14,6 +15,13 @@ final class DetailProductVC: BaseViewController<DetailProductView> {
     
     private let favoriteRepository = FavoriteProductRepository()
     private var isLike = false
+    
+    private var notificationToken: NotificationToken?
+    
+    deinit {
+        // realm 노티피케이션 제거
+        notificationToken?.invalidate()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +40,39 @@ final class DetailProductVC: BaseViewController<DetailProductView> {
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ResColors.primaryLabel]
         navigationController?.navigationBar.tintColor = ResColors.primaryLabel
         
+        let tasks = favoriteRepository.fetch(objType: ShoppingProduct.self)
+        realmResultsObserve(tasks: tasks)
+        
+        mainView.reloadViewClicked = { [weak self] in
+            self?.loadWebView(id: searchProduct.productId)
+        }
+        
+        loadWebView(id: searchProduct.productId)
+    }
+    
+    private func realmResultsObserve(tasks: Results<ShoppingProduct>?) {
+        
+        guard let tasks else { return }
+        
+        // observe
+        notificationToken = tasks.observe { [weak self] changes in
+            guard let self else { return }
+            switch changes {
+            case .initial:
+                setHeartStatus()
+            case .update(_, let deletions, let insertions, let modifications):
+                print("상세화면 램 노티")
+                setHeartStatus()
+            case .error(let error):
+                // An error occurred while opening the Realm file on the background worker thread
+                fatalError("\(error)")
+            }
+        }
+    }
+    
+    private func setHeartStatus() {
+        isLike = false
+        guard let searchProduct else { return }
         let realmProduct = favoriteRepository.favoriteProductItem(productID: searchProduct.productId)
         if realmProduct != nil {
             isLike = true
@@ -43,12 +84,6 @@ final class DetailProductVC: BaseViewController<DetailProductView> {
             target: self,
             action: #selector(heartClicked)
         )
-        
-        mainView.reloadViewClicked = { [weak self] in
-            self?.loadWebView(id: searchProduct.productId)
-        }
-        
-        loadWebView(id: searchProduct.productId)
     }
     
     @objc func heartClicked() {
