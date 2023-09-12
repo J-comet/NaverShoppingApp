@@ -36,8 +36,8 @@ Recap02
 <details>
 <summary>검색화면에서 페이징 이후 좋아요 누르지 않은 아이템이 좋아요 표시로 되는 오류</summary>
 <div markdown="1">
-- CollectionViewCell 에서 prepareForReuse() 함수에 image = nil 로 처리를 해두었지만 통하지 않았다.<br>
-  그래서 애초에 빈하트,꽉찬하트 이미지뷰를 2개를 곂쳐서 두고 hidden 처리하는 방식으로 변경 후 잘동작하는 것을 확인했다.
+- 네이버 API 페이징 오류 start 를 페이지로 생각하고 +1씩 증가시켜서 중복된 데이터가 노출되고 있었다.<br>
+  30개씩 불러오게 해서 페이징시 31, 61 .. 이런식으로 증가시키도록 수정 후 중복된 데이터가 없는 것을 확인했다. 
 </div>
 </details>
 
