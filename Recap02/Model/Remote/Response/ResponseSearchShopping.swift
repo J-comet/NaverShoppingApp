@@ -10,6 +10,7 @@ import Foundation
 // MARK: - ResponseSearchShopping
 struct ResponseSearchShopping: Codable {
     let lastBuildDate: String
+    let total: Int
     let items: [ShoppingProduct]
 }
 

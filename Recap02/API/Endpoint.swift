@@ -24,7 +24,7 @@ enum Endpoint {
         }
     }
     
-    var limitPage: Int {
+    var limitStart: Int {
         switch self {
         case .search:
             return 1000

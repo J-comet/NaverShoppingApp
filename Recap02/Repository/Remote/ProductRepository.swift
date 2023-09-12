@@ -10,7 +10,7 @@ import Foundation
 final class ProductRepository {
     
     func search(
-        page: Int,
+        start: Int,
         query: String,
         sort: ShoppingSortType = .accuracy,
         completionHandler: @escaping (_ response: ResponseSearchShopping?, _ isSuccess: Bool) -> Void
@@ -19,7 +19,7 @@ final class ProductRepository {
         // 구조체로 전달
         let request = RequestSearchShopping(
             query: query,
-            start: page,
+            start: start,
             display: Endpoint.search.display,
             sort: sort.rawValue
         )

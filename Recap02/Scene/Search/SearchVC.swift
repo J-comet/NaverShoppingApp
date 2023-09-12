@@ -18,6 +18,8 @@ final class SearchVC: BaseViewController<SearchView> {
     private let favoriteProductRepository = FavoriteProductRepository()
     private var page = 1
     private var sortType: ShoppingSortType = .accuracy
+    private var total = 0
+    private var startIndex = 0
     
     private var searchText = ""  // 당겨서 새로고침할 때 사용자가 텍스트를 지우고 새로고침한 경우 이전에 검색한 내용으로 새로고침 기능 실행
     
@@ -77,7 +79,9 @@ final class SearchVC: BaseViewController<SearchView> {
     }
     
     private func search(page: Int, query: String, sort: ShoppingSortType, completionHandler: @escaping () -> Void) {
-        productRepository.search(page: page, query: query, sort: sort) { [weak self] response, isSuccess in
+        startIndex = ((page - 1) * Endpoint.search.display) + 1
+        print("startIndex = \(startIndex)")
+        productRepository.search(start: startIndex, query: query, sort: sort) { [weak self] response, isSuccess in
             guard let self else {
                 completionHandler()
                 return
@@ -105,6 +109,8 @@ final class SearchVC: BaseViewController<SearchView> {
             completionHandler()
             
             if page == 1 {
+                total = response?.total ?? 0
+                print("total = \(total)")
                 self.mainView.removePullRefreshControllAction()
                 if !self.mainView.searchProducts.isEmpty {
                     self.mainView.addPullRefreshControllAction()
@@ -169,12 +175,15 @@ extension SearchVC: SearchVCProtocol {
             }
         }
         favoriteProductRepository.delete(realmFavoriteProduct)
-        
     }
     
     func prefetchItemsAt(prefetchItemsAt indexPaths: [IndexPath]) {
+        
+        // 검색갯수가 1000개 초과일 때는 1000개로 제한
+        var limit = total > Endpoint.search.limitStart ? Endpoint.search.limitStart : total
+        
         for indexPath in indexPaths {
-            if mainView.searchProducts.count - 1 == indexPath.item && page < Endpoint.search.limitPage {
+            if mainView.searchProducts.count - 1 == indexPath.item && startIndex < limit {
                 LoadingIndicator.show()
                 page += 1
                 search(page: page, query: searchText, sort: sortType) {
