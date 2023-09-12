@@ -57,7 +57,7 @@ final class FavoriteView: BaseView {
     
     weak var favoriteVCDelegate: FavoriteVCProtocol?
     
-    var favoriteProducts: Results<FavoriteProduct>? {
+    var favoriteProducts: Results<ShoppingProduct>? {
         didSet {
             if favoriteProducts?.isEmpty == true {
                 emptyView.isHidden = false

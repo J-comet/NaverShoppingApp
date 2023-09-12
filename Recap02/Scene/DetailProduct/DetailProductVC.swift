@@ -32,7 +32,7 @@ final class DetailProductVC: BaseViewController<DetailProductView> {
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ResColors.primaryLabel]
         navigationController?.navigationBar.tintColor = ResColors.primaryLabel
         
-        let realmProduct = favoriteRepository.favoriteProductItem(productID: searchProduct.productID)
+        let realmProduct = favoriteRepository.favoriteProductItem(productID: searchProduct.productId)
         if realmProduct != nil {
             isLike = true
         }
@@ -45,23 +45,23 @@ final class DetailProductVC: BaseViewController<DetailProductView> {
         )
         
         mainView.reloadViewClicked = { [weak self] in
-            self?.loadWebView(id: searchProduct.productID)
+            self?.loadWebView(id: searchProduct.productId)
         }
         
-        loadWebView(id: searchProduct.productID)
+        loadWebView(id: searchProduct.productId)
     }
     
     @objc func heartClicked() {
         if let searchProduct {
-            guard let realmFavoriteProduct = favoriteRepository.favoriteProductItem(productID: searchProduct.productID) else {
+            guard let realmFavoriteProduct = favoriteRepository.favoriteProductItem(productID: searchProduct.productId) else {
                 // 좋아요 ADD
-                let newFavoriteProduct = FavoriteProduct(
-                    productID: searchProduct.productID,
+                let newFavoriteProduct = ShoppingProduct(
+                    productID: searchProduct.productId,
                     title: searchProduct.titleValue,
-                    link: searchProduct.link,
                     image: searchProduct.image,
                     lprice: searchProduct.lprice,
-                    mallName: searchProduct.mallName
+                    mallName: searchProduct.mallName,
+                    isLike: true
                 )
                 favoriteRepository.create(newFavoriteProduct)
                 navigationItem.rightBarButtonItem?.image = UIImage(systemName: "heart.fill")

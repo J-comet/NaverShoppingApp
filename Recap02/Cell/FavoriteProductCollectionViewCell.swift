@@ -11,10 +11,10 @@ import Kingfisher
 import SkeletonView
 import SnapKit
 
-final class FavoriteProductCollectionViewCell: BaseCollectionViewCell<FavoriteProduct> {
+final class FavoriteProductCollectionViewCell: BaseCollectionViewCell<ShoppingProduct> {
     
     private let cellView = ProductDesignCellView(frame: .zero)
-    var heartClicked: ((FavoriteProduct) -> Void)?
+    var heartClicked: ((ShoppingProduct) -> Void)?
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -29,7 +29,7 @@ final class FavoriteProductCollectionViewCell: BaseCollectionViewCell<FavoritePr
         }
     }
     
-    override func configCell(row: FavoriteProduct) {
+    override func configCell(row: ShoppingProduct) {
         let url = URL(string: row.image)
         if let url {
             cellView.thumbImageView.kf.setImage(

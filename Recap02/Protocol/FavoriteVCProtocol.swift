@@ -11,7 +11,7 @@ protocol FavoriteVCProtocol: AnyObject {
     func searchBarCancelClicked(_ searchBar: UISearchBar)
     func searchBarSearchClicked(_ searchBar: UISearchBar)
     func searchBarTextDidChange(textDidChange searchText: String)
-    func didSelectItemAt(item: FavoriteProduct)
-    func heartClicked(item: FavoriteProduct)
+    func didSelectItemAt(item: ShoppingProduct)
+    func heartClicked(item: ShoppingProduct)
     func emptyMoveLabelClicked()
 }

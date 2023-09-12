@@ -24,7 +24,7 @@ final class SearchVC: BaseViewController<SearchView> {
     private var searchText = ""  // 당겨서 새로고침할 때 사용자가 텍스트를 지우고 새로고침한 경우 이전에 검색한 내용으로 새로고침 기능 실행
     
     private var notificationToken: NotificationToken?
-    private var favoriteProducts: Results<FavoriteProduct>?
+    private var favoriteProducts: Results<ShoppingProduct>?
     
     deinit {
         // realm 노티피케이션 제거
@@ -48,13 +48,13 @@ final class SearchVC: BaseViewController<SearchView> {
         navigationItem.title = ResStrings.NavigationBar.search
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ResColors.primaryLabel]
         
-        let realmProducts = favoriteProductRepository.fetch(objType: FavoriteProduct.self)
+        let realmProducts = favoriteProductRepository.fetch(objType: ShoppingProduct.self)
         realmResultsObserve(tasks: realmProducts)
     }
     
     // realm 값 변화 옵저빙
     // realm 에 데이터 추가될 때마다 기존 서버에서 불러온 데이터와 동기화
-    private func realmResultsObserve(tasks: Results<FavoriteProduct>?) {
+    private func realmResultsObserve(tasks: Results<ShoppingProduct>?) {
         
         guard let tasks else { return }
         
@@ -129,8 +129,9 @@ final class SearchVC: BaseViewController<SearchView> {
         if let favoriteProducts {
             for (index,product) in items.enumerated() {
                 items[index] = product.copy(isLike: false)
+                
                 for favoriteProduct in favoriteProducts {
-                    if favoriteProduct.productID == product.productID {
+                    if favoriteProduct.productId == product.productId {
                         print("=========== ", product.title)
                         items[index] = product.copy(isLike: true)
                         break
@@ -153,15 +154,15 @@ extension SearchVC: SearchVCProtocol {
     func heartClicked(item: ShoppingProduct) {
         // 페이징 이후 하트 클릭하면 하트색이 안바뀌는 오류 발생
         //  => 기존 하나의 UIImageView 에서 UIImage 값 변경 -> 두개의 UIImageView (꽉찬 하트, 일반 하트) 로 Hidden 처리로 오류 수정
-        guard let realmFavoriteProduct = favoriteProductRepository.favoriteProductItem(productID: item.productID) else {
+        guard let realmFavoriteProduct = favoriteProductRepository.favoriteProductItem(productID: item.productId) else {
             // ADD
-            let newFavoriteProduct = FavoriteProduct(
-                productID: item.productID,
+            let newFavoriteProduct = ShoppingProduct(
+                productID: item.productId,
                 title: item.titleValue,
-                link: item.link,
                 image: item.image,
                 lprice: item.lprice,
-                mallName: item.mallName
+                mallName: item.mallName,
+                isLike: true
             )
             favoriteProductRepository.create(newFavoriteProduct)
             return
@@ -169,7 +170,7 @@ extension SearchVC: SearchVCProtocol {
         
         // DELETE
         for (index,product) in mainView.searchProducts.enumerated() {
-            if item.productID == product.productID {
+            if item.productId == product.productId {
                 mainView.searchProducts[index] = product.copy(isLike: false)
                 break
             }
@@ -180,7 +181,7 @@ extension SearchVC: SearchVCProtocol {
     func prefetchItemsAt(prefetchItemsAt indexPaths: [IndexPath]) {
         
         // 검색갯수가 1000개 초과일 때는 1000개로 제한
-        var limit = total > Endpoint.search.limitStart ? Endpoint.search.limitStart : total
+        let limit = total > Endpoint.search.limitStart ? Endpoint.search.limitStart : total
         
         for indexPath in indexPaths {
             if mainView.searchProducts.count - 1 == indexPath.item && startIndex < limit {

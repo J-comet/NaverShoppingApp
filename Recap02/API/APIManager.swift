@@ -19,7 +19,7 @@ class APIManager {
         "X-Naver-Client-Secret": APIKey.ClientSecret
     ]
     
-    func call<T: Codable>(
+    func call<T: Decodable>(
         endPoint: Endpoint,
         responseData: T.Type,
         param: Encodable,

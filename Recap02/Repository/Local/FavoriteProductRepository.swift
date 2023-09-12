@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 final class FavoriteProductRepository: RealmDBProtocol {
-    typealias T = FavoriteProduct
+    typealias T = ShoppingProduct
     private let realm = try! Realm()
     private lazy var fileURL = self.realm.configuration.fileURL
     
@@ -17,15 +17,15 @@ final class FavoriteProductRepository: RealmDBProtocol {
         print(String(describing: fileURL))
     }
     
-    func fetch(objType: FavoriteProduct.Type) -> Results<FavoriteProduct> {
+    func fetch(objType: ShoppingProduct.Type) -> Results<ShoppingProduct> {
         return realm.objects(objType.self).sorted(byKeyPath: "date", ascending: false)
     }
     
-    func fetchFilter(objType: FavoriteProduct.Type, _ isIncluded: ((Query<FavoriteProduct>) -> Query<Bool>)) -> Results<FavoriteProduct> {
+    func fetchFilter(objType: ShoppingProduct.Type, _ isIncluded: ((Query<ShoppingProduct>) -> Query<Bool>)) -> Results<ShoppingProduct> {
         return realm.objects(objType.self).where { isIncluded($0) }
     }
     
-    func create(_ item: FavoriteProduct) {
+    func create(_ item: ShoppingProduct) {
         do {
             try realm.write {
                 realm.add(item)
@@ -35,11 +35,11 @@ final class FavoriteProductRepository: RealmDBProtocol {
         }
     }
     
-    func update(_ item: FavoriteProduct) {
+    func update(_ item: ShoppingProduct) {
         do {
             try realm.write {
                 realm.create(
-                    FavoriteProduct.self,
+                    ShoppingProduct.self,
                     value: item,
                     update: .modified
                 )
@@ -49,7 +49,7 @@ final class FavoriteProductRepository: RealmDBProtocol {
         }
     }
     
-    func delete(_ item: FavoriteProduct) {
+    func delete(_ item: ShoppingProduct) {
         do {
             let _ = try realm.write {
                 realm.delete(item)
@@ -60,9 +60,9 @@ final class FavoriteProductRepository: RealmDBProtocol {
         }
     }
     
-    func favoriteProductItem(productID: String) -> FavoriteProduct? {
-        return fetchFilter(objType: FavoriteProduct.self) {
-            $0.productID == productID
+    func favoriteProductItem(productID: String) -> ShoppingProduct? {
+        return fetchFilter(objType: ShoppingProduct.self) {
+            $0.productId == productID
         }.first
     }
 }

@@ -36,7 +36,7 @@ final class FavoriteVC: BaseViewController<FavoriteView> {
         
         let mainViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(mainViewTapped))
         mainView.addGestureRecognizer(mainViewTapGesture)
-        let tasks = favoriteRepository.fetch(objType: FavoriteProduct.self)
+        let tasks = favoriteRepository.fetch(objType: ShoppingProduct.self)
         realmResultsObserve(tasks: tasks)
     }
     
@@ -44,7 +44,7 @@ final class FavoriteVC: BaseViewController<FavoriteView> {
         mainView.searchBar.resignFirstResponder()
     }
     
-    private func realmResultsObserve(tasks: Results<FavoriteProduct>?) {
+    private func realmResultsObserve(tasks: Results<ShoppingProduct>?) {
         
         guard let tasks else { return }
         
@@ -77,26 +77,26 @@ extension FavoriteVC: FavoriteVCProtocol {
         tabBarController?.selectedIndex = 0
     }
     
-    func didSelectItemAt(item: FavoriteProduct) {
+    func didSelectItemAt(item: ShoppingProduct) {
         let vc = DetailProductVC()
         vc.searchProduct = ShoppingProduct(
-            productID: item.productID,
+            productID: item.productId,
             title: item.title,
-            link: item.link,
             image: item.image,
             lprice: item.lprice,
-            mallName: item.mallName
+            mallName: item.mallName,
+            isLike: item.isLike
         )
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func heartClicked(item: FavoriteProduct) {
+    func heartClicked(item: ShoppingProduct) {
         favoriteRepository.delete(item)
     }
     
     func searchBarCancelClicked(_ searchBar: UISearchBar) {
         searchBar.searchTextField.text = nil
-        let tasks =  favoriteRepository.fetch(objType: FavoriteProduct.self)
+        let tasks =  favoriteRepository.fetch(objType: ShoppingProduct.self)
         mainView.favoriteProducts = tasks
         searchBar.resignFirstResponder()
     }
@@ -108,10 +108,10 @@ extension FavoriteVC: FavoriteVCProtocol {
     func searchBarTextDidChange(textDidChange searchText: String) {
         // 실시간 검색 빈값일 때는 전체리스트 노출
         if searchText.isEmpty {
-            let tasks = favoriteRepository.fetch(objType: FavoriteProduct.self)
+            let tasks = favoriteRepository.fetch(objType: ShoppingProduct.self)
             mainView.favoriteProducts = tasks
         } else {
-            let tasks =  favoriteRepository.fetchFilter(objType: FavoriteProduct.self) {
+            let tasks =  favoriteRepository.fetchFilter(objType: ShoppingProduct.self) {
                 $0.titleValue.contains(searchText, options: .caseInsensitive)
             }
             mainView.favoriteProducts = tasks
