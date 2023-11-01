@@ -1,96 +1,70 @@
-Recap02
-==========
-상품 검색, 좋아요 기능으로 마음에 드는 상품을 저장 해둘 수 있는 앱. 
+# NaverShoppingApp
+<br>
+
+### 프로젝트
+ - 인원 : 개인프로젝트 <br>
+ - 기간 : 2023.09.24 ~ 2023.10.22 (4주) <br>
+ - 최소지원버전 : iOS 13 <br>
+ 
+<br>
+
+### 한줄소개
+ - 상품 검색, 좋아요 기능으로 마음에 드는 상품을 저장 해둘 수 있는 앱 입니다.
+   
+<br>
+
+### 미리보기
+
 
 <br>
 
-> 요구사항
-1. 네이버 쇼핑 API 를 이용해 검색 및 페이지네이션 기능.
-2. 좋아요 상태는 모든화면에서 동기화.
-3. 좋아요 목록은 앱이 삭제되기 전까지 영구적으로 저장.
-4. 로컬 DB에 저장된 좋아요 실시간 검색 기능
-5. CodeBase UI
+### 기술
+| Category | Stack |
+|----|-----|
+| Architecture | `MVC` |
+| iOS | `UIKit` `WebKit` `UserDefaults` |
+|  UI  | `CodeBaseUI` `SnapKit` |
+|  Network  | `Alamofire` `Codable` |
+|  Database  | `Realm` |
+|  Image  | `Kingfisher` |
+|  Dependency Manager  | `SwiftPackageManager` |
+|  Etc  | `Toast` `SkeletonView` `Basekit` |
 
 <br>
 
-> 추가 기능
-1. 다크모드 대응
-2. 다국어 대응
-3. 검색화면 당겨서 새로고침   
-4. 좋아요화면 목록 없을 때 검색화면으로 이동버튼 추가
-5. 네트워크 연결 체크
-6. SkeletonView 적용
+### 기능
+1. 네이버 쇼핑 API 를 이용해 검색 및 페이지네이션
+2. 좋아요 상태는 모든화면에서 동기화
+3. 좋아요 목록 Realm 저장
+4. 좋아요 실시간 검색
+5. pull down refresh 
 
 <br>
 
-> 문제 해결
-<details>
-<summary>검색화면에서 좋아요 터치 반응 없는 오류</summary>
-<div markdown="1">
-- mainView 에 TabGesture 를 이용해 키보드가 올라와있을 때 키보드를 내려주는 기능을 구현이 되어 있는 상태였다.<br> 
-  하트버튼의 터치를 mainView 의 TabGesture 가 가로채서 didSelectItemAt 가 호출 되지 않고 있었다.<br>
-  Cell 에 TabGesture 를 추가해주고 다시 didSelectItemAt 이 호출 되는 것을 확인했다.
-</div>
-</details>
-
-<details>
-<summary>검색화면에서 페이징 이후 좋아요 누르지 않은 아이템이 좋아요 표시로 되는 오류</summary>
-<div markdown="1">
-- 네이버 API 페이징 오류 start 를 페이지로 생각하고 +1씩 증가시켜서 중복된 데이터가 노출되고 있었다.<br>
-  30개씩 불러오게 해서 페이징시 31, 61 .. 이런식으로 증가시키도록 수정 후 중복된 데이터가 없는 것을 확인했다. 
-</div>
-</details>
-
-<details>
-<summary>상세화면으로 이동할 때 버벅이는 오류</summary>
-<div markdown="1">
-- viewDidLoad()를 작성했는지 체크했는데 이미 작성되어있었다.<br>
-  그 이후 DetailProductView 에 BackgroundColor 가 지정되지 않은 걸 보고 BackgroundColor 값을 지정해주자 잘동작하는 것을 확인했다.
-</div>
-</details>
+### 개발 고려사항
+- NetworkMonitor 활용해서 인터넷 연결 체크
+- Realm NotificationToken 활용해 Realm 데이터 변경될 때 UI 업데이트 되도록 구현
+- 다크모드, 다국어 대응
 
 <br>
 
-NaverAPIKey
-----------
-name | value
-:---------:|:----------:|
- clientID | EvDsEyvh9JtGGD8l0VIv
- ClientSecret | 6hvb5CCpas 
+
+### 트러블슈팅
+
+####  1. 검색화면에서 좋아요 터치 반응 없는 오류
+ -> mainView 에 TabGesture 를 이용해 키보드가 올라와있을 때 키보드를 내려주는 기능을 구현이 되어 있는 상태였습니다.<br>
+  하트버튼의 터치를 mainView 의 TabGesture 가 가로채서 didSelectItemAt 메서드가 호출 되지 않고 있었습니다. <br>
+  Cell 에 TabGesture 를 추가해주고 다시 didSelectItemAt 이 호출 되는 것을 확인했습니다.
+
+####  2. 상세화면으로 이동할 때 버벅이는 오류
+-> AppDelegate 에서 UIView backgroundColor 를 clear 시켜주고 있는 상태였습니다. <br>
+  다른 ViewController 는 버벅이지 않고 있어서 비교해보니 mainView 의 backgroundColor 가 적용되어 있지 않은 것을 확인 후
+   Color 값을 지정해주자 부드럽게 화면 전환이 되는 것을 확인했습니다.
 
 <br>
 
-Development Environment
-----------
-<p align="left">
-<img src ="https://img.shields.io/badge/Swift-5.8.1-F05138?style=for-the-plastic&logo=swift&logoColor=white">
-<img src ="https://img.shields.io/badge/Xcode-14.3.1-147EFB?style=for-the-plastic&logo=Xcode&logoColor=white">
-<img src ="https://img.shields.io/badge/iOS-13.0-orange?style=for-the-plastic&logo=apple&logoColor=white">
-</p>
+### 회고
+
 
 <br>
-  
-Architecture
-----------
-MVC Pattern
-<br>
-<img src="https://github.com/J-comet/Recap02/assets/67407666/6eb16d96-41e6-43c6-866a-72acf1be67e8.png" width="700" height="300"/>
-<br><br>
 
-Used Libraries & Framework
-----------
-- [Basekit][0] - 공통으로 사용되는 View, 코드가 있는 Framework 
-- [Alamofire][1] - 네트워크 통신
-- [Kingfisher][2] - 이미지 로딩
-- [Realm][3] - 로컬 데이터베이스
-- [SkeletonView][4] - 로딩
-- [Snapkit][5] - UI Layout 
-- [Toast][6] - 사용자에게 간단한 알림 띄워주고 싶을 때 사용
-
-[0]: https://github.com/J-comet/BaseKit
-[1]: https://github.com/Alamofire/Alamofire
-[2]: https://github.com/onevcat/Kingfisher
-[3]: https://realm.io/
-[4]: https://github.com/Juanpe/SkeletonView
-[5]: https://github.com/SnapKit/SnapKit
-[6]: https://github.com/scalessec/Toast-Swift
