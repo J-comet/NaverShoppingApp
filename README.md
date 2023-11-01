@@ -61,6 +61,12 @@
   다른 ViewController 는 버벅이지 않고 있어서 비교해보니 mainView 의 backgroundColor 가 적용되어 있지 않은 것을 확인 후
    Color 값을 지정해주자 부드럽게 화면 전환이 되는 것을 확인했습니다.
 
+####  3. 자체적으로 만든 BaseKit 이 github 에 커밋 안되는 오류
+ -> BaseKit 프레임워크를 처음 생성시 현재프로젝트 폴더와 같은 레벨에 위치해있었습니다. <br>
+ git 이 연결되어 있지 않은 곳에 BaseKit 프레임워크가 위치하고 있어 github 에 커밋할 때 추가되지 않았던 오류로 <br>
+ git 이 연결되어 있는 현재 프로젝트 폴더 안으로 BaseKit 을 추가해준 뒤 github 에 커밋할 수 있었습니다.
+   
+
 <br>
 
 ### 회고
