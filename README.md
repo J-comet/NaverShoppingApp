@@ -23,21 +23,22 @@
 |:----:|:-----:|
 | Architecture | `MVC` |
 | iOS | `UIKit` `WebKit` `UserDefaults` |
-|  UI  | `CodeBaseUI` `SnapKit` |
+|  UI  | `SnapKit` |
 |  Network  | `Alamofire` `Codable` |
 |  Database  | `Realm` |
 |  Image  | `Kingfisher` |
-|  Dependency Manager  | `SwiftPackageManager` |
+|  Dependency Manager  | `SPM` |
 |  Etc  | `Toast` `SkeletonView` `Basekit` |
 
 <br>
 
 ### 기능
-1. 네이버 쇼핑 API 를 이용해 검색 및 페이지네이션
-2. 좋아요 상태는 모든화면에서 동기화
-3. 좋아요 목록 Realm 저장
-4. 좋아요 실시간 검색
-5. pull down refresh 
+1. 네이버 쇼핑 API 이용해 검색 및 페이지네이션
+2. 상품 상세페이지 WebView load
+3. 좋아요 상태는 모든 화면에서 동기화
+4. 좋아요 목록 Realm 저장
+5. 좋아요 상품 실시간 검색
+6. Pagination / Infinite Scroll / pull down refresh
 
 <br>
 
@@ -45,7 +46,7 @@
 - NetworkMonitor 활용해 인터넷 상태 체크
 - 공통으로 사용중인 코드 BaseKit 모듈화
 - Realm 좋아요 기능 구현, NotificationToken 활용해 데이터 변경시 UI 업데이트
-- 사용자의 관점에서 고민 후 소프트키보드는 입력할 때 제외하고 모두 hidden 처리
+- WebKit 활용해 상품 상세페이지 URL 로드
 - 다크모드, 다국어 대응
 
 <br>
