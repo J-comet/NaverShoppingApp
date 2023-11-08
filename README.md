@@ -20,7 +20,7 @@
 
 ### 기술
 | Category | Stack |
-|:----:|:-----:|
+|:----|:-----|
 | Architecture | `MVC` |
 | iOS | `UIKit` `WebKit` `UserDefaults` |
 |  UI  | `SnapKit` |
