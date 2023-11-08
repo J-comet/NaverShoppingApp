@@ -43,7 +43,7 @@
 <br>
 
 ### 개발 고려사항
-- NetworkMonitor 활용해 인터넷 상태 체크
+- NWPathMonitor 활용해 인터넷 상태 체크
 - 공통으로 사용중인 코드 BaseKit 모듈화
 - Realm 좋아요 기능 구현, NotificationToken 활용해 데이터 변경시 UI 업데이트
 - WebKit 활용해 상품 상세페이지 URL 로드
