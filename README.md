@@ -62,7 +62,7 @@
 ####  2. 상세화면으로 이동할 때 버벅이는 오류
 -> AppDelegate 에서 UIView backgroundColor 를 clear 시켜주고 있는 상태였습니다. <br>
   다른 ViewController 는 버벅이지 않고 있어서 비교해보니 mainView 의 backgroundColor 가 적용되어 있지 않은 것을 확인 후
-   Color 값을 지정해주자 부드럽게 화면 전환이 되는 것을 확인했습니다.
+   Color 값을 지정해주자 부드럽게 화면 전환이 되는 것을 확인했습니다.
 
 ####  3. 자체적으로 만든 BaseKit 이 github 에 커밋 안되는 오류
  -> BaseKit 프레임워크를 처음 생성시 현재프로젝트 폴더와 같은 레벨에 위치해있었습니다. <br>
